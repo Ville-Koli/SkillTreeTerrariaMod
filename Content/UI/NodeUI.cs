@@ -42,12 +42,19 @@ namespace Runeforge.Content.UI
 			global_id++;
 		}
 
+		protected override void DrawSelf(SpriteBatch spriteBatch) {
+			base.DrawSelf(spriteBatch); // This ensures the Draw call is propagated to the children(s)
+			if (node_image.IsMouseHovering) {
+				Main.hoverItemName = "Click to see what happens\n+0.5 Defence";
+			}
+		}
+
 		public static bool DoesPossiblePathExistToEmpty(NodeUI start, Dictionary<int, bool> visited)
 		{
 			if (start.type == NodeType.Empty) return true;
 			ModContent.GetInstance<Runeforge>().Logger.Info("\tNOT EMPTY");
 			bool path = false;
-			if (!visited.ContainsKey(start.GetID())) { visited.Add(start.GetID(), true); ModContent.GetInstance<Runeforge>().Logger.Info("\tADDED TO VISITED!");}
+			if (!visited.ContainsKey(start.GetID())) { visited.Add(start.GetID(), true); ModContent.GetInstance<Runeforge>().Logger.Info("\tADDED TO VISITED!"); }
 			foreach (var conn in start.GetConnections())
 			{
 				NodeUI node = GetNeighbourNode(conn, start);

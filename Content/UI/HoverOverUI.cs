@@ -1,0 +1,103 @@
+using System;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Terraria;
+using Terraria.DataStructures;
+using Terraria.ID;
+using Terraria.ModLoader;
+using Runeforge.Content.Buffs;
+using Terraria.UI;
+using System.Collections.Generic;
+using Terraria.GameInput;
+using Terraria.GameContent.UI.Elements;
+using Runeforge.Content.SkillTree;
+using Microsoft.Xna.Framework.Input;
+using ReLogic.Content;
+
+namespace Runeforge.Content.UI
+{
+	public class HoverOverUI : UIElement
+	{
+		private SkillTreePanel mainPanel;
+		public UIImage hoverOverUIImage;
+        public ConnectionDirection direction_from_node;
+		public Asset<Texture2D> activeConnectionImage;
+		public Asset<Texture2D> inActiveConnectionImage;
+		public UIText description;
+		public bool active;
+		private int id;
+		private static int global_id = 0;
+		public HoverOverUI(SkillTreePanel panel, Asset<Texture2D> inactive, Asset<Texture2D> active)
+		{
+			mainPanel = panel;
+			hoverOverUIImage = new UIImage(inactive);
+			this.description = new UIText("");
+			inActiveConnectionImage = inactive;
+			activeConnectionImage = active;
+			id = global_id;
+			global_id++;
+		}
+
+		public int GetID()
+		{
+			return id;
+		}
+
+		public bool ChangeDescription(string newDescription)
+		{
+			if (description != null)
+			{
+				description.SetText(newDescription);
+				return true;
+			}
+			return false;
+		}
+
+		public void SetActive()
+		{
+			hoverOverUIImage.SetImage(activeConnectionImage);
+			active = true;
+		}
+		public void SetInActive()
+		{
+			hoverOverUIImage.SetImage(inActiveConnectionImage);
+			active = false;
+		}
+
+		public override void OnInitialize()
+		{
+			base.OnInitialize();
+			Width.Set(50, 0f);
+			Height.Set(50, 0f);
+			Append(hoverOverUIImage);
+			hoverOverUIImage.Append(description);
+		}
+
+		public override void MouseOver(UIMouseEvent evt)
+		{
+			base.MouseOver(evt);
+			if (!mainPanel.isDragging)
+			{
+				mainPanel.isHoveringOverUI = true;
+			}
+        }
+		public override void MouseOut(UIMouseEvent evt)
+		{
+			base.MouseOver(evt);
+			if (!mainPanel.isDragging)
+			{
+				mainPanel.isHoveringOverUI = false;
+			}
+        }
+
+		public override void Update(GameTime gameTime)
+		{
+			base.Update(gameTime);
+		}
+
+        public override int GetHashCode()
+        {
+			return hoverOverUIImage.GetHashCode();
+        }
+	}
+}

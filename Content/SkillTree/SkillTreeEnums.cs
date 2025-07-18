@@ -40,6 +40,11 @@ namespace Runeforge.Content.SkillTree
         MAJOR_RighteousFire,
         MAJOR_MinionCreator
     }
+
+    public enum UIType
+    {
+        hoverOver
+    }
     public enum ConnectionDirection
     {
         UP,

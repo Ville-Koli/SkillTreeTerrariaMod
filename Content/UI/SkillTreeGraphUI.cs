@@ -33,6 +33,10 @@ namespace Runeforge.Content.UI
 			(Asset<Texture2D> active, Asset<Texture2D> inactive) horizontal = (
 			ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/active_connection_horizontal_long"),
 			ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/inactive_connection_horizontal_long"));
+
+			(Asset<Texture2D> active, Asset<Texture2D> inactive) hoverOver = (
+			ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/active_hoverover_text_box"),
+			ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/inactive_hoverover_text_box"));
 			Asset<Texture2D> emptyNode = ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/EmptyNode");
 			Asset<Texture2D> activeEmptyNode = ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/Active_EmptyNode");
 
@@ -44,6 +48,7 @@ namespace Runeforge.Content.UI
 			textureManager.AddDirection(ConnectionDirection.RIGHT, horizontal.active, horizontal.inactive);
 			textureManager.AddNode(NodeType.Empty, activeEmptyNode, emptyNode);
 			textureManager.AddNode(NodeType.Defence, tankNodeActive, tankNodeInActive);
+			textureManager.AddUI(UIType.hoverOver, hoverOver.active, hoverOver.inactive);
 		}
 		public override void Load()
 		{
