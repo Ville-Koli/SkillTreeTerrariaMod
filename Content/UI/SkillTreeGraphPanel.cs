@@ -23,6 +23,7 @@ namespace Runeforge.Content.UI
 		private Dictionary<int, NodeUI> node_list = new();
 		public List<NodeUI> nodes = new();
 		public Dictionary<int, ConnectionUI> conns = new();
+		public HoverOverUI hoverOverUI;
 		private Vector2 offset;
 		private UIText debugText;
 		public bool isDragging;
@@ -127,7 +128,7 @@ namespace Runeforge.Content.UI
 			foreach (var n in nodes)
 			{
 				NodeUI nodeui = n;
-				ModContent.GetInstance<Runeforge>().Logger.Info("NODE ID: " + n.GetID()  + " locations: " + nodeui.GetLocation().X + " , " + nodeui.GetLocation().Y);
+				ModContent.GetInstance<Runeforge>().Logger.Info("NODE ID: " + n.GetID() + " locations: " + nodeui.GetLocation().X + " , " + nodeui.GetLocation().Y);
 				node_list.Add(n.GetID(), n);
 				nodeui.Left.Set(nodeui.GetLocation().X, 0.0f);
 				nodeui.Top.Set(nodeui.GetLocation().Y, 0.0f);
@@ -143,6 +144,7 @@ namespace Runeforge.Content.UI
 				}
 				_uiPanel.Append(nodeui);
 			}
+			_uiPanel.Append(hoverOverUI);
 			Recalculate();
 		}
 

@@ -15,7 +15,6 @@ namespace Runeforge
 	public class Runeforge : Mod
 	{
 		public static ModKeybind ToggleMyUIKeybind;
-		//public static TextureManager textureManager;
 		public override void Load()
 		{
 			ToggleMyUIKeybind = KeybindLoader.RegisterKeybind(this, "Toggle Skilltree", Keys.G);

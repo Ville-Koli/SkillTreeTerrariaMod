@@ -18,6 +18,7 @@ namespace Runeforge.Content.UI
 {
 	public class TextureManager
 	{
+		public Asset<Texture2D> transparent_box;
 		public Dictionary<ConnectionDirection, (Asset<Texture2D> active, Asset<Texture2D> inactive)> direction_textures = new();
 		public Dictionary<NodeType, (Asset<Texture2D> active, Asset<Texture2D> inactive)> node_textures = new();
 		public Dictionary<UIType, (Asset<Texture2D> active, Asset<Texture2D> inactive)> general_ui = new();

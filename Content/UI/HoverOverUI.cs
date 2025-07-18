@@ -23,21 +23,22 @@ namespace Runeforge.Content.UI
         public ConnectionDirection direction_from_node;
 		public Asset<Texture2D> activeConnectionImage;
 		public Asset<Texture2D> inActiveConnectionImage;
+		public Asset<Texture2D> transparentImage;
 		public UIText description;
 		public bool active;
 		private int id;
 		private static int global_id = 0;
-		public HoverOverUI(SkillTreePanel panel, Asset<Texture2D> inactive, Asset<Texture2D> active)
+		public HoverOverUI(SkillTreePanel panel, Asset<Texture2D> inactive, Asset<Texture2D> active, Asset<Texture2D> transparentImage)
 		{
 			mainPanel = panel;
-			hoverOverUIImage = new UIImage(inactive);
-			this.description = new UIText("");
+			hoverOverUIImage = new UIImage(transparentImage);
+			this.description = new UIText("test", 0.7f);
 			inActiveConnectionImage = inactive;
+			this.transparentImage = transparentImage;
 			activeConnectionImage = active;
 			id = global_id;
 			global_id++;
 		}
-
 		public int GetID()
 		{
 			return id;
@@ -64,31 +65,22 @@ namespace Runeforge.Content.UI
 			active = false;
 		}
 
+		public void SetTransparent()
+		{
+			hoverOverUIImage.SetImage(transparentImage);
+		}
+
 		public override void OnInitialize()
 		{
 			base.OnInitialize();
 			Width.Set(50, 0f);
 			Height.Set(50, 0f);
+			description.PaddingTop = 15;
+			description.PaddingLeft = 15;
+			description.SetText("");
 			Append(hoverOverUIImage);
 			hoverOverUIImage.Append(description);
 		}
-
-		public override void MouseOver(UIMouseEvent evt)
-		{
-			base.MouseOver(evt);
-			if (!mainPanel.isDragging)
-			{
-				mainPanel.isHoveringOverUI = true;
-			}
-        }
-		public override void MouseOut(UIMouseEvent evt)
-		{
-			base.MouseOver(evt);
-			if (!mainPanel.isDragging)
-			{
-				mainPanel.isHoveringOverUI = false;
-			}
-        }
 
 		public override void Update(GameTime gameTime)
 		{

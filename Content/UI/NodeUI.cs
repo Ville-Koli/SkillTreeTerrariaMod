@@ -25,11 +25,13 @@ namespace Runeforge.Content.UI
 		public UIImage node_image;
 		public Asset<Texture2D> active_node_image;
 		public Asset<Texture2D> inactive_node_image;
+		public HoverOverUI hoverOverUI;
 		public Vector2 location;
 		public bool active;
+		private string description;
 		private int id;
 		private static int global_id = 0;
-		public NodeUI(SkillTreePanel panel, Asset<Texture2D> inactive, Asset<Texture2D> active, Vector2 location, ModifyPlayer modification, NodeType type)
+		public NodeUI(SkillTreePanel panel, Asset<Texture2D> inactive, Asset<Texture2D> active, Vector2 location, ModifyPlayer modification, NodeType type, HoverOverUI hoverOverUI, string description)
 		{
 			mainPanel = panel;
 			node_image = new UIImage(inactive);
@@ -37,16 +39,15 @@ namespace Runeforge.Content.UI
 			this.location = location;
 			this.modification = modification;
 			this.type = type;
+			this.hoverOverUI = hoverOverUI;
+			this.description = description;
 			active_node_image = active;
 			id = global_id;
 			global_id++;
 		}
-
-		protected override void DrawSelf(SpriteBatch spriteBatch) {
-			base.DrawSelf(spriteBatch); // This ensures the Draw call is propagated to the children(s)
-			if (node_image.IsMouseHovering) {
-				Main.hoverItemName = "Click to see what happens\n+0.5 Defence";
-			}
+		public string GetDescription()
+		{
+			return description;
 		}
 
 		public static bool DoesPossiblePathExistToEmpty(NodeUI start, Dictionary<int, bool> visited)
@@ -189,6 +190,7 @@ namespace Runeforge.Content.UI
 					}
 				}
 			}
+			EditHoverOverElement();
 			Recalculate();
 		}
 
@@ -202,12 +204,30 @@ namespace Runeforge.Content.UI
 			Append(node_image);
 		}
 
+
+		public void EditHoverOverElement()
+		{
+			hoverOverUI.ChangeDescription(description);
+			if (active)
+			{
+				hoverOverUI.SetActive();
+			}
+			else
+			{
+				hoverOverUI.SetInActive();
+			}
+		}
+
 		public override void MouseOver(UIMouseEvent evt)
 		{
 			base.MouseOver(evt);
 			if (!mainPanel.isDragging)
 			{
 				mainPanel.isHoveringOverUI = true;
+			}
+			if (type != NodeType.Empty)
+			{
+				EditHoverOverElement();
 			}
 		}
 		public override void MouseOut(UIMouseEvent evt)
@@ -217,11 +237,18 @@ namespace Runeforge.Content.UI
 			{
 				mainPanel.isHoveringOverUI = false;
 			}
+			hoverOverUI.SetTransparent();
+			hoverOverUI.ChangeDescription("");
 		}
 
 		public override void Update(GameTime gameTime)
 		{
 			base.Update(gameTime);
+			if (node_image.IsMouseHovering)
+			{
+				hoverOverUI.Left.Set(Main.MouseScreen.X, 0.0f);
+				hoverOverUI.Top.Set(Main.MouseScreen.Y, 0.0f);
+			}
 		}
 
 		public override int GetHashCode()
