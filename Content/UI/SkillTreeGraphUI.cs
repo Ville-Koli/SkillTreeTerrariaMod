@@ -1,17 +1,10 @@
-using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
-using Terraria.DataStructures;
-using Terraria.ID;
 using Terraria.ModLoader;
-using Runeforge.Content.Buffs;
 using Terraria.UI;
 using System.Collections.Generic;
-using Terraria.GameInput;
-using Terraria.GameContent.UI.Elements;
 using Runeforge.Content.SkillTree;
-using Microsoft.Xna.Framework.Input;
 using ReLogic.Content;
 
 namespace Runeforge.Content.UI

@@ -1,18 +1,7 @@
-using System;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Terraria;
-using Terraria.DataStructures;
-using Terraria.ID;
-using Terraria.ModLoader;
-using Runeforge.Content.Buffs;
 using Terraria.UI;
-using System.Collections.Generic;
-using Terraria.GameInput;
-using Terraria.GameContent.UI.Elements;
 using Runeforge.Content.SkillTree;
-using Microsoft.Xna.Framework.Input;
-using ReLogic.Content;
+
 
 namespace Runeforge.Content.UI
 {
@@ -45,8 +34,8 @@ namespace Runeforge.Content.UI
 			panel.nodes.Add(button6);
 			NodeUI button7 = new NodeUI(panel, textureManager.GetNode(NodeType.Defence).inactive, textureManager.GetNode(NodeType.Defence).active, new Vector2(50 * 5, 0), delegate { }, NodeType.Defence, hoverOverUI, temp_text);
 			panel.nodes.Add(button7);
-			// add connection
 
+			// add connection
 			ac.AutoConnect(panel, button1, button2, ConnectionDirection.RIGHT);
 			ac.AutoConnect(panel, button2, button3, ConnectionDirection.RIGHT);
 			ac.AutoConnect(panel, button2, button4, ConnectionDirection.UP);
