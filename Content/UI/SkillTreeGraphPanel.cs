@@ -85,6 +85,28 @@ namespace Runeforge.Content.UI
 				Recalculate();
 			}
 		}
+		protected override void DrawSelf(SpriteBatch spriteBatch)
+		{
+			base.DrawSelf(spriteBatch);
+			// If this code is in the panel or container element, check it directly
+			if (ContainsPoint(Main.MouseScreen))
+			{
+				Main.LocalPlayer.mouseInterface = true;
+			}
+			// Otherwise, we can check a child element instead
+			if (ContainsPoint(Main.MouseScreen))
+			{
+				Main.LocalPlayer.mouseInterface = true;
+			}
+			// If this code is in the scrollable element, check it directly
+			if (IsMouseHovering) {
+				PlayerInput.LockVanillaMouseScroll("Runeforge/ScrollListA"); // The passed in string can be anything.
+			}
+			// Otherwise, we can check a child element instead
+			if (IsMouseHovering) {
+				PlayerInput.LockVanillaMouseScroll("Runeforge/ScrollListB"); // The passed in string can be anything.
+			}
+		}
 		public SkillTreePanel() : base()
 		{
 
