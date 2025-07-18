@@ -1,0 +1,58 @@
+using System;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Terraria;
+using Terraria.DataStructures;
+using Terraria.ID;
+using Terraria.ModLoader;
+using Runeforge.Content.Buffs;
+using Terraria.UI;
+using System.Collections.Generic;
+using Terraria.GameInput;
+using Terraria.GameContent.UI.Elements;
+using Runeforge.Content.SkillTree;
+using Microsoft.Xna.Framework.Input;
+using ReLogic.Content;
+
+namespace Runeforge.Content.UI
+{
+	class TheUI : UIState
+	{
+		private SkillTreePanel panel;
+		public override void OnInitialize()
+		{
+			TextureManager textureManager = SkillTreeGraphUI.textureManager;
+			AutoConnector ac = new AutoConnector(textureManager);
+			panel = new SkillTreePanel();
+			panel.Width.Set(0, 1);
+			panel.Height.Set(0, 1);
+			panel.BackgroundColor = Color.Black;
+			Append(panel);
+			// TODO: LOAD ALL ASSETS IN LOAD() func
+
+			NodeUI button1 = new NodeUI(panel, textureManager.GetNode(NodeType.Empty).inactive, textureManager.GetNode(NodeType.Empty).active, new Vector2(50 * 0, 0), delegate { }, NodeType.Empty);
+			panel.nodes.Add(button1);
+			NodeUI button2 = new NodeUI(panel, textureManager.GetNode(NodeType.Defence).inactive, textureManager.GetNode(NodeType.Defence).active, new Vector2(50 * 2, 0), delegate { }, NodeType.BulletDamage);
+			panel.nodes.Add(button2);
+			NodeUI button3 = new NodeUI(panel, textureManager.GetNode(NodeType.Defence).inactive, textureManager.GetNode(NodeType.Defence).active, new Vector2(50 * 5, 0), delegate { }, NodeType.BulletDamage);
+			panel.nodes.Add(button3);
+			NodeUI button4 = new NodeUI(panel, textureManager.GetNode(NodeType.Defence).inactive, textureManager.GetNode(NodeType.Defence).active, new Vector2(50 * 5, 0), delegate { }, NodeType.BulletDamage);
+			panel.nodes.Add(button4);
+			NodeUI button5 = new NodeUI(panel, textureManager.GetNode(NodeType.Defence).inactive, textureManager.GetNode(NodeType.Defence).active, new Vector2(50 * 5, 0), delegate { }, NodeType.BulletDamage);
+			panel.nodes.Add(button5);
+			NodeUI button6 = new NodeUI(panel, textureManager.GetNode(NodeType.Defence).inactive, textureManager.GetNode(NodeType.Defence).active, new Vector2(50 * 5, 0), delegate { }, NodeType.BulletDamage);
+			panel.nodes.Add(button6);
+			NodeUI button7 = new NodeUI(panel, textureManager.GetNode(NodeType.Defence).inactive, textureManager.GetNode(NodeType.Defence).active, new Vector2(50 * 5, 0), delegate { }, NodeType.BulletDamage);
+			panel.nodes.Add(button7);
+			// add connection
+
+			ac.AutoConnect(panel, button1, button2, ConnectionDirection.RIGHT);
+			ac.AutoConnect(panel, button2, button3, ConnectionDirection.RIGHT);
+			ac.AutoConnect(panel, button2, button4, ConnectionDirection.UP);
+			ac.AutoConnect(panel, button3, button5, ConnectionDirection.UP);
+			ac.AutoConnect(panel, button4, button5, ConnectionDirection.RIGHT);
+			ac.AutoConnect(panel, button5, button6, ConnectionDirection.RIGHT);
+			ac.AutoConnect(panel, button6, button7, ConnectionDirection.DOWN);
+		}
+	}
+}

@@ -1,0 +1,57 @@
+# This file will automatically update with entries for new content after a build and reload.
+
+Items: {
+	Accessories: {
+		RighteousFire: {
+			DisplayName: Righteous Fire
+			Tooltip:
+				'''
+				An item, which sets you a blaze
+				as it does your enemies.
+				'''
+		}
+	}
+
+	RighteousFire: {
+		DisplayName: Righteous Fire
+		Tooltip:
+			'''
+			An item, which sets you a blaze
+			as it does your enemies.
+			Passive stats:
+			-10 Life regen
+			-10 Defence
+			Abilities:
+			[c/FF0000:+Passive Righteous Fire]
+			'''
+	}
+
+	MinionCompress: {
+		DisplayName: Minion Creator
+		Tooltip:
+			'''
+			Minion creator allows one to form their own
+			abominations from minions and sentries.
+			Passive stats:
+			+10 Minion slots
+			-50 Defence
+			Significant melee attack speed reduction
+			Abilities:
+			[c/0000FF:+Passive Minion Creator]
+			Caution:
+			Some combinations can cause odd behaviour!
+			'''
+	}
+}
+
+Buffs: {
+	CustomInferno: {
+		DisplayName: Custom Inferno
+		Description: Mods.Runeforge.Buffs.CustomInferno.Description
+	}
+}
+
+Keybinds: {
+	"Toggle My UI.DisplayName": Toggle  My  U I
+	"Toggle Skilltree.DisplayName": Toggle  Skilltree
+}
