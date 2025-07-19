@@ -30,7 +30,6 @@ namespace Runeforge.Content.UI
 			b.AddConnection(conn);
 			return conn;
 		}
-
 		public (Vector2, Vector2) GetNewLocations(NodeUI fixed_node, NodeUI b, ConnectionDirection dir)
 		{
 			(Asset<Texture2D> active, Asset<Texture2D> inactive) dir_asset = textureManager.GetDirection(dir);
@@ -70,6 +69,10 @@ namespace Runeforge.Content.UI
 		public void AutoSyncNodes(NodeUI b, Vector2 delta)
 		{
 			PathingAlgorithms.ApplyFunctionToConnectedNodes(b, new(), delta, ApplyDelta, ApplyDelta);
+		}
+		public void AutoSync(NodeUI b)
+		{
+			PathingAlgorithms.CorrectNodeLocations(b, new(), GetNewLocations);
 		}
 		public ConnectionUI AutoConnectWithSync(SkillTreePanel panel, NodeUI a, NodeUI b, ConnectionDirection dir)
 		{

@@ -10,7 +10,7 @@ using System;
 
 namespace Runeforge.Content.UI
 {
-	public class PathingAlgorithms : UIElement
+	public class PathingAlgorithms
 	{
 
 		public static bool DoesPossiblePathExistToEmpty(NodeUI start, Dictionary<int, bool> visited)
@@ -35,7 +35,7 @@ namespace Runeforge.Content.UI
 			}
 			return path;
 		}
-		public static void ApplyFunctionToConnectedNodes(NodeUI start, Dictionary<int, bool> visited, Vector2 delta, Action<NodeUI, Vector2> action1, Action<ConnectionUI, Vector2> action2)
+		public static void ApplyFunctionToConnectedNodes(NodeUI start, Dictionary<int, bool> visited, Vector2 delta, Action<NodeUI, Vector2> applyToNode, Action<ConnectionUI, Vector2> applyToConnection)
 		{
 			ModContent.GetInstance<Runeforge>().Logger.Info("\tNOT EMPTY");
 			if (!visited.ContainsKey(start.GetID())) { visited.Add(start.GetID(), true); ModContent.GetInstance<Runeforge>().Logger.Info("\tADDED TO VISITED!"); }
@@ -44,12 +44,27 @@ namespace Runeforge.Content.UI
 				NodeUI node = NodeUI.GetNeighbourNode(conn, start);
 				if (!visited.ContainsKey(node.GetID()))
 				{
-					action1(node, delta);
-					action2(conn, delta);
-					ApplyFunctionToConnectedNodes(node, visited, delta, action1, action2);
+					applyToNode(node, delta);
+					applyToConnection(conn, delta);
+					ApplyFunctionToConnectedNodes(node, visited, delta, applyToNode, applyToConnection);
 				}
 			}
 		}
-
+		public static void CorrectNodeLocations(NodeUI start, Dictionary<int, bool> visited, Func<NodeUI, NodeUI, ConnectionDirection, (Vector2, Vector2)> getNewLocations)
+		{
+			ModContent.GetInstance<Runeforge>().Logger.Info("\tNOT EMPTY");
+			if (!visited.ContainsKey(start.GetID())) { visited.Add(start.GetID(), true); ModContent.GetInstance<Runeforge>().Logger.Info("\tADDED TO VISITED!"); }
+			foreach (var conn in start.GetConnections())
+			{
+				NodeUI node = NodeUI.GetNeighbourNode(conn, start);
+				if (!visited.ContainsKey(node.GetID()))
+				{
+					(Vector2 dirLocation, Vector2 neighbourLocation) results = getNewLocations(start, node, conn.direction_from_node);
+					node.SetLocation(results.neighbourLocation);
+					conn.SetLocation(results.dirLocation);
+					CorrectNodeLocations(node, visited, getNewLocations);
+				}
+			}
+		}
 	}
 }

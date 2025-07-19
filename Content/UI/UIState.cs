@@ -1,6 +1,8 @@
 using Microsoft.Xna.Framework;
 using Terraria.UI;
 using Runeforge.Content.SkillTree;
+using Terraria.ModLoader;
+using Terraria;
 
 
 namespace Runeforge.Content.UI
@@ -8,6 +10,27 @@ namespace Runeforge.Content.UI
 	class TheUI : UIState
 	{
 		private SkillTreePanel panel;
+		public StatBlockPlayer statBlockPlayer;
+		public static StatBlock statBlock = new();
+		public TheUI()
+		{
+		}
+
+		public override void Update(GameTime gameTime)
+		{
+			base.Update(gameTime);
+		}
+
+		public void UpdatePlayerStatBlock()
+		{
+			if (Main.LocalPlayer.active && Main.LocalPlayer != null)
+			{
+				statBlockPlayer = Main.LocalPlayer.GetModPlayer<StatBlockPlayer>();
+				statBlockPlayer.ApplyStatBlock(statBlock);
+				ModContent.GetInstance<Runeforge>().Logger.Info("UPDATING");
+			}
+		}
+
 		public override void OnInitialize()
 		{
 			TextureManager textureManager = SkillTreeGraphUI.textureManager;
@@ -20,23 +43,36 @@ namespace Runeforge.Content.UI
 			HoverOverUI hoverOverUI = new HoverOverUI(panel, textureManager);
 			NodeManager nodeManager = new NodeManager(panel, textureManager, hoverOverUI);
 
+			void IncreaseDefence(NodeUI node)
+			{
+				if (node.active)
+				{
+					statBlock.defenceIncrease += 50;
+				}
+				else
+				{
+					statBlock.defenceIncrease -= 50;
+				}
+				UpdatePlayerStatBlock();
+			}
+
 			string temp_text = "+0.5 Defence";
 			NodeUI button1 = nodeManager.CreateNode(delegate { }, NodeType.Empty, "");
-			NodeUI button2 = nodeManager.CreateNode(delegate { }, NodeType.Defence, temp_text);
+			NodeUI button2 = nodeManager.CreateNode(IncreaseDefence, NodeType.Defence, temp_text);
 			NodeUI button3 = nodeManager.CreateNode(delegate { }, NodeType.Defence, temp_text);
 			NodeUI button4 = nodeManager.CreateNode(delegate { }, NodeType.Defence, temp_text);
 			NodeUI button5 = nodeManager.CreateNode(delegate { }, NodeType.Defence, temp_text);
 			NodeUI button6 = nodeManager.CreateNode(delegate { }, NodeType.Defence, temp_text);
 			NodeUI button7 = nodeManager.CreateNode(delegate { }, NodeType.Defence, temp_text);
-
-			// add connection
-			ac.AutoConnectWithSync(panel, button1, button2, ConnectionDirection.RIGHT);
-			ac.AutoConnectWithSync(panel, button2, button4, ConnectionDirection.UP);
-			ac.AutoConnectWithSync(panel, button4, button5, ConnectionDirection.RIGHT);
-			ac.AutoConnectWithSync(panel, button5, button6, ConnectionDirection.RIGHT);
-			ac.AutoConnectWithSync(panel, button3, button5, ConnectionDirection.UP);
-			ac.AutoConnectWithSync(panel, button7, button6, ConnectionDirection.DOWN);
-			ac.AutoConnectWithSync(panel, button2, button3, ConnectionDirection.RIGHT);
+			// add connections
+			ac.AutoConnect(panel, button1, button2, ConnectionDirection.RIGHT);
+			ac.AutoConnect(panel, button2, button4, ConnectionDirection.UP);
+			ac.AutoConnect(panel, button4, button5, ConnectionDirection.RIGHT);
+			ac.AutoConnect(panel, button5, button6, ConnectionDirection.RIGHT);
+			ac.AutoConnect(panel, button3, button5, ConnectionDirection.UP);
+			ac.AutoConnect(panel, button7, button6, ConnectionDirection.DOWN);
+			//ac.AutoConnect(panel, button2, button3, ConnectionDirection.RIGHT);
+			ac.AutoSync(button1);
 		}
 	}
 }

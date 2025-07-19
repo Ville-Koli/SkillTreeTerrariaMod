@@ -144,6 +144,7 @@ namespace Runeforge.Content.UI
 				}
 
 				active = !active;
+				modification(this);
 			}
 			else
 			{
@@ -153,6 +154,7 @@ namespace Runeforge.Content.UI
 				{
 					ModContent.GetInstance<Runeforge>().Logger.Info("\t\tINACTIVATE!");
 					active = !active;
+					modification(this);
 
 					node_image.SetImage(inactive_node_image);
 					foreach (var conn in connections)
