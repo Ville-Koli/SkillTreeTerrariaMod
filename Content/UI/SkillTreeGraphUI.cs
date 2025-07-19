@@ -36,6 +36,7 @@ namespace Runeforge.Content.UI
 			Asset<Texture2D> tankNodeInActive = ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/inactive_defencenode");
 			Asset<Texture2D> tankNodeActive = ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/active_defencenode");
 			textureManager = new TextureManager();
+			
 			textureManager.transparent_box = ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/transparent_hoverover_text_box");
 			textureManager.AddDirection(ConnectionDirection.UP, vertical.active, vertical.inactive);
 			textureManager.AddDirection(ConnectionDirection.DOWN, vertical.active, vertical.inactive);

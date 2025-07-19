@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Terraria.GameContent.UI.Elements;
 using Runeforge.Content.SkillTree;
 using ReLogic.Content;
+using System;
 
 namespace Runeforge.Content.UI
 {
@@ -43,30 +44,6 @@ namespace Runeforge.Content.UI
 		{
 			return description;
 		}
-
-		public static bool DoesPossiblePathExistToEmpty(NodeUI start, Dictionary<int, bool> visited)
-		{
-			if (start.type == NodeType.Empty) return true;
-			ModContent.GetInstance<Runeforge>().Logger.Info("\tNOT EMPTY");
-			bool path = false;
-			if (!visited.ContainsKey(start.GetID())) { visited.Add(start.GetID(), true); ModContent.GetInstance<Runeforge>().Logger.Info("\tADDED TO VISITED!"); }
-			foreach (var conn in start.GetConnections())
-			{
-				NodeUI node = GetNeighbourNode(conn, start);
-				if (node.type == NodeType.Empty) return true;
-				if (node.active)
-				{
-					ModContent.GetInstance<Runeforge>().Logger.Info("\t\tNEIGHBOUR NOT EMPTY");
-					if (!visited.ContainsKey(node.GetID()))
-					{
-						ModContent.GetInstance<Runeforge>().Logger.Info("CHECKING NEIGBHOUR: " + path);
-						path = path || DoesPossiblePathExistToEmpty(node, visited);
-					}
-				}
-			}
-			return path;
-		}
-
 		public bool CanNodeBeDeActivated(List<ConnectionUI> activeNeighbours)
 		{
 			if (!active) return false;
@@ -76,7 +53,7 @@ namespace Runeforge.Content.UI
 			foreach (var conn in activeNeighbours)
 			{
 				NodeUI node = GetNeighbourNode(conn);
-				deactivation = deactivation && DoesPossiblePathExistToEmpty(node, new());
+				deactivation = deactivation && PathingAlgorithms.DoesPossiblePathExistToEmpty(node, new());
 				ModContent.GetInstance<Runeforge>().Logger.Info("Trying neigbhour: " + deactivation);
 			}
 			active = true;

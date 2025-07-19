@@ -19,50 +19,79 @@ namespace Runeforge.Content.UI
 	class AutoConnector
 	{
 		public TextureManager textureManager;
+
+		public ConnectionUI ConnectNodes(SkillTreePanel panel, NodeUI a, NodeUI b,
+		(Asset<Texture2D> active, Asset<Texture2D> inactive) dir_asset, ConnectionDirection dir,
+		Vector2 resulting_location_for_dir, Vector2 resulting_location_for_b)
+		{
+			b.SetLocation(resulting_location_for_b);
+			ConnectionUI conn = new ConnectionUI(panel, dir_asset.inactive, dir_asset.active, a, b, dir, resulting_location_for_dir);
+			a.AddConnection(conn);
+			b.AddConnection(conn);
+			return conn;
+		}
+
+		public (Vector2, Vector2) GetNewLocations(NodeUI fixed_node, NodeUI b, ConnectionDirection dir)
+		{
+			(Asset<Texture2D> active, Asset<Texture2D> inactive) dir_asset = textureManager.GetDirection(dir);
+			Vector2 nodeALocation = fixed_node.GetLocation();
+			Vector2 dir_dimensions = dir_asset.inactive.Size();
+			Vector2 fixed_node_dimensions = fixed_node.inactive_node_image.Size();
+			Vector2 b_dimensions = b.inactive_node_image.Size();
+			Vector2 resulting_location_for_b;
+			Vector2 resulting_location_for_dir;
+			switch (dir)
+			{
+				case ConnectionDirection.UP:
+					resulting_location_for_dir = nodeALocation + new Vector2(MathF.Abs(fixed_node_dimensions.X / 2 - dir_dimensions.X / 2), -dir_dimensions.Y);
+					resulting_location_for_b = nodeALocation + new Vector2(MathF.Abs(fixed_node_dimensions.X / 2 - b_dimensions.X / 2), -dir_dimensions.Y - b_dimensions.Y);
+					return (resulting_location_for_dir, resulting_location_for_b);
+				case ConnectionDirection.DOWN:
+					resulting_location_for_dir = nodeALocation + new Vector2(MathF.Abs(fixed_node_dimensions.X / 2 - dir_dimensions.X / 2), fixed_node_dimensions.Y);
+					resulting_location_for_b = nodeALocation + new Vector2(MathF.Abs(fixed_node_dimensions.X / 2 - b_dimensions.X / 2), fixed_node_dimensions.Y + dir_dimensions.Y);
+					return (resulting_location_for_dir, resulting_location_for_b);
+				case ConnectionDirection.RIGHT:
+					resulting_location_for_dir = nodeALocation + new Vector2(fixed_node_dimensions.X, MathF.Abs(fixed_node_dimensions.Y / 2 - dir_dimensions.Y / 2));
+					resulting_location_for_b = nodeALocation + new Vector2(fixed_node_dimensions.X + dir_dimensions.X, MathF.Abs(fixed_node_dimensions.Y / 2 - b_dimensions.Y / 2));
+					return (resulting_location_for_dir, resulting_location_for_b);
+			}
+			return (Vector2.Zero, Vector2.Zero);
+		}
+
+		public void ApplyDelta(NodeUI node, Vector2 delta)
+		{
+			node.SetLocation(node.GetLocation() + delta);
+		}
+		public void ApplyDelta(ConnectionUI conn, Vector2 delta)
+		{
+			conn.SetLocation(conn.GetLocation() + delta);
+		}
+
+		public void AutoSyncNodes(NodeUI b, Vector2 delta)
+		{
+			PathingAlgorithms.ApplyFunctionToConnectedNodes(b, new(), delta, ApplyDelta, ApplyDelta);
+		}
+		public ConnectionUI AutoConnectWithSync(SkillTreePanel panel, NodeUI a, NodeUI b, ConnectionDirection dir)
+		{
+			(Asset<Texture2D> active, Asset<Texture2D> inactive) dir_asset = textureManager.GetDirection(dir);
+			if (dir_asset.inactive != null && dir_asset.active != null)
+			{
+				(Vector2 resDir, Vector2 resB) results = GetNewLocations(a, b, dir);
+				AutoSyncNodes(b, results.resB - b.location);
+				return ConnectNodes(panel, a, b, dir_asset, dir, results.resDir, results.resB);
+			}
+			return null;
+		}
 		public ConnectionUI AutoConnect(SkillTreePanel panel, NodeUI a, NodeUI b, ConnectionDirection dir)
 		{
 			(Asset<Texture2D> active, Asset<Texture2D> inactive) dir_asset = textureManager.GetDirection(dir);
 			if (dir_asset.inactive != null && dir_asset.active != null)
 			{
-				Vector2 nodeALocation = a.GetLocation();
-				Vector2 dir_dimensions = dir_asset.inactive.Size();
-				Vector2 a_dimensions = a.inactive_node_image.Size();
-				Vector2 b_dimensions = b.inactive_node_image.Size();
-				ModContent.GetInstance<Runeforge>().Logger.Info("DATA: " + nodeALocation + " " + dir_dimensions + " " + a_dimensions + " " + b_dimensions + " " + (a.inactive_node_image != null) + " " + (b.inactive_node_image != null));
-				Vector2 resulting_location_for_b;
-				Vector2 resulting_location_for_dir;
-				// assume that A is already placed to their correct spot
-				switch (dir)
-				{
-					case ConnectionDirection.UP:
-						resulting_location_for_dir = nodeALocation + new Vector2(MathF.Abs(a_dimensions.X / 2 - dir_dimensions.X / 2), -dir_dimensions.Y);
-						resulting_location_for_b = nodeALocation + new Vector2(MathF.Abs(a_dimensions.X / 2 - b_dimensions.X / 2), -dir_dimensions.Y - b_dimensions.Y);
-						b.SetLocation(resulting_location_for_b);
-						ConnectionUI conn = new ConnectionUI(panel, dir_asset.inactive, dir_asset.active, a, b, dir, resulting_location_for_dir);
-						a.AddConnection(conn);
-						b.AddConnection(conn);
-						return conn;
-					case ConnectionDirection.DOWN:
-						resulting_location_for_dir = nodeALocation + new Vector2(MathF.Abs(a_dimensions.X / 2 - dir_dimensions.X / 2), a_dimensions.Y);
-						resulting_location_for_b = nodeALocation + new Vector2(MathF.Abs(a_dimensions.X / 2 - b_dimensions.X / 2), a_dimensions.Y + dir_dimensions.Y);
-						b.SetLocation(resulting_location_for_b);
-						ConnectionUI conn2 = new ConnectionUI(panel, dir_asset.inactive, dir_asset.active, a, b, dir, resulting_location_for_dir);
-						a.AddConnection(conn2);
-						b.AddConnection(conn2);
-						return conn2;
-					case ConnectionDirection.RIGHT:
-						resulting_location_for_dir = nodeALocation + new Vector2(a_dimensions.X, MathF.Abs(a_dimensions.Y / 2 - dir_dimensions.Y / 2));
-						resulting_location_for_b = nodeALocation + new Vector2(a_dimensions.X + dir_dimensions.X, MathF.Abs(a_dimensions.Y / 2 - b_dimensions.Y / 2));
-						b.SetLocation(resulting_location_for_b);
-						ConnectionUI conn3 = new ConnectionUI(panel, dir_asset.inactive, dir_asset.active, a, b, dir, resulting_location_for_dir);
-						a.AddConnection(conn3);
-						b.AddConnection(conn3);
-						return conn3;
-				}
+				(Vector2 resDir, Vector2 resB) results = GetNewLocations(a, b, dir);
+				return ConnectNodes(panel, a, b, dir_asset, dir, results.resDir, results.resB);
 			}
 			return null;
 		}
-
 		public AutoConnector(TextureManager textureManager)
 		{
 			this.textureManager = textureManager;
