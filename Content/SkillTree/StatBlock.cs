@@ -6,11 +6,11 @@ namespace Runeforge.Content.SkillTree
 {
     public class StatBlockPlayer : ModPlayer
     {
-        public int defenceIncrease;
+        public StatBlock statBlock = new();
 
         public void ApplyStatBlock(StatBlock statBlock)
         {
-            defenceIncrease = statBlock.defenceIncrease;
+            this.statBlock = statBlock;
         }
         public override void Initialize()
         {
@@ -19,11 +19,23 @@ namespace Runeforge.Content.SkillTree
         public override void UpdateEquips()
         {
             base.UpdateEquips();
-            Player.statDefense += defenceIncrease;
+            Player.statDefense += (int)statBlock.GetDefenceIncrease();
         }
     }
     public class StatBlock
     {
-        public int defenceIncrease;
+        private float defenceIncrease;
+        public float GetDefenceIncrease()
+        {
+            return defenceIncrease;
+        }
+        public void SetDefenceIncrease(float newDefenceIncrease)
+        {
+            defenceIncrease = newDefenceIncrease;
+        }
+        public void AddDefenceIncrease(float newDefenceIncrease)
+        {
+            defenceIncrease += newDefenceIncrease;
+        }
     }
 }

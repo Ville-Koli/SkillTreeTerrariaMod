@@ -3,6 +3,7 @@ using Terraria.UI;
 using Runeforge.Content.SkillTree;
 using Terraria.ModLoader;
 using Terraria;
+using Runeforge.Content.SkillTree.NodeScripts;
 
 
 namespace Runeforge.Content.UI
@@ -19,6 +20,17 @@ namespace Runeforge.Content.UI
 		public override void Update(GameTime gameTime)
 		{
 			base.Update(gameTime);
+			// probably can be fetched somewhere else to optimize further
+			// let it be here for the time being
+			if (statBlockPlayer == null && Main.LocalPlayer.active && Main.LocalPlayer != null)
+			{
+				statBlockPlayer = Main.LocalPlayer.GetModPlayer<StatBlockPlayer>();
+				if (statBlockPlayer != null)
+				{
+					statBlockPlayer.ApplyStatBlock(statBlock);
+					ModContent.GetInstance<Runeforge>().Logger.Info("UPDATING");
+				}
+			}
 		}
 
 		public void UpdatePlayerStatBlock()
@@ -41,29 +53,17 @@ namespace Runeforge.Content.UI
 			panel.BackgroundColor = Color.Black;
 			Append(panel);
 			HoverOverUI hoverOverUI = new HoverOverUI(panel, textureManager);
-			NodeManager nodeManager = new NodeManager(panel, textureManager, hoverOverUI);
-
-			void IncreaseDefence(NodeUI node)
-			{
-				if (node.active)
-				{
-					statBlock.defenceIncrease += 50;
-				}
-				else
-				{
-					statBlock.defenceIncrease -= 50;
-				}
-				UpdatePlayerStatBlock();
-			}
+			NodeManager nodeManager = new NodeManager(panel, textureManager, hoverOverUI, statBlock);
 
 			string temp_text = "+0.5 Defence";
-			NodeUI button1 = nodeManager.CreateNode(delegate { }, NodeType.Empty, "");
-			NodeUI button2 = nodeManager.CreateNode(IncreaseDefence, NodeType.Defence, temp_text);
-			NodeUI button3 = nodeManager.CreateNode(delegate { }, NodeType.Defence, temp_text);
-			NodeUI button4 = nodeManager.CreateNode(delegate { }, NodeType.Defence, temp_text);
-			NodeUI button5 = nodeManager.CreateNode(delegate { }, NodeType.Defence, temp_text);
-			NodeUI button6 = nodeManager.CreateNode(delegate { }, NodeType.Defence, temp_text);
-			NodeUI button7 = nodeManager.CreateNode(delegate { }, NodeType.Defence, temp_text);
+			DefenceNodeTrigger trigger = new DefenceNodeTrigger(1);
+			NodeUI button1 = nodeManager.CreateNode(new DefenceNodeTrigger(0), NodeType.Empty, "");
+			NodeUI button2 = nodeManager.CreateNode(trigger, NodeType.Defence, temp_text);
+			NodeUI button3 = nodeManager.CreateNode(trigger, NodeType.Defence, temp_text);
+			NodeUI button4 = nodeManager.CreateNode(trigger, NodeType.Defence, temp_text);
+			NodeUI button5 = nodeManager.CreateNode(trigger, NodeType.Defence, temp_text);
+			NodeUI button6 = nodeManager.CreateNode(trigger, NodeType.Defence, temp_text);
+			NodeUI button7 = nodeManager.CreateNode(trigger, NodeType.Defence, temp_text);
 			// add connections
 			ac.AutoConnect(panel, button1, button2, ConnectionDirection.RIGHT);
 			ac.AutoConnect(panel, button2, button4, ConnectionDirection.UP);

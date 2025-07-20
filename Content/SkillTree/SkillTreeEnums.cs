@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 
 namespace Runeforge.Content.SkillTree
 {
-    public delegate void ModifyPlayer(NodeUI node);
+    public delegate void ModifyPlayer(StatBlock statBlock, NodeUI node);
     public enum NodeType
     {
         Empty,

@@ -10,17 +10,19 @@ namespace Runeforge.Content.UI
 		public SkillTreePanel panel;
 		public TextureManager textureManager;
 		public HoverOverUI hoverOverUI;
-		public NodeManager(SkillTreePanel panel, TextureManager textureManager, HoverOverUI hoverOverUI)
+		public StatBlock statBlock;
+		public NodeManager(SkillTreePanel panel, TextureManager textureManager, HoverOverUI hoverOverUI, StatBlock statBlock)
 		{
+			this.statBlock = statBlock;
 			this.panel = panel;
 			this.textureManager = textureManager;
 			this.hoverOverUI = hoverOverUI;
 		}
 
-		public NodeUI CreateNode(ModifyPlayer modifyPlayer, NodeType type, string description)
+		public NodeUI CreateNode(INodeTrigger trigger, NodeType type, string description)
 		{
 			(Asset<Texture2D> active, Asset<Texture2D> inactive) texture = textureManager.GetNode(type);
-			NodeUI nodeUI = new NodeUI(panel, texture.inactive, texture.active, Vector2.Zero, modifyPlayer, type, hoverOverUI, description);
+			NodeUI nodeUI = new NodeUI(panel, texture.inactive, texture.active, Vector2.Zero, trigger, type, hoverOverUI, statBlock, description);
 			panel.nodes.Add(nodeUI);
 			return nodeUI;
 		}

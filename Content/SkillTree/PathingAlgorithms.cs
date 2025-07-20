@@ -7,8 +7,9 @@ using ReLogic.Content;
 using System.Collections.Generic;
 using Terraria.ModLoader;
 using System;
+using Runeforge.Content.UI;
 
-namespace Runeforge.Content.UI
+namespace Runeforge.Content.SkillTree
 {
 	public class PathingAlgorithms
 	{

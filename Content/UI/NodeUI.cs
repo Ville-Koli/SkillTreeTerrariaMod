@@ -16,29 +16,39 @@ namespace Runeforge.Content.UI
 		private SkillTreePanel mainPanel;
 		private List<ConnectionUI> connections = new();
 		private NodeType type;
-		private ModifyPlayer modification;
+		private INodeTrigger trigger;
 		public UIImage node_image;
 		public Asset<Texture2D> active_node_image;
 		public Asset<Texture2D> inactive_node_image;
+		public StatBlock statBlock;
 		public HoverOverUI hoverOverUI;
 		public Vector2 location;
 		public bool active;
 		private string description;
 		private int id;
 		private static int global_id = 0;
-		public NodeUI(SkillTreePanel panel, Asset<Texture2D> inactive, Asset<Texture2D> active, Vector2 location, ModifyPlayer modification, NodeType type, HoverOverUI hoverOverUI, string description)
+		public NodeUI(SkillTreePanel panel, Asset<Texture2D> inactive, Asset<Texture2D> active, Vector2 location, INodeTrigger trigger, NodeType type, HoverOverUI hoverOverUI, StatBlock statBlock, string description)
 		{
 			mainPanel = panel;
 			node_image = new UIImage(inactive);
 			inactive_node_image = inactive;
 			this.location = location;
-			this.modification = modification;
+			this.trigger = trigger;
 			this.type = type;
 			this.hoverOverUI = hoverOverUI;
 			this.description = description;
+			this.statBlock = statBlock;
 			active_node_image = active;
 			id = global_id;
 			global_id++;
+		}
+		public bool GetNodeActivity()
+		{
+			return active;
+		}
+		public StatBlock GetStatBlock()
+		{
+			return statBlock;
 		}
 		public string GetDescription()
 		{
@@ -144,7 +154,7 @@ namespace Runeforge.Content.UI
 				}
 
 				active = !active;
-				modification(this);
+				trigger.Activate(statBlock);
 			}
 			else
 			{
@@ -154,7 +164,7 @@ namespace Runeforge.Content.UI
 				{
 					ModContent.GetInstance<Runeforge>().Logger.Info("\t\tINACTIVATE!");
 					active = !active;
-					modification(this);
+					trigger.DeActivate(statBlock);
 
 					node_image.SetImage(inactive_node_image);
 					foreach (var conn in connections)
@@ -232,7 +242,7 @@ namespace Runeforge.Content.UI
         public int GetID() { return id; }
         public NodeType GetNodeType() { return type; }
         public List<ConnectionUI> GetConnections() { return connections; }
-        public ModifyPlayer GetModification() { return modification; }
+        public INodeTrigger GetModification() { return trigger; }
         public void AddConnection(ConnectionUI conn) { connections.Add(conn); }
 	}
 }
