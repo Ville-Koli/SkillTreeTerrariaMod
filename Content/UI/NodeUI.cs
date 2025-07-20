@@ -8,6 +8,8 @@ using Terraria.GameContent.UI.Elements;
 using Runeforge.Content.SkillTree;
 using ReLogic.Content;
 using System;
+using Runeforge.Content.SkillTree.NodeScripts;
+using System.Text;
 
 namespace Runeforge.Content.UI
 {
@@ -42,6 +44,21 @@ namespace Runeforge.Content.UI
 			id = global_id;
 			global_id++;
 		}
+
+        public override string ToString()
+        {
+			StringBuilder nodeString = new StringBuilder();
+			nodeString.Append($"{id} | {type} | ");
+			nodeString.Append('{');
+			foreach (var conn in connections)
+			{
+				nodeString.Append(conn);
+				nodeString.Append(',');
+			}
+			nodeString.Append("} | ");
+			nodeString.Append($"{description}");
+			return nodeString.ToString();
+        }
 		public bool GetNodeActivity()
 		{
 			return active;
@@ -130,7 +147,18 @@ namespace Runeforge.Content.UI
 			}
 			return false;
 		}
-		
+
+		public void SetActive()
+		{
+			node_image.SetImage(active_node_image);
+			active = true;
+		}
+
+		public void SetInActive()
+		{
+			node_image.SetImage(inactive_node_image);
+			active = false;
+		}
 
 		public override void LeftMouseDown(UIMouseEvent evt)
 		{
@@ -162,15 +190,14 @@ namespace Runeforge.Content.UI
 				ModContent.GetInstance<Runeforge>().Logger.Info("\t\tIS LEAFNODE: " + isLeafNode + " is deactivatable: " + CanNodeBeDeActivated(connections));
 				if (active && (isLeafNode || CanNodeBeDeActivated(connections)))
 				{
-					ModContent.GetInstance<Runeforge>().Logger.Info("\t\tINACTIVATE!");
 					active = !active;
-					trigger.DeActivate(statBlock);
 
 					node_image.SetImage(inactive_node_image);
 					foreach (var conn in connections)
 					{
 						conn.SetInActive();
 					}
+					trigger.DeActivate(statBlock);
 				}
 			}
 			EditHoverOverElement();

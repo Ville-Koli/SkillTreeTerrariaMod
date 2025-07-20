@@ -1,6 +1,6 @@
 using Runeforge.Content.UI;
 
-namespace Runeforge.Content.SkillTree
+namespace Runeforge.Content.SkillTree.NodeScripts
 {
     public interface INodeTrigger
     {

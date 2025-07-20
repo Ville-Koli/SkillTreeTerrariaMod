@@ -4,6 +4,7 @@ using Terraria.UI;
 using Terraria.GameContent.UI.Elements;
 using Runeforge.Content.SkillTree;
 using ReLogic.Content;
+using Terraria.ModLoader;
 
 namespace Runeforge.Content.UI
 {
@@ -34,6 +35,10 @@ namespace Runeforge.Content.UI
 			global_id++;
 		}
 
+        public override string ToString()
+        {
+            return $"({connectedNodeA.GetID()}, {connectedNodeB.GetID()}, {active})";
+        }
 		public int GetID()
 		{
 			return id;

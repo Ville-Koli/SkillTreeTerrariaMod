@@ -66,6 +66,12 @@ namespace Runeforge.Content.UI
 				MyInterface.Update(gameTime);
 			}
 		}
+		public override void OnWorldUnload()
+		{
+			base.OnWorldUnload();
+			NodeManager.DeActivateAll();
+			ConnectionManager.DeActivateAll();
+        }
 		public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
 		{
 			int mouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));
@@ -101,7 +107,7 @@ namespace Runeforge.Content.UI
 		}
 		public override void PostUpdateInput()
 		{
-			if (Runeforge.ToggleMyUIKeybind.JustPressed)
+			if (Runeforge.ToggleMyUIKeybind != null && Runeforge.ToggleMyUIKeybind.JustPressed)
 			{
 				ShowUI = !ShowUI;
 				if (ShowUI)

@@ -18,18 +18,18 @@ namespace Runeforge.Content.UI
 		public bool active;
 		private int id;
 		private static int global_id = 0;
-		public HoverOverUI(SkillTreePanel panel, TextureManager textureManager)
+		public HoverOverUI(TextureManager textureManager)
 		{
 			transparentImage = textureManager.transparent_box;
 			(Asset<Texture2D> active, Asset<Texture2D> inactive) asset = textureManager.GetUI(UIType.hoverOver);
 			hoverOverUIImage = new UIImage(transparentImage);
 			this.description = new UIText("test", 0.7f); // DO NOT SET "test" to "" when changing font size, if font size is 1 then it can be ""
-			panel.hoverOverUI = this;
 			inActiveConnectionImage = asset.inactive;
 			activeConnectionImage = asset.active;
 			id = global_id;
 			global_id++;
 		}
+
 		public int GetID()
 		{
 			return id;

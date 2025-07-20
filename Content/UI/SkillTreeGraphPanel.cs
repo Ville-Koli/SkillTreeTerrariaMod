@@ -13,9 +13,8 @@ namespace Runeforge.Content.UI
 	{
 		public Color BackgroundColor;
 		private UIPanel _uiPanel;
-		private Dictionary<int, NodeUI> node_list = new();
-		public List<NodeUI> nodes = new();
-		public Dictionary<int, ConnectionUI> conns = new();
+		private NodeManager nodeManager;
+		public ConnectionManager connectionManager;
 		public HoverOverUI hoverOverUI;
 		private Vector2 offset;
 		private UIText debugText;
@@ -31,7 +30,18 @@ namespace Runeforge.Content.UI
 			offset = evt.MousePosition;
 
 		}
-
+		public void SetHoverOverUI(HoverOverUI hoverOverUI)
+		{
+			this.hoverOverUI = hoverOverUI;
+		}
+		public void SetConnectionManager(ConnectionManager connectionManager)
+		{
+			this.connectionManager = connectionManager;
+		}
+		public void SetNodeManager(NodeManager nodeManager)
+		{
+			this.nodeManager = nodeManager;
+		}
 		public override void LeftMouseUp(UIMouseEvent evt)
 		{
 			base.LeftMouseUp(evt);
@@ -39,16 +49,18 @@ namespace Runeforge.Content.UI
 			{
 				isDragging = false;
 				Vector2 mouseDelta = MouseDeltaVector();
-				foreach (var pair in node_list)
+				Dictionary<int, NodeUI> nodeContainer = nodeManager.GetNodes();
+				Dictionary<int, ConnectionUI> connectionContainer = connectionManager.GetConnections();
+				foreach (var pair in nodeContainer)
 				{
-					NodeUI node = node_list[pair.Key];
+					NodeUI node = nodeContainer[pair.Key];
 					node.SetLocation(pair.Value.GetLocation() + mouseDelta);
 				}
-				foreach (var pair in conns)
+				foreach (var pair in connectionContainer)
 				{
 					ConnectionUI conn = pair.Value;
 					conn.SetLocation(conn.GetLocation() + mouseDelta);
-				}	
+				}
 			}
 		}
 
@@ -64,13 +76,15 @@ namespace Runeforge.Content.UI
 			if (isDragging && !isHoveringOverUI)
 			{
 				Vector2 delta = MouseDeltaVector();
-				foreach (var pair in node_list)
+				Dictionary<int, NodeUI> nodeContainer = nodeManager.GetNodes();
+				foreach (var pair in nodeContainer)
 				{
 					NodeUI nodeUI = pair.Value;
 					nodeUI.Left.Set(delta.X + nodeUI.GetLocation().X, 0.0f);
 					nodeUI.Top.Set(delta.Y + nodeUI.GetLocation().Y, 0.0f);
 				}
-				foreach (var pair in conns)
+				Dictionary<int, ConnectionUI> connectionContainer = connectionManager.GetConnections();
+				foreach (var pair in connectionContainer)
 				{
 					ConnectionUI conn = pair.Value;
 					conn.Left.Set(delta.X + conn.GetLocation().X, 0.0f);
@@ -118,23 +132,20 @@ namespace Runeforge.Content.UI
 			Append(_uiPanel);
 			debugText = new UIText("hello");
 			_uiPanel.Append(debugText);
-			foreach (var n in nodes)
+			Dictionary<int, NodeUI> nodeContainer = nodeManager.GetNodes();
+			foreach (var pair in nodeContainer)
 			{
-				NodeUI nodeui = n;
-				ModContent.GetInstance<Runeforge>().Logger.Info("NODE ID: " + n.GetID() + " locations: " + nodeui.GetLocation().X + " , " + nodeui.GetLocation().Y);
-				node_list.Add(n.GetID(), n);
+				NodeUI nodeui = pair.Value;
+				ModContent.GetInstance<Runeforge>().Logger.Info("NODE ID: " + nodeui.GetID() + " locations: " + nodeui.GetLocation().X + " , " + nodeui.GetLocation().Y);
 				nodeui.Left.Set(nodeui.GetLocation().X, 0.0f);
 				nodeui.Top.Set(nodeui.GetLocation().Y, 0.0f);
 				foreach (var conn in nodeui.GetConnections())
 				{
-					if (!conns.ContainsKey(conn.GetID()))
-					{
-						conns.Add(conn.GetID(), conn);
-						conn.Left.Set(conn.GetLocation().X, 0.0f);
-						conn.Top.Set(conn.GetLocation().Y, 0.0f);
-						_uiPanel.Append(conn);
-					}
+					conn.Left.Set(conn.GetLocation().X, 0.0f);
+					conn.Top.Set(conn.GetLocation().Y, 0.0f);
+					_uiPanel.Append(conn);
 				}
+				//ModContent.GetInstance<Runeforge>().Logger.Info("NODE STATUS: " + nodeui);
 				_uiPanel.Append(nodeui);
 			}
 			_uiPanel.Append(hoverOverUI);
