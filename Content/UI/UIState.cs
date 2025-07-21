@@ -5,6 +5,7 @@ using Terraria.ModLoader;
 using Terraria;
 using Runeforge.Content.SkillTree.NodeScripts;
 using System.Collections.Generic;
+using System;
 
 
 namespace Runeforge.Content.UI
@@ -43,19 +44,19 @@ namespace Runeforge.Content.UI
 			Append(panel);
 
 			string temp_text = "+0.5 Defence";
-			DefenceNodeTrigger trigger = new DefenceNodeTrigger(20);
+			MeleeDamageNodeTrigger trigger = new MeleeDamageNodeTrigger(20);
 			NodeUI button1 = nodeManager.CreateNode(new DefenceNodeTrigger(0), NodeType.Empty, "");
 			List<NodeUI> nodeUIs = new List<NodeUI>(){button1};
-			for (int i = 0; i < 1000; ++i)
+			for (int i = 0; i < 3000; ++i)
 			{
 				NodeUI button2 = nodeManager.CreateNode(trigger, NodeType.Defence, temp_text);
+				button2.SetLocation(new Vector2(i % 500 * 50, MathF.Floor(i / 500) * 50));
 				nodeUIs.Add(button2);
 			}
-			for (int i = 1; i < 1000; ++i)
+			for (int i = 1; i < 3000; ++i)
 			{
 				connectionManager.AutoConnect(panel, nodeUIs[i - 1], nodeUIs[i], ConnectionDirection.RIGHT);
 			}
-			//ac.AutoConnect(panel, button2, button3, ConnectionDirection.RIGHT);
 			connectionManager.AutoSync(button1);
 		}
 	}

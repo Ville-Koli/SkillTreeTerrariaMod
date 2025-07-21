@@ -80,15 +80,20 @@ namespace Runeforge.Content.UI
 				foreach (var pair in nodeContainer)
 				{
 					NodeUI nodeUI = pair.Value;
-					nodeUI.Left.Set(delta.X + nodeUI.GetLocation().X, 0.0f);
-					nodeUI.Top.Set(delta.Y + nodeUI.GetLocation().Y, 0.0f);
+					float newX = delta.X + nodeUI.GetLocation().X;
+					float newY = delta.Y + nodeUI.GetLocation().Y;
+					nodeUI.Left.Set(newX, 0.0f);
+					nodeUI.Top.Set(newY, 0.0f);
+
 				}
 				Dictionary<int, ConnectionUI> connectionContainer = connectionManager.GetConnections();
 				foreach (var pair in connectionContainer)
 				{
 					ConnectionUI conn = pair.Value;
-					conn.Left.Set(delta.X + conn.GetLocation().X, 0.0f);
-					conn.Top.Set(delta.Y + conn.GetLocation().Y, 0.0f);
+					float newX = delta.X + conn.GetLocation().X;
+					float newY = delta.Y + conn.GetLocation().Y;
+					conn.Left.Set(newX, 0.0f);
+					conn.Top.Set(newY, 0.0f);
 				}
 				Recalculate();
 			}

@@ -1,8 +1,10 @@
 
 using System;
+using System.Collections.Generic;
 using System.Text;
 using Runeforge.Content.UI;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -13,15 +15,6 @@ namespace Runeforge.Content.SkillTree
         public StatBlock statBlock;
         public string activeNodes = "";
         public string activeConnections = "";
-
-        public void UpdateStatBlock(StatBlock newStatBlock)
-        {
-            statBlock = newStatBlock;
-        }
-        public StatBlock GetStatBlock()
-        {
-            return statBlock;
-        }
         public override void Initialize()
         {
             statBlock = new StatBlock();
@@ -33,7 +26,13 @@ namespace Runeforge.Content.SkillTree
             if (statBlock != null)
             {
                 Player.statDefense += (int)statBlock.GetDefenceIncrease();
+                Player.GetDamage(DamageClass.Melee) *= statBlock.GetMeleeDamageIncrease();
                 //ModContent.GetInstance<Runeforge>().Logger.Info("Adding defence: " + statBlock.GetDefenceIncrease());
+                // apply buffs
+                foreach (var buffid in statBlock.GetBuffIDs())
+                {
+                    Player.AddBuff(buffid, 100);
+                }
             }
             else
             {
@@ -54,6 +53,8 @@ namespace Runeforge.Content.SkillTree
             if (statBlock != null)
             {
                 tag["defenceIncrease"] = statBlock.GetDefenceIncrease();
+                tag["meleeDamageIncrease"] = statBlock.GetMeleeDamageIncrease();
+                tag["buffIDs"] = statBlock.GetBuffIDs();
                 return;
             }
         }
@@ -77,19 +78,52 @@ namespace Runeforge.Content.SkillTree
             activeNodes = tag.GetString("activeNodes");
             activeConnections = tag.GetString("activeConnections");
             statBlock.SetDefenceIncrease(tag.GetFloat("defenceIncrease"));
+            statBlock.SetMeleeDamageIncrease(tag.GetFloat("meleeDamageIncrease"));
+            statBlock.SetBuffIDs(tag.Get<List<int>>("buffIDs"));
             ModContent.GetInstance<Runeforge>().Logger.Info("[LOADDATA]: Defence: " + tag.GetFloat("defenceIncrease"));
         }
     }
     public class StatBlock
     {
-        private float defenceIncrease;
-        public void ApplyStatBlock(StatBlock statBlock)
+        private List<int> buffIDs = new(); // list of buffs that the statblock provides to SBP
+        private float defenceIncrease = 0;
+        private float meleeDamageIncrease = 1;
+        public List<int> GetBuffIDs()
         {
-            defenceIncrease = statBlock.GetDefenceIncrease();
+            return buffIDs;
+        }
+        public void SetBuffIDs(List<int> newBuffIDs)
+        {
+            buffIDs = newBuffIDs;
+        }
+        public bool ApplyBuff(int buffid)
+        {
+            if (!buffIDs.Contains(buffid))
+            {
+                buffIDs.Add(buffid);
+                return true;
+            }
+            return false;
+        }
+        public bool RemoveBuff(int buffid)
+        {
+            return buffIDs.Remove(buffid);
         }
         public float GetDefenceIncrease()
         {
             return defenceIncrease;
+        }
+        public float GetMeleeDamageIncrease()
+        {
+            return meleeDamageIncrease;
+        }
+        public void SetMeleeDamageIncrease(float meleeDamageIncrease)
+        {
+            this.meleeDamageIncrease = meleeDamageIncrease;
+        }
+        public void AddMeleeDamageIncrease(float meleeDamageIncrease)
+        {
+            this.meleeDamageIncrease += meleeDamageIncrease;
         }
         public void SetDefenceIncrease(float newDefenceIncrease)
         {

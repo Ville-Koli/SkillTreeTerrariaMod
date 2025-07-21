@@ -56,12 +56,13 @@ namespace Runeforge.Content.UI
 				string[] activeIDs = splittedString[1].Split(",");
 				foreach (var id in activeIDs)
 				{
-					//ModContent.GetInstance<Runeforge>().Logger.Info("Trying to activate a node");
 					if (int.TryParse(id, out int intID))
 					{
-						//ModContent.GetInstance<Runeforge>().Logger.Info("Activating a node");
-						NodeUI node = nodeContainer[intID];
-						node.SetActive();
+						if (nodeContainer.ContainsKey(intID))
+						{
+							NodeUI node = nodeContainer[intID];
+							node.SetActive();
+						}
 					}
 				} 
 			}

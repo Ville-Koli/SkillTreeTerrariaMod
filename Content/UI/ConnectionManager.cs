@@ -58,9 +58,8 @@ namespace Runeforge.Content.UI
 				foreach (var id in activeIDs)
 				{
 					//ModContent.GetInstance<Runeforge>().Logger.Info("Trying to activate a connection with id: " + id);
-					if (int.TryParse(id, out int intID))
+					if (int.TryParse(id, out int intID) && connectionContainer.ContainsKey(intID))
 					{
-						//ModContent.GetInstance<Runeforge>().Logger.Info("Activating connection");
 						ConnectionUI connection = connectionContainer[intID];
 						connection.SetActive();
 					}
