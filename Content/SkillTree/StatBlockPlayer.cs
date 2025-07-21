@@ -54,6 +54,15 @@ namespace Runeforge.Content.SkillTree
             {
                 tag["defenceIncrease"] = statBlock.DefenceIncrease;
                 tag["meleeDamageIncrease"] = statBlock.MeleeDamageIncrease;
+                tag["rangedDamageIncrease"] = statBlock.RangeDamageIncrease;
+                tag["bulletDamageIncrease"] = statBlock.BulletDamageIncrease;
+                tag["summonDamageIncrease"] = statBlock.SummonDamageIncrease;
+                tag["meleeAttackSpeedIncrease"] = statBlock.MeleeAttackSpeedIncrease;
+                tag["rangedAttackSpeedIncrease"] = statBlock.RangedAttackSpeedIncrease;
+                tag["extraProjectiles"] = statBlock.ExtraProjectiles;
+                tag["lifeRegenIncrease"] = statBlock.LifeRegenIncrease;
+                tag["maxHealthIncrease"] = statBlock.MaxHealthIncrease;
+                tag["maxManaIncrease"] = statBlock.MaxManaIncrease;
                 tag["buffIDs"] = statBlock.GetBuffIDs();
                 return;
             }
@@ -79,6 +88,15 @@ namespace Runeforge.Content.SkillTree
             activeConnections = tag.GetString("activeConnections");
             statBlock.DefenceIncrease = tag.GetFloat("defenceIncrease");
             statBlock.MeleeDamageIncrease = tag.GetFloat("meleeDamageIncrease");
+            statBlock.RangeDamageIncrease = tag.GetFloat("rangedDamageIncrease");
+            statBlock.BulletDamageIncrease = tag.GetFloat("bulletDamageIncrease");
+            statBlock.SummonDamageIncrease = tag.GetFloat("summonDamageIncrease");
+            statBlock.MeleeAttackSpeedIncrease = tag.GetFloat("meleeAttackSpeedIncrease");
+            statBlock.RangedAttackSpeedIncrease = tag.GetFloat("rangedAttackSpeedIncrease");
+            statBlock.ExtraProjectiles = tag.GetFloat("extraProjectiles");
+            statBlock.LifeRegenIncrease = tag.GetFloat("lifeRegenIncrease");
+            statBlock.MaxHealthIncrease = tag.GetFloat("maxHealthIncrease");
+            statBlock.MaxManaIncrease = tag.GetFloat("maxManaIncrease");
             statBlock.SetBuffIDs(tag.Get<List<int>>("buffIDs"));
             ModContent.GetInstance<Runeforge>().Logger.Info("[LOADDATA]: Defence: " + tag.GetFloat("defenceIncrease"));
         }
