@@ -10,84 +10,33 @@ using Terraria.ModLoader.IO;
 
 namespace Runeforge.Content.SkillTree
 {
-    public class StatBlockPlayer : ModPlayer
-    {
-        public StatBlock statBlock;
-        public string activeNodes = "";
-        public string activeConnections = "";
-        public override void Initialize()
-        {
-            statBlock = new StatBlock();
-        }
-
-        public override void UpdateEquips()
-        {
-            base.UpdateEquips();
-            if (statBlock != null)
-            {
-                Player.statDefense += (int)statBlock.GetDefenceIncrease();
-                Player.GetDamage(DamageClass.Melee) *= statBlock.GetMeleeDamageIncrease();
-                //ModContent.GetInstance<Runeforge>().Logger.Info("Adding defence: " + statBlock.GetDefenceIncrease());
-                // apply buffs
-                foreach (var buffid in statBlock.GetBuffIDs())
-                {
-                    Player.AddBuff(buffid, 100);
-                }
-            }
-            else
-            {
-                ModContent.GetInstance<Runeforge>().Logger.Info("STATBLOCK IS NULL!!");
-            }
-        }
-        public override void PreSavePlayer()
-        {
-            activeNodes = NodeManager.GetActiveNodesAsStringBuilder().ToString();
-            activeConnections = ConnectionManager.GetActiveConnectionsAsStringBuilder().ToString();
-        }
-        public override void SaveData(TagCompound tag)
-        {
-            tag["activeNodes"] = activeNodes;
-            tag["activeConnections"] = activeConnections;
-            ModContent.GetInstance<Runeforge>().Logger.Info("[SAVEDATA] saving nodes: " + activeNodes);
-            ModContent.GetInstance<Runeforge>().Logger.Info("[SAVEDATA] saving connections: " + activeConnections);
-            if (statBlock != null)
-            {
-                tag["defenceIncrease"] = statBlock.GetDefenceIncrease();
-                tag["meleeDamageIncrease"] = statBlock.GetMeleeDamageIncrease();
-                tag["buffIDs"] = statBlock.GetBuffIDs();
-                return;
-            }
-        }
-        public override void OnEnterWorld()
-        {
-            // Apply the saved data to global UI / manager here
-            if (TheUI.nodeManager != null)
-            {
-                TheUI.nodeManager.ApplyLoadedStatBlock(statBlock);
-                NodeManager.ActivateNodesFromStringBuilder(new StringBuilder(activeNodes));
-                ConnectionManager.ActivateNodesFromStringBuilder(new StringBuilder(activeConnections));
-            }
-            else
-            {
-                ModContent.GetInstance<Runeforge>().Logger.Info("[ENTERWORLD]: NodeManager not ready.");
-            }
-        }
-        public override void LoadData(TagCompound tag)
-        {
-            ModContent.GetInstance<Runeforge>().Logger.Info("[LOADDATA]: LOADING SAVE DATA: " + Main.LocalPlayer.name);
-            activeNodes = tag.GetString("activeNodes");
-            activeConnections = tag.GetString("activeConnections");
-            statBlock.SetDefenceIncrease(tag.GetFloat("defenceIncrease"));
-            statBlock.SetMeleeDamageIncrease(tag.GetFloat("meleeDamageIncrease"));
-            statBlock.SetBuffIDs(tag.Get<List<int>>("buffIDs"));
-            ModContent.GetInstance<Runeforge>().Logger.Info("[LOADDATA]: Defence: " + tag.GetFloat("defenceIncrease"));
-        }
-    }
     public class StatBlock
     {
         private List<int> buffIDs = new(); // list of buffs that the statblock provides to SBP
-        private float defenceIncrease = 0;
-        private float meleeDamageIncrease = 1;
+        private float _defenceIncrease = 0;
+        private float _meleeDamageIncrease = 1;
+        private float _rangeDamageIncrease = 1;
+        private float _bulletDamageIncrease = 1;
+        private float _summonDamageIncrease = 1;
+        private float _movementSpeedIncrease = 1;
+        private float _meleeAttackSpeedIncrease = 1;
+        private float _rangedAttackSpeedIncrease = 1;
+        private float _extraProjectiles = 0;
+        private float _lifeRegenIncrease = 0;
+        private float _maxHealthIncrease = 0;
+        private float _maxManaIncrease = 0;
+        public float DefenceIncrease { get { return _defenceIncrease; } set { _defenceIncrease = value; } }
+        public float MeleeDamageIncrease { get { return _meleeDamageIncrease; } set { _meleeDamageIncrease = value; } }
+        public float RangeDamageIncrease { get { return _rangeDamageIncrease; } set { _rangeDamageIncrease = value; } }
+        public float BulletDamageIncrease { get { return _bulletDamageIncrease; } set { _bulletDamageIncrease = value; } }
+        public float SummonDamageIncrease { get { return _summonDamageIncrease; } set { _summonDamageIncrease = value; } }
+        public float MovementSpeedIncrease { get { return _movementSpeedIncrease; } set { _movementSpeedIncrease = value; } }
+        public float MeleeAttackSpeedIncrease { get { return _meleeAttackSpeedIncrease; } set { _meleeAttackSpeedIncrease = value; } }
+        public float RangedAttackSpeedIncrease { get { return _rangedAttackSpeedIncrease; } set { _rangedAttackSpeedIncrease = value; } }
+        public float ExtraProjectiles { get { return _extraProjectiles; } set { _extraProjectiles = value; } }
+        public float LifeRegenIncrease { get { return _lifeRegenIncrease; } set { _lifeRegenIncrease = value; } }
+        public float MaxHealthIncrease { get { return _maxHealthIncrease; } set { _maxHealthIncrease = value; } }
+        public float MaxManaIncrease { get { return _maxManaIncrease; } set { _maxManaIncrease = value; } }
         public List<int> GetBuffIDs()
         {
             return buffIDs;
@@ -109,29 +58,53 @@ namespace Runeforge.Content.SkillTree
         {
             return buffIDs.Remove(buffid);
         }
-        public float GetDefenceIncrease()
+        public void AddMeleeDamageIncrease(float amount)
         {
-            return defenceIncrease;
+            MeleeDamageIncrease += amount;
         }
-        public float GetMeleeDamageIncrease()
+        public void AddDefenceIncrease(float amount)
         {
-            return meleeDamageIncrease;
+            DefenceIncrease += amount;
         }
-        public void SetMeleeDamageIncrease(float meleeDamageIncrease)
+        public void AddRangeDamageIncrease(float amount)
         {
-            this.meleeDamageIncrease = meleeDamageIncrease;
+            RangeDamageIncrease += amount;
         }
-        public void AddMeleeDamageIncrease(float meleeDamageIncrease)
+        public void AddBulletDamageIncrease(float amount)
         {
-            this.meleeDamageIncrease += meleeDamageIncrease;
+            BulletDamageIncrease += amount;
         }
-        public void SetDefenceIncrease(float newDefenceIncrease)
+        public void AddSummonDamageIncrease(float amount)
         {
-            defenceIncrease = newDefenceIncrease;
+            SummonDamageIncrease += amount;
         }
-        public void AddDefenceIncrease(float newDefenceIncrease)
+        public void AddMovementSpeedIncreasee(float amount)
         {
-            defenceIncrease += newDefenceIncrease;
+            MovementSpeedIncrease += amount;
+        }
+        public void AddMeleeAttackSpeedIncrease(float amount)
+        {
+            MeleeAttackSpeedIncrease += amount;
+        }
+        public void AddRangedAttackSpeedIncrease(float amount)
+        {
+            RangedAttackSpeedIncrease += amount;
+        }
+        public void AddExtraProjectiles(float amount)
+        {
+            ExtraProjectiles += amount;
+        }
+        public void AddLifeRegenIncrease(float amount)
+        {
+            LifeRegenIncrease += amount;
+        }
+        public void AddMaxHealthIncrease(float amount)
+        {
+            MaxHealthIncrease += amount;
+        }
+        public void AddMaxManaIncrease(float amount)
+        {
+            MaxManaIncrease += amount;
         }
     }
 }
