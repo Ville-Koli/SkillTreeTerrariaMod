@@ -160,6 +160,8 @@ namespace Runeforge.Content.UI
 		{
 			base.Update(gameTime);
 			ApplyDragging();
+			hoverOverUI.Left.Set(Main.MouseScreen.X, 0.0f);
+			hoverOverUI.Top.Set(Main.MouseScreen.Y, 0.0f);
 		}	
 	}
 }

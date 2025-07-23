@@ -266,11 +266,6 @@ namespace Runeforge.Content.UI
 		public override void Update(GameTime gameTime)
 		{
 			base.Update(gameTime);
-			if (node_image.IsMouseHovering)
-			{
-				hoverOverUI.Left.Set(Main.MouseScreen.X, 0.0f);
-				hoverOverUI.Top.Set(Main.MouseScreen.Y, 0.0f);
-			}
 			Width.Set(node_image.Width.Pixels * SkillTreePanel.zoom, 0f);
 			Height.Set(node_image.Height.Pixels * SkillTreePanel.zoom, 0f);
 			location = basePosition * SkillTreePanel.zoom + SkillTreePanel.panOffset;
