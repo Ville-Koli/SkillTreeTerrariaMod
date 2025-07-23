@@ -17,7 +17,9 @@ namespace Runeforge.Content.UI
 		public ConnectionManager connectionManager;
 		public HoverOverUI hoverOverUI;
 		private Vector2 offset;
+		public static Vector2 panOffset;
 		private UIText debugText;
+		public static float zoom = 1;
 		public bool isDragging;
 		public bool isHoveringOverUI;
 		public override void LeftMouseDown(UIMouseEvent evt)
@@ -30,6 +32,14 @@ namespace Runeforge.Content.UI
 			offset = evt.MousePosition;
 
 		}
+		public override void ScrollWheel(UIScrollWheelEvent evt)
+		{
+			Vector2 mousePosBefore = (Main.MouseScreen - panOffset) / zoom;
+			zoom += evt.ScrollWheelValue > 0 ? 0.1f : -0.1f;
+			Vector2 mouseScreenPosAfter = mousePosBefore * zoom + panOffset;
+			Vector2 offsetDelta = Main.MouseScreen - mouseScreenPosAfter;
+			panOffset += offsetDelta;
+        }
 		public void SetHoverOverUI(HoverOverUI hoverOverUI)
 		{
 			this.hoverOverUI = hoverOverUI;
@@ -49,21 +59,9 @@ namespace Runeforge.Content.UI
 			{
 				isDragging = false;
 				Vector2 mouseDelta = MouseDeltaVector();
-				Dictionary<int, NodeUI> nodeContainer = nodeManager.GetNodes();
-				Dictionary<int, ConnectionUI> connectionContainer = connectionManager.GetConnections();
-				foreach (var pair in nodeContainer)
-				{
-					NodeUI node = nodeContainer[pair.Key];
-					node.SetLocation(pair.Value.GetLocation() + mouseDelta);
-				}
-				foreach (var pair in connectionContainer)
-				{
-					ConnectionUI conn = pair.Value;
-					conn.SetLocation(conn.GetLocation() + mouseDelta);
-				}
+				panOffset += mouseDelta;
 			}
 		}
-
 		public Vector2 MouseDeltaVector()
 		{
 			Vector2 mousePos = Main.MouseScreen;
@@ -71,6 +69,7 @@ namespace Runeforge.Content.UI
 			float ydif = mousePos.Y - offset.Y;
 			return new Vector2(xdif, ydif);
 		}
+
 		public void ApplyDragging()
 		{
 			if (isDragging && !isHoveringOverUI)
@@ -80,20 +79,18 @@ namespace Runeforge.Content.UI
 				foreach (var pair in nodeContainer)
 				{
 					NodeUI nodeUI = pair.Value;
-					float newX = delta.X + nodeUI.GetLocation().X;
-					float newY = delta.Y + nodeUI.GetLocation().Y;
-					nodeUI.Left.Set(newX, 0.0f);
-					nodeUI.Top.Set(newY, 0.0f);
+					nodeUI.location = nodeUI.basePosition * zoom + panOffset + delta; ;
+					nodeUI.Left.Set(nodeUI.location .X, 0.0f);
+					nodeUI.Top.Set(nodeUI.location .Y, 0.0f);
 
 				}
 				Dictionary<int, ConnectionUI> connectionContainer = connectionManager.GetConnections();
 				foreach (var pair in connectionContainer)
 				{
 					ConnectionUI conn = pair.Value;
-					float newX = delta.X + conn.GetLocation().X;
-					float newY = delta.Y + conn.GetLocation().Y;
-					conn.Left.Set(newX, 0.0f);
-					conn.Top.Set(newY, 0.0f);
+					conn.location = conn.basePosition * zoom + panOffset + delta;
+					conn.Left.Set(conn.location.X, 0.0f);
+					conn.Top.Set(conn.location.Y, 0.0f);
 				}
 				Recalculate();
 			}
@@ -112,11 +109,13 @@ namespace Runeforge.Content.UI
 				Main.LocalPlayer.mouseInterface = true;
 			}
 			// If this code is in the scrollable element, check it directly
-			if (IsMouseHovering) {
+			if (IsMouseHovering)
+			{
 				PlayerInput.LockVanillaMouseScroll("Runeforge/ScrollListA"); // The passed in string can be anything.
 			}
 			// Otherwise, we can check a child element instead
-			if (IsMouseHovering) {
+			if (IsMouseHovering)
+			{
 				PlayerInput.LockVanillaMouseScroll("Runeforge/ScrollListB"); // The passed in string can be anything.
 			}
 		}

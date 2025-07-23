@@ -5,6 +5,8 @@ using Terraria.GameContent.UI.Elements;
 using Runeforge.Content.SkillTree;
 using ReLogic.Content;
 using Terraria.ModLoader;
+using Terraria;
+using Terraria.GameContent;
 
 namespace Runeforge.Content.UI
 {
@@ -18,6 +20,7 @@ namespace Runeforge.Content.UI
 		public Asset<Texture2D> active_connection_image;
 		public Asset<Texture2D> inactive_connection_image;
 		public Vector2 location;
+		public Vector2 basePosition;
 		public bool active;
 		private int id;
 		private static int global_id = 0;
@@ -28,13 +31,21 @@ namespace Runeforge.Content.UI
 			inactive_connection_image = inactive;
 			active_connection_image = active;
 			this.location = location;
+			this.basePosition = location;
 			connectedNodeA = connectedA;
 			connectedNodeB = connectedB;
 			this.direction_from_node = direction_from_node;
 			id = global_id;
 			global_id++;
 		}
-
+		public override void Draw(SpriteBatch spriteBatch)
+		{
+			//base.Draw(spriteBatch);
+			Vector2 newLocation = new Vector2(connection_image.GetDimensions().X, connection_image.GetDimensions().Y);
+			spriteBatch.Draw(active ? active_connection_image.Value : inactive_connection_image.Value, newLocation, null, Color.White, 0f, Vector2.Zero, SkillTreePanel.zoom, SpriteEffects.None, 0f);
+			//var rect = GetDimensions().ToRectangle();
+			//spriteBatch.Draw(TextureAssets.MagicPixel.Value, rect, Color.Blue * 0.5f);
+        }
         public override string ToString()
         {
             return $"({connectedNodeA.GetID()}, {connectedNodeB.GetID()}, {active})";
@@ -43,7 +54,6 @@ namespace Runeforge.Content.UI
 		{
 			return id;
 		}
-
 		public void SetActive()
 		{
 			connection_image.SetImage(active_connection_image);
@@ -68,10 +78,10 @@ namespace Runeforge.Content.UI
 		public override void OnInitialize()
 		{
 			base.OnInitialize();
-			Width.Set(50, 0f);
-			Height.Set(50, 0f);
-			connection_image.Width.Set(50, 0);
-			connection_image.Height.Set(50, 0);
+			connection_image.Width.Set(connection_image.Width.Pixels, 0);
+			connection_image.Height.Set(connection_image.Height.Pixels, 0);
+			Width.Set(connection_image.Width.Pixels, 0f);
+			Height.Set(connection_image.Height.Pixels, 0f);
 			Append(connection_image);
 		}
 
@@ -95,6 +105,13 @@ namespace Runeforge.Content.UI
 		public override void Update(GameTime gameTime)
 		{
 			base.Update(gameTime);
+			Width.Set(connection_image.Width.Pixels * SkillTreePanel.zoom, 0f);
+			Height.Set(connection_image.Height.Pixels * SkillTreePanel.zoom, 0f);
+			location = basePosition * SkillTreePanel.zoom + SkillTreePanel.panOffset;
+			Vector2 newLocation = location;
+			Top.Set(newLocation.Y, 0f);
+			Left.Set(newLocation.X, 0f);
+			Recalculate();
 		}
 
         public override int GetHashCode()

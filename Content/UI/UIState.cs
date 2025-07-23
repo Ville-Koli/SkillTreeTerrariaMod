@@ -45,19 +45,28 @@ namespace Runeforge.Content.UI
 
 			string temp_text = "+0.5 Defence";
 			MeleeDamageNodeTrigger trigger = new MeleeDamageNodeTrigger(20);
-			NodeUI button1 = nodeManager.CreateNode(new DefenceNodeTrigger(0), NodeType.Empty, "");
-			List<NodeUI> nodeUIs = new List<NodeUI>(){button1};
+			NodeUI root = nodeManager.CreateNode(new DefenceNodeTrigger(0), NodeType.Empty, "");
+			List<NodeUI> nodeUIs = new List<NodeUI>() { root };
 			for (int i = 0; i < 3000; ++i)
 			{
 				NodeUI button2 = nodeManager.CreateNode(trigger, NodeType.Defence, temp_text);
-				button2.SetLocation(new Vector2(i % 500 * 50, MathF.Floor(i / 500) * 50));
 				nodeUIs.Add(button2);
 			}
-			for (int i = 1; i < 3000; ++i)
+			for (int i = 1; i < 3001; ++i)
 			{
 				connectionManager.AutoConnect(panel, nodeUIs[i - 1], nodeUIs[i], ConnectionDirection.RIGHT);
 			}
-			connectionManager.AutoSync(button1);
+			connectionManager.AutoSync(root);
+			foreach (var pair in nodeManager.GetNodes())
+			{
+				NodeUI node = pair.Value;
+				node.basePosition = node.location;
+			}			
+			foreach (var pair in connectionManager.GetConnections())
+			{
+				ConnectionUI conn = pair.Value;
+				conn.basePosition = conn.location;
+			}	
 		}
 	}
 }

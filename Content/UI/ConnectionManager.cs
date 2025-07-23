@@ -26,7 +26,6 @@ namespace Runeforge.Content.UI
 		{
 			return connectionContainer;
 		}
-
 		public static StringBuilder GetActiveConnectionsAsStringBuilder()
 		{
 			StringBuilder activeConnections = new StringBuilder("Connections: ");

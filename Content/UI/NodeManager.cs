@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Terraria.ModLoader;
 using System.Text;
 using System.Linq;
+using Terraria;
 
 namespace Runeforge.Content.UI
 {
@@ -16,6 +17,7 @@ namespace Runeforge.Content.UI
 		public TextureManager textureManager;
 		public HoverOverUI hoverOverUI;
 		public StatBlock statBlock;
+		public NodeUI rootNode;
 		private static Dictionary<int, NodeUI> nodeContainer = new();
 		public NodeManager(SkillTreePanel panel, TextureManager textureManager, HoverOverUI hoverOverUI, StatBlock statBlock)
 		{
@@ -30,6 +32,7 @@ namespace Runeforge.Content.UI
 			this.textureManager = textureManager;
 			this.hoverOverUI = hoverOverUI;
 		}
+
 		public void SetPanel(SkillTreePanel panel)
 		{
 			this.panel = panel;
@@ -86,6 +89,8 @@ namespace Runeforge.Content.UI
 			NodeUI nodeUI = new NodeUI(panel, texture.inactive, texture.active, Vector2.Zero, trigger, type, hoverOverUI, statBlock, description);
 			if (!nodeContainer.ContainsKey(nodeUI.GetID()))
 				nodeContainer.Add(nodeUI.GetID(), nodeUI);
+			if (rootNode == null && type == NodeType.Empty)
+				rootNode = nodeUI;
 			return nodeUI;
 		}
 

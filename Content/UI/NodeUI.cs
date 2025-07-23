@@ -10,6 +10,7 @@ using ReLogic.Content;
 using System;
 using Runeforge.Content.SkillTree.NodeScripts;
 using System.Text;
+using Terraria.GameContent;
 
 namespace Runeforge.Content.UI
 {
@@ -25,6 +26,7 @@ namespace Runeforge.Content.UI
 		public StatBlock statBlock;
 		public HoverOverUI hoverOverUI;
 		public Vector2 location;
+		public Vector2 basePosition;
 		public bool active;
 		private string description;
 		private int id;
@@ -35,6 +37,7 @@ namespace Runeforge.Content.UI
 			node_image = new UIImage(inactive);
 			inactive_node_image = inactive;
 			this.location = location;
+			this.basePosition = location;
 			this.trigger = trigger;
 			this.type = type;
 			this.hoverOverUI = hoverOverUI;
@@ -44,9 +47,18 @@ namespace Runeforge.Content.UI
 			id = global_id;
 			global_id++;
 		}
-
-        public override string ToString()
-        {
+		public override void Draw(SpriteBatch spriteBatch)
+		{
+			//base.Draw(spriteBatch);
+			//location = basePosition * SkillTreePanel.zoom + SkillTreePanel.panOffset;
+			Vector2 nodeui_location = new Vector2(node_image.GetDimensions().X, node_image.GetDimensions().Y);
+			//ModContent.GetInstance<Runeforge>().Logger.Info("node ui: " + nodeui_location + " origin: " + node_image.NormalizedOrigin + " " + node_image.GetDimensions().X + " " + node_image.GetDimensions().Y);
+			spriteBatch.Draw(active ? active_node_image.Value : inactive_node_image.Value, nodeui_location, null, Color.White, 0f, Vector2.Zero, SkillTreePanel.zoom, SpriteEffects.None, 0f);
+			//var rect = GetDimensions().ToRectangle();
+			//spriteBatch.Draw(TextureAssets.MagicPixel.Value, rect, Color.Blue * 0.5f);
+        }
+		public override string ToString()
+		{
 			StringBuilder nodeString = new StringBuilder();
 			nodeString.Append($"{id} | {type} | ");
 			nodeString.Append('{');
@@ -58,7 +70,7 @@ namespace Runeforge.Content.UI
 			nodeString.Append("} | ");
 			nodeString.Append($"{description}");
 			return nodeString.ToString();
-        }
+		}
 		public bool GetNodeActivity()
 		{
 			return active;
@@ -207,10 +219,10 @@ namespace Runeforge.Content.UI
 		public override void OnInitialize()
 		{
 			base.OnInitialize();
-			Width.Set(50, 0f);
-			Height.Set(50, 0f);
-			node_image.Width.Set(50, 0);
-			node_image.Height.Set(50, 0);
+			node_image.Width.Set(node_image.Width.Pixels, 0);
+			node_image.Height.Set(node_image.Height.Pixels, 0);
+			Width.Set(node_image.Width.Pixels, 0f);
+			Height.Set(node_image.Height.Pixels, 0f);
 			Append(node_image);
 		}
 
@@ -259,6 +271,12 @@ namespace Runeforge.Content.UI
 				hoverOverUI.Left.Set(Main.MouseScreen.X, 0.0f);
 				hoverOverUI.Top.Set(Main.MouseScreen.Y, 0.0f);
 			}
+			Width.Set(node_image.Width.Pixels * SkillTreePanel.zoom, 0f);
+			Height.Set(node_image.Height.Pixels * SkillTreePanel.zoom, 0f);
+			location = basePosition * SkillTreePanel.zoom + SkillTreePanel.panOffset;
+			Top.Set(location.Y, 0f);
+			Left.Set(location.X, 0f);
+			Recalculate();
 		}
 
 		public override int GetHashCode()
