@@ -18,10 +18,11 @@ namespace Runeforge.Content.SkillTree
         private float _rangeDamageIncrease = 1;
         private float _bulletDamageIncrease = 1;
         private float _summonDamageIncrease = 1;
+        private float _magicDamageIncrease = 1;
         private float _movementSpeedIncrease = 1;
         private float _meleeAttackSpeedIncrease = 1;
         private float _rangedAttackSpeedIncrease = 1;
-        private float _extraProjectiles = 0;
+        private float _extraProjectiles = 0; // not yet implemented
         private float _lifeRegenIncrease = 0;
         private float _maxHealthIncrease = 0;
         private float _maxManaIncrease = 0;
@@ -37,6 +38,7 @@ namespace Runeforge.Content.SkillTree
         public float LifeRegenIncrease { get { return _lifeRegenIncrease; } set { _lifeRegenIncrease = value; } }
         public float MaxHealthIncrease { get { return _maxHealthIncrease; } set { _maxHealthIncrease = value; } }
         public float MaxManaIncrease { get { return _maxManaIncrease; } set { _maxManaIncrease = value; } }
+        public float MagicDamageIncrease { get { return _magicDamageIncrease; } set { _magicDamageIncrease = value; } }
         public List<int> GetBuffIDs()
         {
             return buffIDs;
@@ -105,6 +107,10 @@ namespace Runeforge.Content.SkillTree
         public void AddMaxManaIncrease(float amount)
         {
             MaxManaIncrease += amount;
+        }
+        public void AddMagicDamageIncrease(float amount)
+        {
+            MagicDamageIncrease += amount;
         }
     }
 }

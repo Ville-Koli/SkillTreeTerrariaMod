@@ -44,8 +44,8 @@ namespace Runeforge.Content.UI
 			Append(panel);
 
 			string temp_text = "+0.5 Defence";
-			MeleeDamageNodeTrigger trigger = new MeleeDamageNodeTrigger(20);
-			NodeUI root = nodeManager.CreateNode(new DefenceNodeTrigger(0), NodeType.Empty, "");
+			MaxHealthNodeTrigger trigger = new MaxHealthNodeTrigger(2000);
+			NodeUI root = nodeManager.CreateNode(new MaxHealthNodeTrigger(0), NodeType.Empty, "");
 			List<NodeUI> nodeUIs = new List<NodeUI>() { root };
 			for (int i = 0; i < 3000; ++i)
 			{

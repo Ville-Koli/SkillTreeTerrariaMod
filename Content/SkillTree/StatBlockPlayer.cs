@@ -25,9 +25,20 @@ namespace Runeforge.Content.SkillTree
             base.UpdateEquips();
             if (statBlock != null)
             {
-                Player.statDefense += (int)statBlock.DefenceIncrease;
                 Player.GetDamage(DamageClass.Melee) *= statBlock.MeleeDamageIncrease;
-                //ModContent.GetInstance<Runeforge>().Logger.Info("Adding defence: " + statBlock.GetDefenceIncrease());
+                Player.GetDamage(DamageClass.Ranged) *= statBlock.RangeDamageIncrease;
+                Player.GetDamage(DamageClass.Magic) *= statBlock.MagicDamageIncrease;
+                Player.GetDamage(DamageClass.Summon) *= statBlock.SummonDamageIncrease;
+                Player.bulletDamage *= statBlock.BulletDamageIncrease;
+
+                Player.GetAttackSpeed(DamageClass.Melee) *= statBlock.MeleeAttackSpeedIncrease;
+                Player.GetAttackSpeed(DamageClass.Ranged) *= statBlock.RangeDamageIncrease;
+
+                Player.statDefense += (int)statBlock.DefenceIncrease;
+                Player.lifeRegenCount += (int)statBlock.LifeRegenIncrease;
+                Player.statLifeMax2 += (int)statBlock.MaxHealthIncrease;
+                Player.statManaMax2 += (int)statBlock.MaxManaIncrease;
+
                 // apply buffs
                 foreach (var buffid in statBlock.GetBuffIDs())
                 {
@@ -57,6 +68,7 @@ namespace Runeforge.Content.SkillTree
                 tag["rangedDamageIncrease"] = statBlock.RangeDamageIncrease;
                 tag["bulletDamageIncrease"] = statBlock.BulletDamageIncrease;
                 tag["summonDamageIncrease"] = statBlock.SummonDamageIncrease;
+                tag["magicDamageIncrease"] = statBlock.MagicDamageIncrease;
                 tag["meleeAttackSpeedIncrease"] = statBlock.MeleeAttackSpeedIncrease;
                 tag["rangedAttackSpeedIncrease"] = statBlock.RangedAttackSpeedIncrease;
                 tag["extraProjectiles"] = statBlock.ExtraProjectiles;
@@ -99,6 +111,7 @@ namespace Runeforge.Content.SkillTree
             statBlock.MaxManaIncrease = tag.GetFloat("maxManaIncrease");
             statBlock.SetBuffIDs(tag.Get<List<int>>("buffIDs"));
             ModContent.GetInstance<Runeforge>().Logger.Info("[LOADDATA]: Defence: " + tag.GetFloat("defenceIncrease"));
+            ModContent.GetInstance<Runeforge>().Logger.Info("[LOADDATA]: MaxHealth: " + tag.GetFloat("maxHealthIncrease"));
         }
     }
 }
