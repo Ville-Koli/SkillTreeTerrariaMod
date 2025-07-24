@@ -26,6 +26,17 @@ namespace Runeforge.Content.UI
 		{
 			return connectionContainer;
 		}
+		/**
+		<summary> 
+		<para>Function, which returns currently active connections as a stringbuilder</para>
+		Note that the connections, which are returned are formatted as such:
+
+		Connections: ConnectionID,ConnectionID,ConnectionID,ConnectionID,...,
+
+		</summary>
+
+		<returns> StringBuilder, which contains a string of the id's of currently active connections </returns>
+		**/
 		public static StringBuilder GetActiveConnectionsAsStringBuilder()
 		{
 			StringBuilder activeConnections = new StringBuilder("Connections: ");
@@ -39,6 +50,11 @@ namespace Runeforge.Content.UI
 			}
 			return activeConnections;
 		}
+		/**
+		<summary> 
+		Function, which deactivates all connections
+		</summary>
+		**/
 		public static void DeActivateAll()
 		{
 			foreach (var pair in connectionContainer)
@@ -47,6 +63,21 @@ namespace Runeforge.Content.UI
 				connection.SetInActive();
 			}
 		}
+		/**
+		<summary> 
+		<para>Function, which activates connection given a StringBuilder</para>
+		Note that the connections should are be formatted as such:
+
+		Connections: ConnectionID,ConnectionID,ConnectionID,ConnectionID,...,
+		</summary>
+
+		<returns> 
+
+		Function returns bool on whether it succesfully managed to parse through the string
+		contained in the StringBuilder or not
+
+		</returns>
+		**/
 		public static bool ActivateNodesFromStringBuilder(StringBuilder activeNodes)
 		{
 			string activeNodesString = activeNodes.ToString();
@@ -66,7 +97,7 @@ namespace Runeforge.Content.UI
 					{
 						return false;
 					}
-				} 
+				}
 			}
 			else
 			{
@@ -74,6 +105,22 @@ namespace Runeforge.Content.UI
 			}
 			return true;
 		}
+		/**
+		<summary> 
+		<para>Function, which is used to create a connection between two nodes, where node A is assumed
+		to be at the correct location and then B is adjusted accordingly </para>
+		</summary>
+
+		<param name="panel"> the panel that the connection is going to exist on top of </param>
+		<param name="a"> node A which is going to be connected to node B </param>
+		<param name="b"> node B which is going to be connected to node A </param>
+		<param name="dir_asset"> the image two images used to show the connection on the panel</param>
+		<param name="resulting_location_for_dir"> the location of the connection</param>
+		<param name="resulting_location_for_b"> the location of the node B</param>
+		<returns> 
+		Function returns the created connection
+		</returns>
+		**/
 		public ConnectionUI ConnectNodes(SkillTreePanel panel, NodeUI a, NodeUI b,
 		(Asset<Texture2D> active, Asset<Texture2D> inactive) dir_asset, ConnectionDirection dir,
 		Vector2 resulting_location_for_dir, Vector2 resulting_location_for_b)
@@ -86,6 +133,21 @@ namespace Runeforge.Content.UI
 				connectionContainer.Add(conn.GetID(), conn);
 			return conn;
 		}
+		/**
+		<summary> 
+		Function, which generates new locations for connection and node B assuming
+		that node fixed_node is at the correct location
+		</summary>
+		<param name="fixed_node"> node, which location is assumed to be correct </param>
+		<param name="b"> node b, which is going to be connected to fixed_node </param>
+		<param name="dir"> the direction of where b node is going to exist respect to fixed_node </param>
+		<returns> 
+
+		Function returns new locations for connection and b in the manner of
+		(new connection location, new node b location)
+
+		</returns>
+		**/
 		public (Vector2, Vector2) GetNewLocations(NodeUI fixed_node, NodeUI b, ConnectionDirection dir)
 		{
 			(Asset<Texture2D> active, Asset<Texture2D> inactive) dir_asset = textureManager.GetDirection(dir);
@@ -112,24 +174,61 @@ namespace Runeforge.Content.UI
 			}
 			return (Vector2.Zero, Vector2.Zero);
 		}
-
+		/**
+		<summary> 
+		Function, which applies delta vector to nodes location
+		</summary>
+		<param name="node"> node, which location you wish to edit by delta </param>
+		<param name="delta"> the amount you want to edit the nodes location by </param>
+		**/
 		public void ApplyDelta(NodeUI node, Vector2 delta)
 		{
 			node.SetLocation(node.GetLocation() + delta);
 		}
+		/**
+		<summary> 
+		Function, which applies delta vector to connections location
+		</summary>
+		<param name="conn"> connection, which location you wish to edit by delta </param>
+		<param name="delta"> the amount you want to edit the connections location by </param>
+		**/
 		public void ApplyDelta(ConnectionUI conn, Vector2 delta)
 		{
 			conn.SetLocation(conn.GetLocation() + delta);
 		}
-
+		/**
+		<summary> 
+		Function, which corrects node locations from the perspective of node b
+		</summary>
+		<param name="b"> node and all nodes connected to it of which locations you wish to edit by delta </param>
+		<param name="delta"> the amount you want to edit the nodes and connections location by </param>
+		**/
 		public void AutoSyncNodes(NodeUI b, Vector2 delta)
 		{
 			PathingAlgorithms.ApplyFunctionToConnectedNodes(b, new(), delta, ApplyDelta, ApplyDelta);
 		}
+		/**
+		<summary> 
+		Function, which corrects node locations from the perspective of node b
+		</summary>
+		<param name="b"> node and all nodes and connections connected to it of which locations you wish to correct </param>
+		**/
 		public void AutoSync(NodeUI b)
 		{
 			PathingAlgorithms.CorrectNodeLocations(b, new(), GetNewLocations);
 		}
+		/**
+		<summary> 
+		Function, which creates a connection between a and b and corrects the locations connected to b such that ui
+		isn't broken
+		</summary>
+		<param name="panel"> the panel this connection is going to be on top of </param>
+		<param name="a"> node, which you wish to connect node b to with direction of dir </param>
+		<param name="b"> node, which you connect to a</param>
+		<param name="dir"> connection direction </param>
+
+		<returns> returns the created connection and may return null if the direction does not exist in textureManager </returns>
+		**/
 		public ConnectionUI AutoConnectWithSync(SkillTreePanel panel, NodeUI a, NodeUI b, ConnectionDirection dir)
 		{
 			(Asset<Texture2D> active, Asset<Texture2D> inactive) dir_asset = textureManager.GetDirection(dir);
@@ -141,6 +240,18 @@ namespace Runeforge.Content.UI
 			}
 			return null;
 		}
+		/**
+		<summary> 
+		Function, which creates a connection between a and b and only sets node B and the connection to have correct locations respect to node A
+		(if A already has connections connected to it, those are not broken, but the connections connected to B might be)
+		</summary>
+		<param name="panel"> the panel this connection is going to be on top of </param>
+		<param name="a"> node, which you wish to connect node b to with direction of dir </param>
+		<param name="b"> node, which you connect to a</param>
+		<param name="dir"> connection direction </param>
+
+		<returns> returns the created connection and may return null if the direction does not exist in textureManager </returns>
+		**/
 		public ConnectionUI AutoConnect(SkillTreePanel panel, NodeUI a, NodeUI b, ConnectionDirection dir)
 		{
 			(Asset<Texture2D> active, Asset<Texture2D> inactive) dir_asset = textureManager.GetDirection(dir);
