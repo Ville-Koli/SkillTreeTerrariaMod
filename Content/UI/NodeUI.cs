@@ -23,7 +23,7 @@ namespace Runeforge.Content.UI
 		public UIImage node_image;
 		public Asset<Texture2D> active_node_image;
 		public Asset<Texture2D> inactive_node_image;
-		public StatBlock statBlock;
+		private StatBlock statBlock;
 		public HoverOverUI hoverOverUI;
 		public Vector2 location;
 		public Vector2 basePosition;
@@ -49,16 +49,12 @@ namespace Runeforge.Content.UI
 		}
 		public override void Draw(SpriteBatch spriteBatch)
 		{
-			//base.Draw(spriteBatch);
-			//location = basePosition * SkillTreePanel.zoom + SkillTreePanel.panOffset;
-			Vector2 nodeui_location = new Vector2(node_image.GetDimensions().X, node_image.GetDimensions().Y);
-			//ModContent.GetInstance<Runeforge>().Logger.Info("node ui: " + nodeui_location + " origin: " + node_image.NormalizedOrigin + " " + node_image.GetDimensions().X + " " + node_image.GetDimensions().Y);
-			spriteBatch.Draw(active ? active_node_image.Value : inactive_node_image.Value, nodeui_location, null, Color.White, 0f, Vector2.Zero, SkillTreePanel.zoom, SpriteEffects.None, 0f);
-			//var rect = GetDimensions().ToRectangle();
-			//spriteBatch.Draw(TextureAssets.MagicPixel.Value, rect, Color.Blue * 0.5f);
+			spriteBatch.Draw(active ? active_node_image.Value : inactive_node_image.Value, node_image.GetDimensions().Position(), null, Color.White, 0f, Vector2.Zero, SkillTreePanel.zoom, SpriteEffects.None, 0f);
         }
 		public override string ToString()
 		{
+			//                                             NodeID | Type   | Connections                     | Description
+			// to string method generates a string such as NodeID | TypeID | {(NodeID, NodeID, active), ...} | description
 			StringBuilder nodeString = new StringBuilder();
 			nodeString.Append($"{id} | {type} | ");
 			nodeString.Append('{');
@@ -78,6 +74,10 @@ namespace Runeforge.Content.UI
 		public StatBlock GetStatBlock()
 		{
 			return statBlock;
+		}
+		public void SetStatBlock(StatBlock statBlock)
+		{
+			this.statBlock = statBlock;
 		}
 		public string GetDescription()
 		{
@@ -141,6 +141,18 @@ namespace Runeforge.Content.UI
 		{
 			return location;
 		}
+		public void SetActive()
+		{
+			node_image.SetImage(active_node_image);
+			active = true;
+		}
+
+		public void SetInActive()
+		{
+			node_image.SetImage(inactive_node_image);
+			active = false;
+		}
+
 		public bool HandleEmptyNodeCase()
 		{
 			if (!active && type == NodeType.Empty)
@@ -159,19 +171,6 @@ namespace Runeforge.Content.UI
 			}
 			return false;
 		}
-
-		public void SetActive()
-		{
-			node_image.SetImage(active_node_image);
-			active = true;
-		}
-
-		public void SetInActive()
-		{
-			node_image.SetImage(inactive_node_image);
-			active = false;
-		}
-
 		public override void LeftMouseDown(UIMouseEvent evt)
 		{
 			base.LeftMouseDown(evt);

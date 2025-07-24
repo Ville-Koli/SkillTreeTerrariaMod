@@ -17,7 +17,7 @@ namespace Runeforge.Content.SkillTree
         public string activeConnections = "";
         public override void Initialize()
         {
-            statBlock = new StatBlock();
+            statBlock = new StatBlock(); // initialize character based statblock
         }
 
         public override void UpdateEquips()
@@ -82,11 +82,11 @@ namespace Runeforge.Content.SkillTree
         public override void OnEnterWorld()
         {
             // Apply the saved data to global UI / manager here
-            if (TheUI.nodeManager != null)
+            if (SkillTreeUIState.nodeManager != null)
             {
-                TheUI.nodeManager.ApplyLoadedStatBlock(statBlock);
-                NodeManager.ActivateNodesFromStringBuilder(new StringBuilder(activeNodes));
-                ConnectionManager.ActivateNodesFromStringBuilder(new StringBuilder(activeConnections));
+                SkillTreeUIState.nodeManager.ApplyLoadedStatBlock(statBlock); // apply the new loaded statblock to be the used one to all nodes
+                NodeManager.ActivateNodesFromStringBuilder(new StringBuilder(activeNodes)); // activate the previously active nodes
+                ConnectionManager.ActivateNodesFromStringBuilder(new StringBuilder(activeConnections)); // activate previously active connections
             }
             else
             {

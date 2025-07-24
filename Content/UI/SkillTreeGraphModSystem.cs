@@ -11,10 +11,10 @@ using Terraria.ModLoader.IO;
 namespace Runeforge.Content.UI
 {
 	[Autoload(Side = ModSide.Client)]
-	public class SkillTreeGraphUI : ModSystem
+	public class SkillTreeGraphModSystem : ModSystem
 	{
 		internal UserInterface MyInterface;
-		internal TheUI MyUI;
+		internal SkillTreeUIState MyUI;
 		private bool ShowUI = false;
 		public static TextureManager textureManager = new();
 
@@ -52,7 +52,7 @@ namespace Runeforge.Content.UI
 			{
 				CreateTextureManager();
 				MyInterface = new UserInterface();
-				MyUI = new TheUI();
+				MyUI = new SkillTreeUIState();
 				MyUI.Activate(); // Activate calls Initialize() on the UIState if not initialized and calls OnActivate, then calls Activate on every child element.
 			}
 		}

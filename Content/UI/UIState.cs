@@ -10,14 +10,14 @@ using System;
 
 namespace Runeforge.Content.UI
 {
-	class TheUI : UIState
+	class SkillTreeUIState : UIState
 	{
 		private SkillTreePanel panel;
 		public StatBlockPlayer statBlockPlayer;
 		public static NodeManager nodeManager;
 		public static ConnectionManager connectionManager;
 		public StatBlock statBlock = new(); // distribute an empty statblock
-		public TheUI()
+		public SkillTreeUIState()
 		{
 		}
 
@@ -28,7 +28,7 @@ namespace Runeforge.Content.UI
 
 		public override void OnInitialize()
 		{
-			TextureManager textureManager = SkillTreeGraphUI.textureManager;
+			TextureManager textureManager = SkillTreeGraphModSystem.textureManager;
 			HoverOverUI hoverOverUI = new HoverOverUI(textureManager);
 			connectionManager = new ConnectionManager(textureManager);
 			nodeManager = new NodeManager(textureManager, hoverOverUI, statBlock);
@@ -47,12 +47,13 @@ namespace Runeforge.Content.UI
 			MaxHealthNodeTrigger trigger = new MaxHealthNodeTrigger(2000);
 			NodeUI root = nodeManager.CreateNode(new MaxHealthNodeTrigger(0), NodeType.Empty, "");
 			List<NodeUI> nodeUIs = new List<NodeUI>() { root };
-			for (int i = 0; i < 3000; ++i)
+			for (int i = 0; i < 2000; ++i)
 			{
 				NodeUI button2 = nodeManager.CreateNode(trigger, NodeType.Defence, temp_text);
+				button2.SetLocation(new Vector2((i % 1000) * 50, (int)(i / 1000) * 50));
 				nodeUIs.Add(button2);
 			}
-			for (int i = 1; i < 3001; ++i)
+			for (int i = 1; i < 2001; ++i)
 			{
 				connectionManager.AutoConnect(panel, nodeUIs[i - 1], nodeUIs[i], ConnectionDirection.RIGHT);
 			}

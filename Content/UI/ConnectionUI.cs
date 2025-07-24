@@ -40,11 +40,7 @@ namespace Runeforge.Content.UI
 		}
 		public override void Draw(SpriteBatch spriteBatch)
 		{
-			//base.Draw(spriteBatch);
-			Vector2 newLocation = new Vector2(connection_image.GetDimensions().X, connection_image.GetDimensions().Y);
-			spriteBatch.Draw(active ? active_connection_image.Value : inactive_connection_image.Value, newLocation, null, Color.White, 0f, Vector2.Zero, SkillTreePanel.zoom, SpriteEffects.None, 0f);
-			//var rect = GetDimensions().ToRectangle();
-			//spriteBatch.Draw(TextureAssets.MagicPixel.Value, rect, Color.Blue * 0.5f);
+			spriteBatch.Draw(active ? active_connection_image.Value : inactive_connection_image.Value, connection_image.GetDimensions().Position(), null, Color.White, 0f, Vector2.Zero, SkillTreePanel.zoom, SpriteEffects.None, 0f);
         }
         public override string ToString()
         {

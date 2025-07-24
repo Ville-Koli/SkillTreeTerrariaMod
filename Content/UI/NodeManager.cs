@@ -99,7 +99,7 @@ namespace Runeforge.Content.UI
 			statBlock = loadedStatBlock;
 			foreach (var pair in nodeContainer)
 			{
-				pair.Value.statBlock = loadedStatBlock;
+				pair.Value.SetStatBlock(loadedStatBlock);
 			}
 		}
 

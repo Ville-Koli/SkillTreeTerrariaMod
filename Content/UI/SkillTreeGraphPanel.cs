@@ -18,7 +18,6 @@ namespace Runeforge.Content.UI
 		public HoverOverUI hoverOverUI;
 		private Vector2 offset;
 		public static Vector2 panOffset;
-		private UIText debugText;
 		public static float zoom = 1;
 		public bool isDragging;
 		public bool isHoveringOverUI;
@@ -134,8 +133,6 @@ namespace Runeforge.Content.UI
 			_uiPanel.Height = StyleDimension.Fill;
 			_uiPanel.BackgroundColor = BackgroundColor;
 			Append(_uiPanel);
-			debugText = new UIText("hello");
-			_uiPanel.Append(debugText);
 			Dictionary<int, NodeUI> nodeContainer = nodeManager.GetNodes();
 			foreach (var pair in nodeContainer)
 			{
