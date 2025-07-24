@@ -62,6 +62,10 @@ namespace Runeforge.Content.UI
 						ConnectionUI connection = connectionContainer[intID];
 						connection.SetActive();
 					}
+					else
+					{
+						return false;
+					}
 				} 
 			}
 			else

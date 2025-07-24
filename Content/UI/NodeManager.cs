@@ -32,11 +32,17 @@ namespace Runeforge.Content.UI
 			this.textureManager = textureManager;
 			this.hoverOverUI = hoverOverUI;
 		}
+		/**
+		<summary> 
+		<para>Function, which returns currently active nodes as a stringbuilder</para>
+		Note that the nodes, which are returned are formatted as such:
 
-		public void SetPanel(SkillTreePanel panel)
-		{
-			this.panel = panel;
-		}
+		Nodes: NodeID,NodeID,NodeID,NodeID,...,
+
+		</summary>
+
+		<returns> StringBuilder, which contains a string of the id's of currently active nodes </returns>
+		**/
 		public static StringBuilder GetActiveNodesAsStringBuilder()
 		{
 			StringBuilder activeNodes = new StringBuilder("Nodes: ");
@@ -50,6 +56,21 @@ namespace Runeforge.Content.UI
 			}
 			return activeNodes;
 		}
+		/**
+		<summary> 
+		<para>Function, which activates nodes given a StringBuilder</para>
+		Note that the nodes should are be formatted as such:
+
+		Nodes: NodeID,NodeID,NodeID,NodeID,...,
+		</summary>
+
+		<returns> 
+
+		Function returns bool on whether it succesfully managed to parse through the string
+		contained in the StringBuilder or not
+
+		</returns>
+		**/
 		public static bool ActivateNodesFromStringBuilder(StringBuilder activeNodes)
 		{
 			string activeNodesString = activeNodes.ToString();
@@ -59,15 +80,16 @@ namespace Runeforge.Content.UI
 				string[] activeIDs = splittedString[1].Split(",");
 				foreach (var id in activeIDs)
 				{
-					if (int.TryParse(id, out int intID))
+					if (int.TryParse(id, out int intID) && nodeContainer.ContainsKey(intID))
 					{
-						if (nodeContainer.ContainsKey(intID))
-						{
-							NodeUI node = nodeContainer[intID];
-							node.SetActive();
-						}
+						NodeUI node = nodeContainer[intID];
+						node.SetActive();
 					}
-				} 
+					else
+					{
+						return false;
+					}
+				}
 			}
 			else
 			{
@@ -75,6 +97,11 @@ namespace Runeforge.Content.UI
 			}
 			return true;
 		}
+		/**
+		<summary> 
+		Function, which deactivates all nodes
+		</summary>
+		**/
 		public static void DeActivateAll()
 		{
 			foreach (var pair in nodeContainer)
@@ -83,6 +110,19 @@ namespace Runeforge.Content.UI
 				node.SetInActive();
 			}
 		}
+		/**
+		<summary> 
+		<para>Function, which is used to create a node when given trigger, type and description. This node is then added to nodeContainer</para>
+		</summary>
+
+		<param name="trigger"> is the action that the node when the node is activated </param>
+		<param name="type"> describes what type the node is </param>
+		<param name="description"> describes what the node does and is shown on hover over ui </param>
+
+		<returns> 
+		Function returns the created node
+		</returns>
+		**/
 		public NodeUI CreateNode(INodeTrigger trigger, NodeType type, string description)
 		{
 			(Asset<Texture2D> active, Asset<Texture2D> inactive) texture = textureManager.GetNode(type);
@@ -93,7 +133,13 @@ namespace Runeforge.Content.UI
 				rootNode = nodeUI;
 			return nodeUI;
 		}
+		/**
+		<summary> 
+		<para>Function, which changes the statblock reference to all given nodes</para>
+		</summary>
 
+		<param name="loadedStatBlock"> the statblock to be changed to all nodes </param>
+		**/
 		public void ApplyLoadedStatBlock(StatBlock loadedStatBlock)
 		{
 			statBlock = loadedStatBlock;
@@ -102,15 +148,38 @@ namespace Runeforge.Content.UI
 				pair.Value.SetStatBlock(loadedStatBlock);
 			}
 		}
+		/**
+		<summary> 
+		<para>Function that gets statblock</para>
+		</summary>
 
+		<returns> statblock that is currently active on all nodes </returns>
+		**/
 		public StatBlock GetStatBlockReference()
 		{
 			return statBlock;
 		}
+		/**
+		<summary> 
+		<para>Function that gets nodeContainer</para>
+		</summary>
 
+		<returns> a dictionary where key is the node id and value is the node </returns>
+		**/
 		public Dictionary<int, NodeUI> GetNodes()
 		{
 			return nodeContainer;
+		}
+		/**
+		<summary> 
+		<para>Function that sets the panel for node manager</para>
+		</summary>
+
+		<param name="panel"> the panel for node manager</param>
+		**/
+		public void SetPanel(SkillTreePanel panel)
+		{
+			this.panel = panel;
 		}
 	}
 }
