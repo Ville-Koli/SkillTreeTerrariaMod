@@ -14,9 +14,9 @@ namespace Runeforge.Content.UI
 	{
 		private SkillTreePanel mainPanel;
 		public UIImage connection_image;
-        public NodeUI connectedNodeA;
+		public NodeUI connectedNodeA;
 		public NodeUI connectedNodeB;
-        public ConnectionDirection direction_from_node;
+		public ConnectionDirection direction_from_node;
 		public Asset<Texture2D> active_connection_image;
 		public Asset<Texture2D> inactive_connection_image;
 		public Vector2 location;
@@ -38,39 +38,22 @@ namespace Runeforge.Content.UI
 			id = global_id;
 			global_id++;
 		}
+
+		/**
+		<summary> 
+		<para>Function that draws the connections image on the panel as active or not depending on activity </para>
+		</summary>
+		**/
 		public override void Draw(SpriteBatch spriteBatch)
 		{
 			spriteBatch.Draw(active ? active_connection_image.Value : inactive_connection_image.Value, connection_image.GetDimensions().Position(), null, Color.White, 0f, Vector2.Zero, SkillTreePanel.zoom, SpriteEffects.None, 0f);
-        }
-        public override string ToString()
-        {
-            return $"({connectedNodeA.GetID()}, {connectedNodeB.GetID()}, {active})";
-        }
-		public int GetID()
-		{
-			return id;
-		}
-		public void SetActive()
-		{
-			connection_image.SetImage(active_connection_image);
-			active = true;
-		}
-		public void SetInActive()
-		{
-			connection_image.SetImage(inactive_connection_image);
-			active = false;
 		}
 
-		public void SetLocation(Vector2 location)
-		{
-			this.location = location;
-		}
-
-		public Vector2 GetLocation()
-		{
-			return location;
-		}
-
+		/**
+		<summary> 
+		<para>Function which initializes the connection node</para>
+		</summary>
+		**/
 		public override void OnInitialize()
 		{
 			base.OnInitialize();
@@ -81,6 +64,11 @@ namespace Runeforge.Content.UI
 			Append(connection_image);
 		}
 
+		/**
+		<summary> 
+		<para>Event for mouse entering the connection. Used for disabling dragging</para>
+		</summary>
+		**/
 		public override void MouseOver(UIMouseEvent evt)
 		{
 			base.MouseOver(evt);
@@ -88,7 +76,13 @@ namespace Runeforge.Content.UI
 			{
 				mainPanel.isHoveringOverUI = true;
 			}
-        }
+		}
+
+		/**
+		<summary> 
+		<para>Event for mouse leaving the connection.</para>
+		</summary>
+		**/
 		public override void MouseOut(UIMouseEvent evt)
 		{
 			base.MouseOver(evt);
@@ -96,8 +90,13 @@ namespace Runeforge.Content.UI
 			{
 				mainPanel.isHoveringOverUI = false;
 			}
-        }
+		}
 
+		/**
+		<summary> 
+		<para>Function, which is ran every in-game tick when panel is open</para>
+		</summary>
+		**/
 		public override void Update(GameTime gameTime)
 		{
 			base.Update(gameTime);
@@ -110,9 +109,62 @@ namespace Runeforge.Content.UI
 			Recalculate();
 		}
 
-        public override int GetHashCode()
-        {
+		public override int GetHashCode()
+		{
 			return connection_image.GetHashCode();
-        }
+		}
+		/**
+		<summary> 
+		<para>Function that gets the id</para>
+		</summary>
+		<returns> the id of the connection </returns>
+		**/
+		public int GetID()
+		{
+			return id;
+		}
+		/**
+		<summary> 
+		<para>Function that sets the connection to be active</para>
+		</summary>
+		**/
+		public void SetActive()
+		{
+			connection_image.SetImage(active_connection_image);
+			active = true;
+		}
+		/**
+		<summary> 
+		<para>Function that sets the connection to be inactive</para>
+		</summary>
+		**/
+		public void SetInActive()
+		{
+			connection_image.SetImage(inactive_connection_image);
+			active = false;
+		}
+		/**
+		<summary> 
+		<para>Function that sets the connection's location </para>
+		</summary>
+		**/
+		public void SetLocation(Vector2 location)
+		{
+			this.location = location;
+		}
+		/**
+		<summary> 
+		<para>Function that gets the connections location </para>
+		</summary>
+		<returns>get's location of the connection</returns>
+		**/
+		public Vector2 GetLocation()
+		{
+			return location;
+		}
+		public override string ToString()
+		{
+			return $"({connectedNodeA.GetID()}, {connectedNodeB.GetID()}, {active})";
+		}
 	}
 }
