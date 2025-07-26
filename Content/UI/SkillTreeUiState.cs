@@ -61,7 +61,8 @@ namespace Runeforge.Content.UI
 			{
 				connectionManager.AutoConnect(nodeUIs[i - 1], nodeUIs[i], ConnectionDirection.RIGHT);
 			}
-			connectionManager.AutoSync(root);**/
+			**/
+			//connectionManager.AutoSync(nodeManager.rootNode);
 			foreach (var pair in nodeManager.GetNodes())
 			{
 				NodeUI node = pair.Value;

@@ -141,7 +141,7 @@ namespace Runeforge.Content.UI
 		}
 		public (StatusCodes status, NodeUI node, string reason) ParseNode(string node)
 		{
-			string[] nodeElements = node.Split("|"); // Type | Trigger Element | Description
+			string[] nodeElements = node.Split("|"); // Type | Trigger Element | Description -> "Type", "Trigger Element", "Description" 
 			if(nodeElements.Length != 3) return (StatusCodes.Failed, null, $"Failed at splitting as required length is 3 and the length is {nodeElements.Length}");
 
 			string strNodeType = nodeElements[0];
@@ -167,12 +167,12 @@ namespace Runeforge.Content.UI
 		}
 		public (StatusCodes status, ConnectionUI connection, string reason) ParseConnection(string connection)
 		{
-			string[] connectionElements = connection.Split(","); // a connection is "(NodeID, NodeID, dir)" -> "(NodeID", " NodeID", dir)"
+			string[] connectionElements = connection.Split(","); // a connection is "NodeID, NodeID, dir" -> "NodeID", " NodeID", "dir"
 			if (connectionElements.Length != 3) return (StatusCodes.Failed, null, "array's length after splitting is not 3!");
 
-			string strNodeID1 = connectionElements[0].Substring(1);
+			string strNodeID1 = connectionElements[0];
 			string strNodeID2 = connectionElements[1];
-			string strDirection = connectionElements[2].Substring(0, connectionElements[2].Length - 1);
+			string strDirection = connectionElements[2];
 
 			if (int.TryParse(strNodeID1, out int nodeID1) &&
 				int.TryParse(strNodeID2, out int nodeID2) &&
@@ -202,7 +202,7 @@ namespace Runeforge.Content.UI
 					return (StatusCodes.Failed, null, "Node's dont exist in node manager");
 				}
 			}
-			return (StatusCodes.Failed, null, "Failed at parsing ids and directions");
+			return (StatusCodes.Failed, null, $"Failed at parsing ids and directions: {strNodeID1}, {strNodeID2}, {strDirection}");
 		}
 	}
 }
