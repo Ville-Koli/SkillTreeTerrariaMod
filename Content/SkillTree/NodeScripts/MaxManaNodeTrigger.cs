@@ -5,7 +5,7 @@ namespace Runeforge.Content.SkillTree.NodeScripts
     public class MaxManaNodeTrigger : INodeTrigger
     {
         private float maxManaIncrease;
-        public MaxManaNodeTrigger(int maxManaIncrease)
+        public MaxManaNodeTrigger(float maxManaIncrease)
         {
             this.maxManaIncrease = maxManaIncrease;
         }
@@ -16,6 +16,11 @@ namespace Runeforge.Content.SkillTree.NodeScripts
         public void DeActivate(StatBlock statBlock)
         {
             statBlock.AddMaxManaIncrease(-maxManaIncrease);
+        }
+
+        public float ReturnTriggerElement()
+        {
+            return maxManaIncrease;
         }
     }
 }

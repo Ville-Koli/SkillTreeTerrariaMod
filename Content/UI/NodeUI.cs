@@ -25,8 +25,8 @@ namespace Runeforge.Content.UI
 		public Asset<Texture2D> inactive_node_image;
 		private StatBlock statBlock;
 		public HoverOverUI hoverOverUI;
-		public Vector2 location;
-		public Vector2 basePosition;
+		public Vector2 location; // current location
+		public Vector2 basePosition; // starting position
 		public bool active;
 		private string description;
 		private int id;
@@ -334,18 +334,11 @@ namespace Runeforge.Content.UI
 		}
 		public override string ToString()
 		{
-			//                                             NodeID | Type   | Connections                     | Description
-			// to string method generates a string such as NodeID | TypeID | {(NodeID, NodeID, active), ...} | description
+			//                                              Type   | Trigger Element| Description
+			// to string method generates a string such as  2      | 1              | "does something"
 			StringBuilder nodeString = new StringBuilder();
-			nodeString.Append($"{id} | {type} | ");
-			nodeString.Append('{');
-			foreach (var conn in connections)
-			{
-				nodeString.Append(conn);
-				nodeString.Append(',');
-			}
-			nodeString.Append("} | ");
-			nodeString.Append($"{description}");
+			nodeString.Append($"{type} | ");
+			nodeString.Append($"{trigger.ReturnTriggerElement()} | {description}");
 			return nodeString.ToString();
 		}
 		/**

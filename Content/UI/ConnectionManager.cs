@@ -19,6 +19,7 @@ namespace Runeforge.Content.UI
 {
 	public class ConnectionManager
 	{
+		public SkillTreePanel panel;
 		public TextureManager textureManager;
 		public static Dictionary<int, ConnectionUI> connectionContainer = new();
 
@@ -111,7 +112,6 @@ namespace Runeforge.Content.UI
 		to be at the correct location and then B is adjusted accordingly </para>
 		</summary>
 
-		<param name="panel"> the panel that the connection is going to exist on top of </param>
 		<param name="a"> node A which is going to be connected to node B </param>
 		<param name="b"> node B which is going to be connected to node A </param>
 		<param name="dir_asset"> the image two images used to show the connection on the panel</param>
@@ -121,7 +121,7 @@ namespace Runeforge.Content.UI
 		Function returns the created connection
 		</returns>
 		**/
-		public ConnectionUI ConnectNodes(SkillTreePanel panel, NodeUI a, NodeUI b,
+		public ConnectionUI ConnectNodes(NodeUI a, NodeUI b,
 		(Asset<Texture2D> active, Asset<Texture2D> inactive) dir_asset, ConnectionDirection dir,
 		Vector2 resulting_location_for_dir, Vector2 resulting_location_for_b)
 		{
@@ -222,21 +222,20 @@ namespace Runeforge.Content.UI
 		Function, which creates a connection between a and b and corrects the locations connected to b such that ui
 		isn't broken
 		</summary>
-		<param name="panel"> the panel this connection is going to be on top of </param>
 		<param name="a"> node, which you wish to connect node b to with direction of dir </param>
 		<param name="b"> node, which you connect to a</param>
 		<param name="dir"> connection direction </param>
 
 		<returns> returns the created connection and may return null if the direction does not exist in textureManager </returns>
 		**/
-		public ConnectionUI AutoConnectWithSync(SkillTreePanel panel, NodeUI a, NodeUI b, ConnectionDirection dir)
+		public ConnectionUI AutoConnectWithSync(NodeUI a, NodeUI b, ConnectionDirection dir)
 		{
 			(Asset<Texture2D> active, Asset<Texture2D> inactive) dir_asset = textureManager.GetDirection(dir);
 			if (dir_asset.inactive != null && dir_asset.active != null)
 			{
 				(Vector2 resDir, Vector2 resB) results = GetNewLocations(a, b, dir);
 				AutoSyncNodes(b, results.resB - b.location);
-				return ConnectNodes(panel, a, b, dir_asset, dir, results.resDir, results.resB);
+				return ConnectNodes(a, b, dir_asset, dir, results.resDir, results.resB);
 			}
 			return null;
 		}
@@ -245,26 +244,26 @@ namespace Runeforge.Content.UI
 		Function, which creates a connection between a and b and only sets node B and the connection to have correct locations respect to node A
 		(if A already has connections connected to it, those are not broken, but the connections connected to B might be)
 		</summary>
-		<param name="panel"> the panel this connection is going to be on top of </param>
 		<param name="a"> node, which you wish to connect node b to with direction of dir </param>
 		<param name="b"> node, which you connect to a</param>
 		<param name="dir"> connection direction </param>
 
 		<returns> returns the created connection and may return null if the direction does not exist in textureManager </returns>
 		**/
-		public ConnectionUI AutoConnect(SkillTreePanel panel, NodeUI a, NodeUI b, ConnectionDirection dir)
+		public ConnectionUI AutoConnect(NodeUI a, NodeUI b, ConnectionDirection dir)
 		{
 			(Asset<Texture2D> active, Asset<Texture2D> inactive) dir_asset = textureManager.GetDirection(dir);
 			if (dir_asset.inactive != null && dir_asset.active != null)
 			{
 				(Vector2 resDir, Vector2 resB) results = GetNewLocations(a, b, dir);
-				return ConnectNodes(panel, a, b, dir_asset, dir, results.resDir, results.resB);
+				return ConnectNodes(a, b, dir_asset, dir, results.resDir, results.resB);
 			}
 			return null;
 		}
-		public ConnectionManager(TextureManager textureManager)
+		public ConnectionManager(SkillTreePanel panel, TextureManager textureManager)
 		{
 			this.textureManager = textureManager;
+			this.panel = panel;
 		}
 	}
 }

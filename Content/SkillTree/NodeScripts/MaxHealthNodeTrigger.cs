@@ -17,5 +17,10 @@ namespace Runeforge.Content.SkillTree.NodeScripts
         {
             statBlock.AddMaxHealthIncrease(-maxHealth);
         }
+
+        public float ReturnTriggerElement()
+        {
+            return maxHealth;
+        }
     }
 }

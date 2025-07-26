@@ -17,5 +17,10 @@ namespace Runeforge.Content.SkillTree.NodeScripts
         {
             statBlock.AddMeleeDamageIncrease(-meleeDamageIncrease);
         }
+
+        public float ReturnTriggerElement()
+        {
+            return meleeDamageIncrease;
+        }
     }
 }

@@ -17,5 +17,10 @@ namespace Runeforge.Content.SkillTree.NodeScripts
         {
             statBlock.AddDefenceIncrease(-defence);
         }
+
+        public float ReturnTriggerElement()
+        {
+            return defence;
+        }
     }
 }

@@ -30,10 +30,9 @@ namespace Runeforge.Content.UI
 		{
 			TextureManager textureManager = SkillTreeGraphModSystem.textureManager;
 			HoverOverUI hoverOverUI = new HoverOverUI(textureManager);
-			connectionManager = new ConnectionManager(textureManager);
 			nodeManager = new NodeManager(textureManager, hoverOverUI, statBlock);
 			panel = new SkillTreePanel();
-
+			connectionManager = new ConnectionManager(panel, textureManager);
 			panel.Width.Set(0, 1);
 			panel.Height.Set(0, 1);
 			panel.BackgroundColor = Color.Black;
@@ -42,7 +41,12 @@ namespace Runeforge.Content.UI
 			panel.SetConnectionManager(connectionManager);
 			nodeManager.SetPanel(panel);
 			Append(panel);
-
+			SkillTreeLoader loader = new SkillTreeLoader(connectionManager, nodeManager);
+			loader.LoadData();
+			//loader.ParseNode("0 | 0    | Empty");
+			//loader.ParseNode("1 | 1000 | adds 1000 defence");
+			//loader.ParseConnection("(0, 1, 2)");
+			/**
 			string temp_text = "+0.5 Defence";
 			MaxHealthNodeTrigger trigger = new MaxHealthNodeTrigger(2000);
 			NodeUI root = nodeManager.CreateNode(new MaxHealthNodeTrigger(0), NodeType.Empty, "");
@@ -55,19 +59,19 @@ namespace Runeforge.Content.UI
 			}
 			for (int i = 1; i < 2001; ++i)
 			{
-				connectionManager.AutoConnect(panel, nodeUIs[i - 1], nodeUIs[i], ConnectionDirection.RIGHT);
+				connectionManager.AutoConnect(nodeUIs[i - 1], nodeUIs[i], ConnectionDirection.RIGHT);
 			}
-			connectionManager.AutoSync(root);
+			connectionManager.AutoSync(root);**/
 			foreach (var pair in nodeManager.GetNodes())
 			{
 				NodeUI node = pair.Value;
 				node.basePosition = node.location;
-			}			
+			}
 			foreach (var pair in connectionManager.GetConnections())
 			{
 				ConnectionUI conn = pair.Value;
 				conn.basePosition = conn.location;
-			}	
+			}
 		}
 	}
 }

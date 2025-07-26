@@ -17,5 +17,10 @@ namespace Runeforge.Content.SkillTree.NodeScripts
         {
             statBlock.RemoveBuff(buffID);
         }
+
+        public float ReturnTriggerElement()
+        {
+            return buffID;
+        }
     }
 }

@@ -6,5 +6,6 @@ namespace Runeforge.Content.SkillTree.NodeScripts
     {
         void Activate(StatBlock statBlock);
         void DeActivate(StatBlock statBlock);
+        float ReturnTriggerElement();
     }
 }

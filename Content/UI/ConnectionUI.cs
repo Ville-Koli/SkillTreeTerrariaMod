@@ -164,7 +164,7 @@ namespace Runeforge.Content.UI
 		}
 		public override string ToString()
 		{
-			return $"({connectedNodeA.GetID()}, {connectedNodeB.GetID()}, {active})";
+			return $"({connectedNodeA.GetID()}, {connectedNodeB.GetID()}, {direction_from_node})";
 		}
 	}
 }
