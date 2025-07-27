@@ -28,9 +28,19 @@ namespace Runeforge.Content.UI
 			ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/active_connection_horizontal_long"),
 			ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/inactive_connection_horizontal_long"));
 
+			(Asset<Texture2D> active, Asset<Texture2D> inactive) diagonalTop = (
+			ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/active_connection_diagonal_top"),
+			ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/inactive_connection_diagonal_top"));
+
+			(Asset<Texture2D> active, Asset<Texture2D> inactive) diagonalBottom = (
+			ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/active_connection_diagonal_bottom"),
+			ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/inactive_connection_diagonal_bottom"));
+
 			(Asset<Texture2D> active, Asset<Texture2D> inactive) hoverOver = (
 			ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/active_hoverover_text_box"),
 			ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/inactive_hoverover_text_box"));
+
+
 			Asset<Texture2D> emptyNode = ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/EmptyNode");
 			Asset<Texture2D> activeEmptyNode = ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/Active_EmptyNode");
 
@@ -39,11 +49,19 @@ namespace Runeforge.Content.UI
 			textureManager = new TextureManager();
 			
 			textureManager.transparent_box = ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/transparent_hoverover_text_box");
+
 			textureManager.AddDirection(ConnectionDirection.UP, vertical.active, vertical.inactive);
 			textureManager.AddDirection(ConnectionDirection.DOWN, vertical.active, vertical.inactive);
 			textureManager.AddDirection(ConnectionDirection.RIGHT, horizontal.active, horizontal.inactive);
+			textureManager.AddDirection(ConnectionDirection.LEFT, horizontal.active, horizontal.inactive);
+			textureManager.AddDirection(ConnectionDirection.DIAGONAL_BOTTOM_LEFT, diagonalBottom.active, diagonalBottom.inactive);
+			textureManager.AddDirection(ConnectionDirection.DIAGONAL_BOTTOM_RIGHT, diagonalBottom.active, diagonalBottom.inactive);
+			textureManager.AddDirection(ConnectionDirection.DIAGONAL_TOP_RIGHT, diagonalTop.active, diagonalTop.inactive);
+			textureManager.AddDirection(ConnectionDirection.DIAGONAL_TOP_LEFT, diagonalTop.active, diagonalTop.inactive);
+
 			textureManager.AddNode(NodeType.Empty, activeEmptyNode, emptyNode);
 			textureManager.AddNode(NodeType.Defence, tankNodeActive, tankNodeInActive);
+
 			textureManager.AddUI(UIType.hoverOver, hoverOver.active, hoverOver.inactive);
 		}
 		public override void Load()

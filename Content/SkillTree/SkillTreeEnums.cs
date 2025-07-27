@@ -42,7 +42,9 @@ namespace Runeforge.Content.SkillTree
         DOWN,
         RIGHT,
         LEFT,
-        DIAGONAL_LEFT,
-        DIAGONAL_RIGHT,
+        DIAGONAL_TOP_RIGHT,
+        DIAGONAL_TOP_LEFT,
+        DIAGONAL_BOTTOM_RIGHT,
+        DIAGONAL_BOTTOM_LEFT
     }
 }

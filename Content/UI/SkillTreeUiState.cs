@@ -41,28 +41,10 @@ namespace Runeforge.Content.UI
 			panel.SetConnectionManager(connectionManager);
 			nodeManager.SetPanel(panel);
 			Append(panel);
+			
 			SkillTreeLoader loader = new SkillTreeLoader(connectionManager, nodeManager);
 			loader.LoadData();
-			//loader.ParseNode("0 | 0    | Empty");
-			//loader.ParseNode("1 | 1000 | adds 1000 defence");
-			//loader.ParseConnection("(0, 1, 2)");
-			/**
-			string temp_text = "+0.5 Defence";
-			MaxHealthNodeTrigger trigger = new MaxHealthNodeTrigger(2000);
-			NodeUI root = nodeManager.CreateNode(new MaxHealthNodeTrigger(0), NodeType.Empty, "");
-			List<NodeUI> nodeUIs = new List<NodeUI>() { root };
-			for (int i = 0; i < 2000; ++i)
-			{
-				NodeUI button2 = nodeManager.CreateNode(trigger, NodeType.Defence, temp_text);
-				button2.SetLocation(new Vector2((i % 1000) * 50, (int)(i / 1000) * 50));
-				nodeUIs.Add(button2);
-			}
-			for (int i = 1; i < 2001; ++i)
-			{
-				connectionManager.AutoConnect(nodeUIs[i - 1], nodeUIs[i], ConnectionDirection.RIGHT);
-			}
-			**/
-			//connectionManager.AutoSync(nodeManager.rootNode);
+
 			foreach (var pair in nodeManager.GetNodes())
 			{
 				NodeUI node = pair.Value;

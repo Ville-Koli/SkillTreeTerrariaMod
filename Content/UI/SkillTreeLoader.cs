@@ -99,7 +99,7 @@ namespace Runeforge.Content.UI
 				if (line != "")
 				{
 					(StatusCodes status, UIElement element, string reason) result = ParseConnection(line);
-					ModContent.GetInstance<Runeforge>().Logger.Info($"[LOADING] [PARSING CONNECTION] Parsed a node: {result.reason}");
+					ModContent.GetInstance<Runeforge>().Logger.Info($"[LOADING] [PARSING CONNECTION] Parsed a connection: {result.reason}");
 				}
 			}
 			catch (Exception e)
@@ -123,7 +123,7 @@ namespace Runeforge.Content.UI
 				case NodeType.ApplyBuff:
 					return new ApplyBuffNodeTrigger(element);
 			}
-			return new DefenceNodeTrigger(0); // default node
+			return new EmptyNodeTrigger(); // default node
 		}
 
 		public (StatusCodes status, INodeTrigger trigger, string reason) ParseTrigger(NodeType type, string triggerElement)

@@ -81,7 +81,6 @@ namespace Runeforge.Content.UI
 					nodeUI.location = nodeUI.basePosition * zoom + panOffset + delta; ;
 					nodeUI.Left.Set(nodeUI.location .X, 0.0f);
 					nodeUI.Top.Set(nodeUI.location .Y, 0.0f);
-
 				}
 				Dictionary<int, ConnectionUI> connectionContainer = connectionManager.GetConnections();
 				foreach (var pair in connectionContainer)
@@ -133,6 +132,14 @@ namespace Runeforge.Content.UI
 			_uiPanel.Height = StyleDimension.Fill;
 			_uiPanel.BackgroundColor = BackgroundColor;
 			Append(_uiPanel);
+			Dictionary<int, ConnectionUI> connectionContainer = connectionManager.GetConnections();
+			foreach (var pair in connectionContainer)
+			{
+				ConnectionUI conn = pair.Value;
+				conn.Left.Set(conn.GetLocation().X, 0.0f);
+				conn.Top.Set(conn.GetLocation().Y, 0.0f);
+				_uiPanel.Append(conn);
+			}
 			Dictionary<int, NodeUI> nodeContainer = nodeManager.GetNodes();
 			foreach (var pair in nodeContainer)
 			{
@@ -140,12 +147,6 @@ namespace Runeforge.Content.UI
 				ModContent.GetInstance<Runeforge>().Logger.Info("NODE ID: " + nodeui.GetID() + " locations: " + nodeui.GetLocation().X + " , " + nodeui.GetLocation().Y);
 				nodeui.Left.Set(nodeui.GetLocation().X, 0.0f);
 				nodeui.Top.Set(nodeui.GetLocation().Y, 0.0f);
-				foreach (var conn in nodeui.GetConnections())
-				{
-					conn.Left.Set(conn.GetLocation().X, 0.0f);
-					conn.Top.Set(conn.GetLocation().Y, 0.0f);
-					_uiPanel.Append(conn);
-				}
 				//ModContent.GetInstance<Runeforge>().Logger.Info("NODE STATUS: " + nodeui);
 				_uiPanel.Append(nodeui);
 			}

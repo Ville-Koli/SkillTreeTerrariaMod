@@ -171,11 +171,19 @@ namespace Runeforge.Content.UI
 					resulting_location_for_dir = nodeALocation + new Vector2(fixed_node_dimensions.X, MathF.Abs(fixed_node_dimensions.Y / 2 - dir_dimensions.Y / 2));
 					resulting_location_for_b = nodeALocation + new Vector2(fixed_node_dimensions.X + dir_dimensions.X, MathF.Abs(fixed_node_dimensions.Y / 2 - b_dimensions.Y / 2));
 					return (resulting_location_for_dir, resulting_location_for_b);
+				case ConnectionDirection.LEFT:
+					resulting_location_for_dir = nodeALocation + new Vector2(-dir_dimensions.X, MathF.Abs(fixed_node_dimensions.Y / 2 - dir_dimensions.Y / 2));
+					resulting_location_for_b = nodeALocation + new Vector2(-b_dimensions.X - dir_dimensions.X, MathF.Abs(fixed_node_dimensions.Y / 2 - b_dimensions.Y / 2));
+					return (resulting_location_for_dir, resulting_location_for_b);
+				case ConnectionDirection.DIAGONAL_TOP_RIGHT:
+					resulting_location_for_dir = nodeALocation + new Vector2(fixed_node_dimensions.X / 2, fixed_node_dimensions.Y / 2 - dir_dimensions.Y);
+					resulting_location_for_b = resulting_location_for_dir + new Vector2(dir_dimensions.X - b_dimensions.X / 2, -b_dimensions.Y / 2);
+					return (resulting_location_for_dir, resulting_location_for_b);
 			}
 			return (Vector2.Zero, Vector2.Zero);
 		}
 		/**
-		<summary> 
+		<summary> g
 		Function, which applies delta vector to nodes location
 		</summary>
 		<param name="node"> node, which location you wish to edit by delta </param>

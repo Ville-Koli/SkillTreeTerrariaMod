@@ -46,7 +46,7 @@ namespace Runeforge.Content.UI
 		**/
 		public override void Draw(SpriteBatch spriteBatch)
 		{
-			spriteBatch.Draw(active ? active_connection_image.Value : inactive_connection_image.Value, connection_image.GetDimensions().Position(), null, Color.White, 0f, Vector2.Zero, SkillTreePanel.zoom, SpriteEffects.None, 0f);
+			spriteBatch.Draw(active ? active_connection_image.Value : inactive_connection_image.Value, connection_image.GetDimensions().Position(), null, Color.White, 0f, Vector2.Zero, SkillTreePanel.zoom, SpriteEffects.None, 0);
 		}
 
 		/**

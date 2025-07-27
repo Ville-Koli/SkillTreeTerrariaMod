@@ -54,7 +54,7 @@ namespace Runeforge.Content.UI
 		**/
 		public override void Draw(SpriteBatch spriteBatch)
 		{
-			spriteBatch.Draw(active ? active_node_image.Value : inactive_node_image.Value, node_image.GetDimensions().Position(), null, Color.White, 0f, Vector2.Zero, SkillTreePanel.zoom, SpriteEffects.None, 0f);
+			spriteBatch.Draw(active ? active_node_image.Value : inactive_node_image.Value, node_image.GetDimensions().Position(), null, Color.White, 0f, Vector2.Zero, SkillTreePanel.zoom, SpriteEffects.None, 0);
 		}
 		/**
 		<summary> 
