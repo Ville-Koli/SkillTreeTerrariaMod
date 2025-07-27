@@ -26,6 +26,10 @@ namespace Runeforge.Content.SkillTree
         private float _lifeRegenIncrease = 0;
         private float _maxHealthIncrease = 0;
         private float _maxManaIncrease = 0;
+        private float _currentExperience = 0;
+        private float _requiredExperienceForLevel = 45;
+        private float _currentLevel = 0;
+        private int _skillPoints = 0;
         public float DefenceIncrease { get { return _defenceIncrease; } set { _defenceIncrease = value; } }
         public float MeleeDamageIncrease { get { return _meleeDamageIncrease; } set { _meleeDamageIncrease = value; } }
         public float RangeDamageIncrease { get { return _rangeDamageIncrease; } set { _rangeDamageIncrease = value; } }
@@ -39,6 +43,10 @@ namespace Runeforge.Content.SkillTree
         public float MaxHealthIncrease { get { return _maxHealthIncrease; } set { _maxHealthIncrease = value; } }
         public float MaxManaIncrease { get { return _maxManaIncrease; } set { _maxManaIncrease = value; } }
         public float MagicDamageIncrease { get { return _magicDamageIncrease; } set { _magicDamageIncrease = value; } }
+        public float CurrentExperience { get { return _currentExperience; } set { _currentExperience = value; } }
+        public float RequiredExperienceForLevel { get { return _requiredExperienceForLevel; } set { _requiredExperienceForLevel = value; } }
+        public float CurrentLevel { get { return _currentLevel; } set { _currentLevel = value; } }
+        public int SkillPoints { get { return _skillPoints; } set { _skillPoints = value; } }
         public List<int> GetBuffIDs()
         {
             return buffIDs;
@@ -111,6 +119,20 @@ namespace Runeforge.Content.SkillTree
         public void AddMagicDamageIncrease(float amount)
         {
             MagicDamageIncrease += amount;
+        }
+        public void AddExperience(float amount)
+        {
+            CurrentExperience += amount;
+
+            if (CurrentExperience > RequiredExperienceForLevel)
+            {
+                CurrentLevel += 1;
+                CurrentExperience -= RequiredExperienceForLevel;
+                RequiredExperienceForLevel *= 1.1302668536131113f; // holy magic numbah 
+                // (explanation: sum of most bosses max health then multiply that by 35 and take the 80th root of it. We want lvl 80 to be the really end game level so that there is room for post moonlord content like calamity)
+                SkillPoints += 1;
+                ModContent.GetInstance<Runeforge>().Logger.Info($"LEVELED UP TO {CurrentLevel} {CurrentExperience} {RequiredExperienceForLevel}!");
+            }
         }
     }
 }

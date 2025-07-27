@@ -6,6 +6,7 @@ using Terraria.UI;
 using System.Collections.Generic;
 using Terraria.GameInput;
 using Terraria.GameContent.UI.Elements;
+using System;
 
 namespace Runeforge.Content.UI
 {
@@ -34,7 +35,8 @@ namespace Runeforge.Content.UI
 		public override void ScrollWheel(UIScrollWheelEvent evt)
 		{
 			Vector2 mousePosBefore = (Main.MouseScreen - panOffset) / zoom;
-			zoom += evt.ScrollWheelValue > 0 ? 0.1f : -0.1f;
+			zoom = MathF.Max(MathF.Min(zoom + (evt.ScrollWheelValue > 0 ? 0.1f : -0.1f), 2), 0.1f);
+			ModContent.GetInstance<Runeforge>().Logger.Info("Zoom: " + zoom);
 			Vector2 mouseScreenPosAfter = mousePosBefore * zoom + panOffset;
 			Vector2 offsetDelta = Main.MouseScreen - mouseScreenPosAfter;
 			panOffset += offsetDelta;

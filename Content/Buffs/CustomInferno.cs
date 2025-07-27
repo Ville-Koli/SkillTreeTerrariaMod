@@ -16,10 +16,40 @@ namespace Runeforge.Content.Buffs
 	{
 		public int radius = 150;
 		private Player player;
+		public int damage = 2;
+		public int damageCooldown = 10;
+		public double distance = 150;
+		private int damageCooldownCounter = 0;
 		public override void Update(Player player, ref int buffIndex)
 		{
 			base.Update(player, ref buffIndex);
 			this.player = player;
+			if (Main.myPlayer == player.whoAmI && !player.inferno)
+			{
+				//player.GetModPlayer<RighteousFirePlayer>().isCustomInfernoEnabled = true;
+				player.AddBuff(ModContent.BuffType<CustomInferno>(), 100);
+				player.AddBuff(BuffID.OnFire3, 10);
+
+				if (damageCooldownCounter == 0)
+				{
+					foreach (NPC npc in Main.npc)
+					{
+						if (!npc.friendly)
+						{
+							if (npc.Center.Distance(player.Center) < distance)
+							{
+								player.ApplyDamageToNPC(npc, damage * player.HeldItem.damage, 0, 0);
+								npc.AddBuff(BuffID.OnFire3, 10);
+							}
+						}
+					}
+					damageCooldownCounter = damageCooldown;
+				}
+				if (damageCooldownCounter > 0)
+				{
+					damageCooldownCounter--;
+				}
+			}
 		}
 		public override void PostDraw(SpriteBatch spriteBatch, int buffIndex, BuffDrawParams drawParams)
 		{

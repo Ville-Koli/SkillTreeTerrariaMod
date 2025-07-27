@@ -1,4 +1,8 @@
 0 | 0    | 
+2 | 1000 | adds 1000 defence
+1 | 1000 | adds 1000 defence
+1 | 1000 | adds 1000 defence
+1 | 1000 | adds 1000 defence
 1 | 1000 | adds 1000 defence
 1 | 1000 | adds 1000 defence
 1 | 1000 | adds 1000 defence

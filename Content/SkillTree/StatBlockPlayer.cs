@@ -20,6 +20,12 @@ namespace Runeforge.Content.SkillTree
             statBlock = new StatBlock(); // initialize character based statblock
         }
 
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
+        {
+            statBlock.AddExperience(damageDone);
+            //ModContent.GetInstance<Runeforge>().Logger.Info($"Hit an enemy and gained {damageDone} exp!");
+        }
+
         public override void UpdateEquips()
         {
             base.UpdateEquips();
