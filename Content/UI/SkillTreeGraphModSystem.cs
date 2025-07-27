@@ -54,10 +54,10 @@ namespace Runeforge.Content.UI
 			textureManager.AddDirection(ConnectionDirection.DOWN, vertical.active, vertical.inactive);
 			textureManager.AddDirection(ConnectionDirection.RIGHT, horizontal.active, horizontal.inactive);
 			textureManager.AddDirection(ConnectionDirection.LEFT, horizontal.active, horizontal.inactive);
-			textureManager.AddDirection(ConnectionDirection.DIAGONAL_BOTTOM_LEFT, diagonalBottom.active, diagonalBottom.inactive);
+			textureManager.AddDirection(ConnectionDirection.DIAGONAL_BOTTOM_LEFT, diagonalTop.active, diagonalTop.inactive);
 			textureManager.AddDirection(ConnectionDirection.DIAGONAL_BOTTOM_RIGHT, diagonalBottom.active, diagonalBottom.inactive);
 			textureManager.AddDirection(ConnectionDirection.DIAGONAL_TOP_RIGHT, diagonalTop.active, diagonalTop.inactive);
-			textureManager.AddDirection(ConnectionDirection.DIAGONAL_TOP_LEFT, diagonalTop.active, diagonalTop.inactive);
+			textureManager.AddDirection(ConnectionDirection.DIAGONAL_TOP_LEFT, diagonalBottom.active, diagonalBottom.inactive);
 
 			textureManager.AddNode(NodeType.Empty, activeEmptyNode, emptyNode);
 			textureManager.AddNode(NodeType.Defence, tankNodeActive, tankNodeInActive);
