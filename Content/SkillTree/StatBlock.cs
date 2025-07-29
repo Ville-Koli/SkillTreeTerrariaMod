@@ -128,11 +128,12 @@ namespace Runeforge.Content.SkillTree
             {
                 CurrentLevel += 1;
                 CurrentExperience -= RequiredExperienceForLevel;
-                RequiredExperienceForLevel *= 1.1302668536131113f; // holy magic numbah 
+                RequiredExperienceForLevel *= 1.1902668536131113f; // holy magic numbah 
                 // (explanation: sum of most bosses max health then multiply that by 35 and take the 80th root of it. We want lvl 80 to be the really end game level so that there is room for post moonlord content like calamity)
                 SkillPoints += 1;
                 ModContent.GetInstance<Runeforge>().Logger.Info($"LEVELED UP TO {CurrentLevel} {CurrentExperience} {RequiredExperienceForLevel}!");
             }
+            LevelUI.SetExp(CurrentExperience / RequiredExperienceForLevel);
         }
     }
 }

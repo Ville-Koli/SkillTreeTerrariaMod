@@ -134,6 +134,9 @@ namespace Runeforge.Content.UI
 			_uiPanel.Height = StyleDimension.Fill;
 			_uiPanel.BackgroundColor = BackgroundColor;
 			Append(_uiPanel);
+			LevelUI levelUI = new LevelUI();
+			levelUI.levelBarHolder = SkillTreeGraphModSystem.textureManager.GetUI(SkillTree.UIType.levelBar).active;
+			_uiPanel.Append(levelUI);
 			Dictionary<int, ConnectionUI> connectionContainer = connectionManager.GetConnections();
 			foreach (var pair in connectionContainer)
 			{

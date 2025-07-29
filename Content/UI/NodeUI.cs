@@ -28,10 +28,11 @@ namespace Runeforge.Content.UI
 		public Vector2 location; // current location
 		public Vector2 basePosition; // starting position
 		public bool active;
+		public int skillPointCost = 1;
 		private string description;
 		private int id;
 		private static int global_id = 0;
-		public NodeUI(SkillTreePanel panel, Asset<Texture2D> inactive, Asset<Texture2D> active, Vector2 location, INodeTrigger trigger, NodeType type, HoverOverUI hoverOverUI, StatBlock statBlock, string description)
+		public NodeUI(SkillTreePanel panel, Asset<Texture2D> inactive, Asset<Texture2D> active, Vector2 location, INodeTrigger trigger, NodeType type, HoverOverUI hoverOverUI, StatBlock statBlock, string description, int cost)
 		{
 			mainPanel = panel;
 			node_image = new UIImage(inactive);
@@ -43,6 +44,7 @@ namespace Runeforge.Content.UI
 			this.hoverOverUI = hoverOverUI;
 			this.description = description;
 			this.statBlock = statBlock;
+			this.skillPointCost = cost;
 			active_node_image = active;
 			id = global_id;
 			global_id++;
@@ -96,7 +98,7 @@ namespace Runeforge.Content.UI
 			if (HandleEmptyNodeCase()) return;
 
 			ModContent.GetInstance<Runeforge>().Logger.Info("PAST EMPTY NODE: " + connections.Count + " NODE ACTIVITY: " + active);
-			if (!active && connections.Count >= 1)
+			if (!active && connections.Count >= 1 && statBlock.SkillPoints > skillPointCost)
 			{
 				ModContent.GetInstance<Runeforge>().Logger.Info("\tACTIVATE!");
 				node_image.SetImage(active_node_image);
@@ -108,6 +110,7 @@ namespace Runeforge.Content.UI
 
 				active = !active;
 				trigger.Activate(statBlock);
+				statBlock.SkillPoints -= skillPointCost;
 			}
 			else
 			{
@@ -123,6 +126,7 @@ namespace Runeforge.Content.UI
 						conn.SetInActive();
 					}
 					trigger.DeActivate(statBlock);
+					statBlock.SkillPoints += skillPointCost;
 				}
 			}
 			EditHoverOverElement(); // edit hover over element depending on whether node got activated or deactivated

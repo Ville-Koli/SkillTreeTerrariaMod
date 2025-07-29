@@ -20,49 +20,57 @@ namespace Runeforge.Content.UI
 
 		public void CreateTextureManager()
 		{
-			(Asset<Texture2D> active, Asset<Texture2D> inactive) vertical = (
-			ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/active_connection_vertical_long"),
-			ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/inactive_connection_vertical_long"));
+			textureManager = new TextureManager();
+			string pathToUIElements = @"Runeforge/Content/Assets/UIElements/";
+			string pathToNodeAssets= @"Runeforge/Content/Assets/NodeAssets/";
 
-			(Asset<Texture2D> active, Asset<Texture2D> inactive) horizontal = (
-			ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/active_connection_horizontal_long"),
-			ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/inactive_connection_horizontal_long"));
+			List<(List<ConnectionDirection> directions, string name)> connectionElements = new()
+			{
+				(new(){ConnectionDirection.UP, ConnectionDirection.DOWN}, "connection_vertical_long"),
+				(new(){ConnectionDirection.RIGHT, ConnectionDirection.LEFT}, "connection_horizontal_long"),
+				(new(){ConnectionDirection.DIAGONAL_BOTTOM_LEFT, ConnectionDirection.DIAGONAL_TOP_RIGHT}, "connection_diagonal_top"),
+				(new(){ConnectionDirection.DIAGONAL_BOTTOM_RIGHT, ConnectionDirection.DIAGONAL_TOP_LEFT}, "connection_diagonal_bottom")
+			};
+			
+			List<(NodeType type, string name)> nodeElements = new()
+			{
+				(NodeType.Empty, "emptynode"),
+				(NodeType.Defence, "defencenode")
+			};
 
-			(Asset<Texture2D> active, Asset<Texture2D> inactive) diagonalTop = (
-			ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/active_connection_diagonal_top"),
-			ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/inactive_connection_diagonal_top"));
+			foreach (var uiElement in connectionElements)
+			{
+				(Asset<Texture2D> active, Asset<Texture2D> inactive) elementAsset = (
+				ModContent.Request<Texture2D>($"{pathToUIElements}active_{uiElement.name}"),
+				ModContent.Request<Texture2D>($"{pathToUIElements}inactive_{uiElement.name}"));
+				ModContent.GetInstance<Runeforge>().Logger.Info($"Loading element: {pathToUIElements}active_{uiElement.name}");
 
-			(Asset<Texture2D> active, Asset<Texture2D> inactive) diagonalBottom = (
-			ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/active_connection_diagonal_bottom"),
-			ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/inactive_connection_diagonal_bottom"));
+				foreach (var direction in uiElement.directions)
+				{
+					textureManager.AddDirection(direction, elementAsset.active, elementAsset.inactive);
+					ModContent.GetInstance<Runeforge>().Logger.Info($"\tDirection: {direction}");
+				}
+			}
+
+			foreach (var uiElement in nodeElements)
+			{
+				(Asset<Texture2D> active, Asset<Texture2D> inactive) elementAsset = (
+				ModContent.Request<Texture2D>($"{pathToNodeAssets}active_{uiElement.name}"),
+				ModContent.Request<Texture2D>($"{pathToNodeAssets}inactive_{uiElement.name}"));
+				ModContent.GetInstance<Runeforge>().Logger.Info($"Loading element: {pathToNodeAssets}{uiElement.name}");
+
+				textureManager.AddNode(uiElement.type, elementAsset.active, elementAsset.inactive);
+			}
+
+			Asset<Texture2D> levelBar = ModContent.Request<Texture2D>($"{pathToUIElements}level_bar");
 
 			(Asset<Texture2D> active, Asset<Texture2D> inactive) hoverOver = (
-			ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/active_hoverover_text_box"),
-			ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/inactive_hoverover_text_box"));
-
-
-			Asset<Texture2D> emptyNode = ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/EmptyNode");
-			Asset<Texture2D> activeEmptyNode = ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/Active_EmptyNode");
-
-			Asset<Texture2D> tankNodeInActive = ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/inactive_defencenode");
-			Asset<Texture2D> tankNodeActive = ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/active_defencenode");
-			textureManager = new TextureManager();
-			
-			textureManager.transparent_box = ModContent.Request<Texture2D>("Runeforge/Content/SkillTree/NodeAssets/transparent_hoverover_text_box");
-
-			textureManager.AddDirection(ConnectionDirection.UP, vertical.active, vertical.inactive);
-			textureManager.AddDirection(ConnectionDirection.DOWN, vertical.active, vertical.inactive);
-			textureManager.AddDirection(ConnectionDirection.RIGHT, horizontal.active, horizontal.inactive);
-			textureManager.AddDirection(ConnectionDirection.LEFT, horizontal.active, horizontal.inactive);
-			textureManager.AddDirection(ConnectionDirection.DIAGONAL_BOTTOM_LEFT, diagonalTop.active, diagonalTop.inactive);
-			textureManager.AddDirection(ConnectionDirection.DIAGONAL_BOTTOM_RIGHT, diagonalBottom.active, diagonalBottom.inactive);
-			textureManager.AddDirection(ConnectionDirection.DIAGONAL_TOP_RIGHT, diagonalTop.active, diagonalTop.inactive);
-			textureManager.AddDirection(ConnectionDirection.DIAGONAL_TOP_LEFT, diagonalBottom.active, diagonalBottom.inactive);
-
-			textureManager.AddNode(NodeType.Empty, activeEmptyNode, emptyNode);
-			textureManager.AddNode(NodeType.Defence, tankNodeActive, tankNodeInActive);
+			ModContent.Request<Texture2D>($"{pathToUIElements}active_hoverover_text_box"),
+			ModContent.Request<Texture2D>($"{pathToUIElements}inactive_hoverover_text_box"));
+			textureManager.transparent_box = ModContent.Request<Texture2D>($"{pathToUIElements}transparent_hoverover_text_box");
 
 			textureManager.AddUI(UIType.hoverOver, hoverOver.active, hoverOver.inactive);
+			textureManager.AddUI(UIType.levelBar, levelBar, levelBar); // level bar is always active
 		}
 		public override void Load()
 		{

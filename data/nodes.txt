@@ -1,11 +1,11 @@
-0 | 0    | 
-2 | 1000 | adds 1000 defence
-1 | 1000 | adds 1000 defence
-1 | 1000 | adds 1000 defence
-1 | 1000 | adds 1000 defence
-1 | 1000 | adds 1000 defence
-1 | 1000 | adds 1000 defence
-1 | 1000 | adds 1000 defence
-1 | 1000 | adds 1000 defence
-1 | 1000 | adds 1000 defence
-1 | 1000 | adds 1000 defence
+0 | 0    | | 0
+1 | 1000 | adds 1000 defence | 1
+1 | 1000 | adds 1000 defence | 1
+1 | 1000 | adds 1000 defence | 1
+1 | 1000 | adds 1000 defence | 1
+1 | 1000 | adds 1000 defence | 1
+1 | 1000 | adds 1000 defence | 1
+1 | 1000 | adds 1000 defence | 1
+1 | 1000 | adds 1000 defence | 1
+1 | 1000 | adds 1000 defence | 1
+1 | 1000 | adds 1000 defence | 1

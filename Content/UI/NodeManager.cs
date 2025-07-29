@@ -123,10 +123,10 @@ namespace Runeforge.Content.UI
 		Function returns the created node
 		</returns>
 		**/
-		public NodeUI CreateNode(INodeTrigger trigger, NodeType type, string description)
+		public NodeUI CreateNode(INodeTrigger trigger, NodeType type, string description, int cost)
 		{
 			(Asset<Texture2D> active, Asset<Texture2D> inactive) texture = textureManager.GetNode(type);
-			NodeUI nodeUI = new NodeUI(panel, texture.inactive, texture.active, Vector2.Zero, trigger, type, hoverOverUI, statBlock, description);
+			NodeUI nodeUI = new NodeUI(panel, texture.inactive, texture.active, Vector2.Zero, trigger, type, hoverOverUI, statBlock, description, cost);
 			if (!nodeContainer.ContainsKey(nodeUI.GetID()))
 				nodeContainer.Add(nodeUI.GetID(), nodeUI);
 			if (rootNode == null && type == NodeType.Empty)

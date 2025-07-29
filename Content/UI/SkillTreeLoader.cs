@@ -141,21 +141,22 @@ namespace Runeforge.Content.UI
 		}
 		public (StatusCodes status, NodeUI node, string reason) ParseNode(string node)
 		{
-			string[] nodeElements = node.Split("|"); // Type | Trigger Element | Description -> "Type", "Trigger Element", "Description" 
-			if(nodeElements.Length != 3) return (StatusCodes.Failed, null, $"Failed at splitting as required length is 3 and the length is {nodeElements.Length}");
+			string[] nodeElements = node.Split("|"); // Type | Trigger Element | Description | Cost -> "Type", "Trigger Element", "Description" 
+			if(nodeElements.Length != 4) return (StatusCodes.Failed, null, $"Failed at splitting as required length is 3 and the length is {nodeElements.Length}");
 
 			string strNodeType = nodeElements[0];
 			string strTrigger = nodeElements[1];
 			string description = nodeElements[2];
+			string cost = nodeElements[3];
 			
-			if (int.TryParse(strNodeType, out int type))
+			if (int.TryParse(strNodeType, out int type) && int.TryParse(cost, out int intCost))
 			{
 				try
 				{
 					NodeType nodeType = (NodeType)type;
 					(StatusCodes status, INodeTrigger trigger, string reason) result = ParseTrigger(nodeType, strTrigger);
 					if (result.status == StatusCodes.Failed) return (StatusCodes.Failed, null, result.reason);
-					NodeUI nodeui = nodeManager.CreateNode(result.trigger, nodeType, description);
+					NodeUI nodeui = nodeManager.CreateNode(result.trigger, nodeType, description, intCost);
 					return (StatusCodes.Success, nodeui, "Success");
 				}
 				catch (Exception e)
