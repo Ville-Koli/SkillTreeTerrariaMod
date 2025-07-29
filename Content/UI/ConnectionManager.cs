@@ -157,6 +157,8 @@ namespace Runeforge.Content.UI
 			Vector2 b_dimensions = b.inactive_node_image.Size();
 			Vector2 resulting_location_for_b;
 			Vector2 resulting_location_for_dir;
+
+			// probably could use a matrix or something to describe this
 			switch (dir)
 			{
 				case ConnectionDirection.UP:

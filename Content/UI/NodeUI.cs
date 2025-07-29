@@ -42,7 +42,7 @@ namespace Runeforge.Content.UI
 			this.trigger = trigger;
 			this.type = type;
 			this.hoverOverUI = hoverOverUI;
-			this.description = description;
+			this.description = description + $"\nCosts: {cost}"; // add skill point cost to description
 			this.statBlock = statBlock;
 			this.skillPointCost = cost;
 			active_node_image = active;

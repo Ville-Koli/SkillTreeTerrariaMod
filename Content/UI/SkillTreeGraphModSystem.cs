@@ -21,7 +21,7 @@ namespace Runeforge.Content.UI
 		public void CreateTextureManager()
 		{
 			textureManager = new TextureManager();
-			string pathToUIElements = @"Runeforge/Content/Assets/UIElements/";
+			string pathToUIElements = @"Runeforge/Content/Assets/UIAssets/";
 			string pathToNodeAssets= @"Runeforge/Content/Assets/NodeAssets/";
 
 			List<(List<ConnectionDirection> directions, string name)> connectionElements = new()
@@ -31,7 +31,7 @@ namespace Runeforge.Content.UI
 				(new(){ConnectionDirection.DIAGONAL_BOTTOM_LEFT, ConnectionDirection.DIAGONAL_TOP_RIGHT}, "connection_diagonal_top"),
 				(new(){ConnectionDirection.DIAGONAL_BOTTOM_RIGHT, ConnectionDirection.DIAGONAL_TOP_LEFT}, "connection_diagonal_bottom")
 			};
-			
+
 			List<(NodeType type, string name)> nodeElements = new()
 			{
 				(NodeType.Empty, "emptynode"),
