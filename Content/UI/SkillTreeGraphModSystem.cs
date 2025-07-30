@@ -22,7 +22,7 @@ namespace Runeforge.Content.UI
 		{
 			textureManager = new TextureManager();
 			string pathToUIElements = @"Runeforge/Content/Assets/UIAssets/";
-			string pathToNodeAssets= @"Runeforge/Content/Assets/NodeAssets/";
+			string pathToNodeAssets = @"Runeforge/Content/Assets/NodeAssets/";
 
 			List<(List<ConnectionDirection> directions, string name)> connectionElements = new()
 			{
@@ -63,14 +63,16 @@ namespace Runeforge.Content.UI
 			}
 
 			Asset<Texture2D> levelBar = ModContent.Request<Texture2D>($"{pathToUIElements}level_bar");
+			Asset<Texture2D> skillPointOrb = ModContent.Request<Texture2D>($"{pathToUIElements}skillpoint_orb");
 
 			(Asset<Texture2D> active, Asset<Texture2D> inactive) hoverOver = (
 			ModContent.Request<Texture2D>($"{pathToUIElements}active_hoverover_text_box"),
 			ModContent.Request<Texture2D>($"{pathToUIElements}inactive_hoverover_text_box"));
 			textureManager.transparent_box = ModContent.Request<Texture2D>($"{pathToUIElements}transparent_hoverover_text_box");
 
-			textureManager.AddUI(UIType.hoverOver, hoverOver.active, hoverOver.inactive);
-			textureManager.AddUI(UIType.levelBar, levelBar, levelBar); // level bar is always active
+			textureManager.AddUI(UIType.HoverOver, hoverOver.active, hoverOver.inactive);
+			textureManager.AddUI(UIType.LevelBar, levelBar, levelBar); // level bar is always active
+			textureManager.AddUI(UIType.SkillPointOrb, skillPointOrb, skillPointOrb); // level bar is always active
 		}
 		public override void Load()
 		{

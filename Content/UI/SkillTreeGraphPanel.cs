@@ -134,9 +134,8 @@ namespace Runeforge.Content.UI
 			_uiPanel.Height = StyleDimension.Fill;
 			_uiPanel.BackgroundColor = BackgroundColor;
 			Append(_uiPanel);
-			LevelUI levelUI = new LevelUI();
-			levelUI.levelBarHolder = SkillTreeGraphModSystem.textureManager.GetUI(SkillTree.UIType.levelBar).active;
-			_uiPanel.Append(levelUI);
+			LevelUI levelUI = new LevelUI(SkillTreeGraphModSystem.textureManager.GetUI(SkillTree.UIType.LevelBar).active);
+			SkillPointDisplay display = new SkillPointDisplay(SkillTreeGraphModSystem.textureManager.GetUI(SkillTree.UIType.SkillPointOrb).inactive);
 			Dictionary<int, ConnectionUI> connectionContainer = connectionManager.GetConnections();
 			foreach (var pair in connectionContainer)
 			{
@@ -156,6 +155,8 @@ namespace Runeforge.Content.UI
 				_uiPanel.Append(nodeui);
 			}
 			_uiPanel.Append(hoverOverUI);
+			_uiPanel.Append(levelUI);
+			_uiPanel.Append(display);
 			Recalculate();
 		}
 

@@ -34,8 +34,9 @@ namespace Runeforge.Content.SkillTree
 
     public enum UIType
     {
-        hoverOver,
-        levelBar
+        HoverOver,
+        LevelBar,
+        SkillPointOrb
     }
     public enum ConnectionDirection
     {

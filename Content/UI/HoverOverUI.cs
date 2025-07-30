@@ -19,7 +19,7 @@ namespace Runeforge.Content.UI
 		public HoverOverUI(TextureManager textureManager)
 		{
 			transparentImage = textureManager.transparent_box;
-			(Asset<Texture2D> active, Asset<Texture2D> inactive) asset = textureManager.GetUI(UIType.hoverOver);
+			(Asset<Texture2D> active, Asset<Texture2D> inactive) asset = textureManager.GetUI(UIType.HoverOver);
 			hoverOverUIImage = new UIImage(transparentImage);
 			description = new UIText("test", 0.7f); // DO NOT SET "test" to "" when changing font size, if font size is 1 then it can be ""
 			inActiveConnectionImage = asset.inactive;

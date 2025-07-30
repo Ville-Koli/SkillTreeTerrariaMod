@@ -6,26 +6,28 @@ using Terraria.UI;
 using Terraria.GameContent.UI.Elements;
 using Microsoft.Xna.Framework;
 using Terraria.GameContent;
+using log4net.Core;
 
 namespace Runeforge.Content.UI
 {
 	public class LevelUI : UIElement
 	{
-		// TODO
-		// Show level
-		// Show progress bar
-		// Make ui change when you gain exp
 		public static UIText displayLevel;
 		public Asset<Texture2D> levelBarHolder;
 		public Vector2 location;
 		public static Rectangle expBar;
 		private Vector2 spriteOffset = new Vector2(18, 15);
+		public LevelUI(Asset<Texture2D> levelBarHolder)
+		{
+			displayLevel = new UIText("Level 0", 1);
+			this.levelBarHolder = levelBarHolder;
+		}
 		public override void OnInitialize()
 		{
 			base.OnInitialize();
 			expBar.Width = 0;
 			expBar.Height = 8;
-			displayLevel = new UIText("Level 0", 1);
+			location = new Vector2(100, 0);
 			Append(displayLevel);
 		}
 		public override void Draw(SpriteBatch spriteBatch)

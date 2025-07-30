@@ -98,7 +98,7 @@ namespace Runeforge.Content.UI
 			if (HandleEmptyNodeCase()) return;
 
 			ModContent.GetInstance<Runeforge>().Logger.Info("PAST EMPTY NODE: " + connections.Count + " NODE ACTIVITY: " + active);
-			if (!active && connections.Count >= 1 && statBlock.SkillPoints > skillPointCost)
+			if (!active && connections.Count >= 1 && statBlock.SkillPoints >= skillPointCost)
 			{
 				ModContent.GetInstance<Runeforge>().Logger.Info("\tACTIVATE!");
 				node_image.SetImage(active_node_image);
@@ -110,7 +110,7 @@ namespace Runeforge.Content.UI
 
 				active = !active;
 				trigger.Activate(statBlock);
-				statBlock.SkillPoints -= skillPointCost;
+				statBlock.ChangeSkillPointAmount(-skillPointCost);
 			}
 			else
 			{
@@ -126,7 +126,7 @@ namespace Runeforge.Content.UI
 						conn.SetInActive();
 					}
 					trigger.DeActivate(statBlock);
-					statBlock.SkillPoints += skillPointCost;
+					statBlock.ChangeSkillPointAmount(skillPointCost);
 				}
 			}
 			EditHoverOverElement(); // edit hover over element depending on whether node got activated or deactivated
