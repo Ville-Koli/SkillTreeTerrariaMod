@@ -197,7 +197,7 @@ namespace Runeforge.Content.UI
 			return (Vector2.Zero, Vector2.Zero);
 		}
 		/**
-		<summary> g
+		<summary> 
 		Function, which applies delta vector to nodes location
 		</summary>
 		<param name="node"> node, which location you wish to edit by delta </param>

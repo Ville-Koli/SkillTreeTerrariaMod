@@ -70,17 +70,27 @@ namespace Runeforge.Content.SkillTree
             if (statBlock != null)
             {
                 tag["defenceIncrease"] = statBlock.DefenceIncrease;
+
                 tag["meleeDamageIncrease"] = statBlock.MeleeDamageIncrease;
                 tag["rangedDamageIncrease"] = statBlock.RangeDamageIncrease;
                 tag["bulletDamageIncrease"] = statBlock.BulletDamageIncrease;
                 tag["summonDamageIncrease"] = statBlock.SummonDamageIncrease;
                 tag["magicDamageIncrease"] = statBlock.MagicDamageIncrease;
+
                 tag["meleeAttackSpeedIncrease"] = statBlock.MeleeAttackSpeedIncrease;
                 tag["rangedAttackSpeedIncrease"] = statBlock.RangedAttackSpeedIncrease;
+
                 tag["extraProjectiles"] = statBlock.ExtraProjectiles;
+
                 tag["lifeRegenIncrease"] = statBlock.LifeRegenIncrease;
                 tag["maxHealthIncrease"] = statBlock.MaxHealthIncrease;
                 tag["maxManaIncrease"] = statBlock.MaxManaIncrease;
+
+                tag["currentExp"] = statBlock.CurrentExperience;
+                tag["currentLevel"] = statBlock.CurrentLevel;
+                tag["requiredExp"] = statBlock.RequiredExperienceForLevel;
+                tag["skillpoints"] = statBlock.SkillPoints;
+                ModContent.GetInstance<Runeforge>().Logger.Info($"[SAVING] [LEVEL STATS]: {statBlock.CurrentExperience}, {statBlock.CurrentLevel}, {statBlock.RequiredExperienceForLevel}");
                 tag["buffIDs"] = statBlock.GetBuffIDs();
                 return;
             }
@@ -93,6 +103,9 @@ namespace Runeforge.Content.SkillTree
                 SkillTreeUIState.nodeManager.ApplyLoadedStatBlock(statBlock); // apply the new loaded statblock to be the used one to all nodes
                 NodeManager.ActivateNodesFromStringBuilder(new StringBuilder(activeNodes)); // activate the previously active nodes
                 ConnectionManager.ActivateNodesFromStringBuilder(new StringBuilder(activeConnections)); // activate previously active connections
+                statBlock.UpdateLevelUI();
+                statBlock.UpdateSkillPointAmount();
+                ModContent.GetInstance<Runeforge>().Logger.Info($"[ENTERWORLD] [LEVEL STATS]: {statBlock.CurrentExperience}, {statBlock.CurrentLevel}, {statBlock.RequiredExperienceForLevel}");
             }
             else
             {
@@ -101,20 +114,31 @@ namespace Runeforge.Content.SkillTree
         }
         public override void LoadData(TagCompound tag)
         {
-            ModContent.GetInstance<Runeforge>().Logger.Info("[LOADDATA]: LOADING SAVE DATA: " + Main.LocalPlayer.name);
+            ModContent.GetInstance<Runeforge>().Logger.Info("[LOADDATA]: LOADING SAVE DATA: " + Player.name);
             activeNodes = tag.GetString("activeNodes");
             activeConnections = tag.GetString("activeConnections");
+
             statBlock.DefenceIncrease = tag.GetFloat("defenceIncrease");
             statBlock.MeleeDamageIncrease = tag.GetFloat("meleeDamageIncrease");
             statBlock.RangeDamageIncrease = tag.GetFloat("rangedDamageIncrease");
             statBlock.BulletDamageIncrease = tag.GetFloat("bulletDamageIncrease");
             statBlock.SummonDamageIncrease = tag.GetFloat("summonDamageIncrease");
+
             statBlock.MeleeAttackSpeedIncrease = tag.GetFloat("meleeAttackSpeedIncrease");
             statBlock.RangedAttackSpeedIncrease = tag.GetFloat("rangedAttackSpeedIncrease");
+
             statBlock.ExtraProjectiles = tag.GetFloat("extraProjectiles");
+
             statBlock.LifeRegenIncrease = tag.GetFloat("lifeRegenIncrease");
             statBlock.MaxHealthIncrease = tag.GetFloat("maxHealthIncrease");
             statBlock.MaxManaIncrease = tag.GetFloat("maxManaIncrease");
+
+            statBlock.CurrentExperience = tag.GetFloat("currentExp");
+            statBlock.CurrentLevel = tag.GetFloat("currentLevel");
+            statBlock.RequiredExperienceForLevel = tag.GetFloat("requiredExp");
+            statBlock.SkillPoints = tag.GetInt("skillpoints");
+            ModContent.GetInstance<Runeforge>().Logger.Info($"[LOADING] [LEVEL STATS]: {tag.GetFloat("currentExp")}, {tag.GetFloat("currentLevel")}, {tag.GetFloat("requiredExp")}");
+
             statBlock.SetBuffIDs(tag.Get<List<int>>("buffIDs"));
             ModContent.GetInstance<Runeforge>().Logger.Info("[LOADDATA]: Defence: " + tag.GetFloat("defenceIncrease"));
             ModContent.GetInstance<Runeforge>().Logger.Info("[LOADDATA]: MaxHealth: " + tag.GetFloat("maxHealthIncrease"));

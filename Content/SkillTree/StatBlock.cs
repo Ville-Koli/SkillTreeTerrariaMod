@@ -133,14 +133,28 @@ namespace Runeforge.Content.SkillTree
                 ChangeSkillPointAmount(+1);
                 LevelUI.SetLevel((int)CurrentLevel);
                 ModContent.GetInstance<Runeforge>().Logger.Info($"LEVELED UP TO {CurrentLevel} {CurrentExperience} {RequiredExperienceForLevel}!");
+                if (CurrentExperience > RequiredExperienceForLevel) {
+                    AddExperience(0);
+                }
             }
-            LevelUI.SetExp(CurrentExperience / RequiredExperienceForLevel);
+            LevelUI.SetExp(CurrentExperience, RequiredExperienceForLevel);
+        }
+
+        public void UpdateLevelUI()
+        {
+            LevelUI.SetLevel((int)CurrentLevel);
+            LevelUI.SetExp(CurrentExperience, RequiredExperienceForLevel);
+        }
+
+        public void UpdateSkillPointAmount()
+        {
+            SkillPointDisplay.EditSkillPointAmount(SkillPoints);
         }
 
         public void ChangeSkillPointAmount(int amount)
         {
             SkillPoints += amount;
-            SkillPointDisplay.EditSkillPointAmount(SkillPoints);
+            UpdateSkillPointAmount();
         }
     }
 }

@@ -7,6 +7,7 @@ using Terraria.GameContent.UI.Elements;
 using Microsoft.Xna.Framework;
 using Terraria.GameContent;
 using log4net.Core;
+using Terraria;
 
 namespace Runeforge.Content.UI
 {
@@ -16,6 +17,7 @@ namespace Runeforge.Content.UI
 		public Asset<Texture2D> levelBarHolder;
 		public Vector2 location;
 		public static Rectangle expBar;
+		public static string experienceRatio = "";
 		private Vector2 spriteOffset = new Vector2(18, 15);
 		public LevelUI(Asset<Texture2D> levelBarHolder)
 		{
@@ -38,9 +40,10 @@ namespace Runeforge.Content.UI
 			spriteBatch.Draw(levelBarHolder.Value, location, Color.White); // level bar holder
 			spriteBatch.Draw(TextureAssets.MagicPixel.Value, expBar, Color.GreenYellow);
 		}
-		public static void SetExp(float percent)
+		public static void SetExp(float current, float required)
 		{
-			expBar.Width = (int)(91 * percent);
+			expBar.Width = (int)(91 * (current / required));
+			experienceRatio = $"{current} / {required}";
 		}
 		public static void SetLevel(int level)
 		{
