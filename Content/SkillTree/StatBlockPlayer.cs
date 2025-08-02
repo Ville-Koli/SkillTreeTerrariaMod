@@ -38,7 +38,7 @@ namespace Runeforge.Content.SkillTree
                 Player.bulletDamage *= statBlock.BulletDamageIncrease;
 
                 Player.GetAttackSpeed(DamageClass.Melee) *= statBlock.MeleeAttackSpeedIncrease;
-                Player.GetAttackSpeed(DamageClass.Ranged) *= statBlock.RangeDamageIncrease;
+                Player.GetAttackSpeed(DamageClass.Ranged) *= statBlock.RangedAttackSpeedIncrease;
 
                 Player.statDefense += (int)statBlock.DefenceIncrease;
                 Player.lifeRegenCount += (int)statBlock.LifeRegenIncrease;
@@ -141,6 +141,8 @@ namespace Runeforge.Content.SkillTree
 
             statBlock.SetBuffIDs(tag.Get<List<int>>("buffIDs"));
             ModContent.GetInstance<Runeforge>().Logger.Info("[LOADDATA]: Defence: " + tag.GetFloat("defenceIncrease"));
+            ModContent.GetInstance<Runeforge>().Logger.Info("[LOADDATA]: Melee Damage: " + tag.GetFloat("meleeDamageIncrease"));
+            ModContent.GetInstance<Runeforge>().Logger.Info("[LOADDATA]: Melee Attackspeed: " + tag.GetFloat("meleeAttackSpeedIncrease"));
             ModContent.GetInstance<Runeforge>().Logger.Info("[LOADDATA]: MaxHealth: " + tag.GetFloat("maxHealthIncrease"));
         }
     }

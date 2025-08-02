@@ -23,7 +23,7 @@ namespace Runeforge.Content.UI
 			description = new UIText(statText);
 			this.statIcon = new UIImage(statIcon);
 			this.type = type;
-			description.Left.Set(statIcon.Width(), 0f);
+			description.Left.Set(statIcon.Width() + 15, 0f);
 			description.Top.Set(statIcon.Height() / 2 - 10, 0f);
 		}
 

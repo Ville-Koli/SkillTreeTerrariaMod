@@ -38,12 +38,21 @@ namespace Runeforge.Content.UI
 			List<(NodeType type, string name)> nodeElements = new()
 			{
 				(NodeType.Empty, "emptynode"),
-				(NodeType.Defence, "defencenode")
+				(NodeType.Defence, "defencenode"),
+				(NodeType.MeleeDamage, "meleedamagenode"),
+				(NodeType.MeleeAttackSpeed, "meleeattackspeednode"),
+				(NodeType.RangedAttackSpeed, "rangedattackspeednode")
 			};
 
 			List<(NodeType type, string name)> statElements = new()
 			{
-				(NodeType.Defence, "stat_icon_defence")
+				(NodeType.Defence, "stat_icon_defence"),
+				(NodeType.MeleeDamage, "stat_icon_melee_damage"),
+				(NodeType.LifeSteal, "stat_icon_lifesteal"),
+				(NodeType.RangedDamage, "stat_icon_range_damage"),
+				(NodeType.SummonDamage, "stat_icon_summoner_damage"),
+				(NodeType.MeleeAttackSpeed, "stat_icon_melee_attackspeed"),
+				(NodeType.RangedAttackSpeed, "stat_icon_ranged_attackspeed")
 			};
 
 			foreach (var uiElement in connectionElements)
