@@ -184,6 +184,10 @@ namespace Runeforge.Content.SkillTree
                     return LifeRegenIncrease;
                 case NodeType.ProjectileCount:
                     return ExtraProjectiles;
+                case NodeType.CriticalHitChance:
+                    return CritChanceIncrease;
+                case NodeType.CriticalHitDamage:
+                    return CritDamageIncrease;
             }
             return 0;
         }

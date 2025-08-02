@@ -44,6 +44,7 @@ namespace Runeforge.Content.UI
 				(NodeType.BulletDamage, "bulletdamagenode"),
 				(NodeType.MeleeAttackSpeed, "meleeattackspeednode"),
 				(NodeType.RangedAttackSpeed, "rangedattackspeednode"),
+				(NodeType.ProjectileCount, "extraprojectilesnode"),
 				(NodeType.MaxHealth, "maxhealthnode")
 			};
 

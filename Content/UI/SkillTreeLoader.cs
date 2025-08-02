@@ -122,6 +122,8 @@ namespace Runeforge.Content.UI
 					return new RangedAttackSpeedNodeTrigger(element);
 				case NodeType.RangedDamage:
 					return new RangedDamageNodeTrigger(element);
+				case NodeType.ProjectileCount:
+					return new ExtraProjectileNodeTrigger(element);
 				case NodeType.MaxHealth:
 					return new MaxHealthNodeTrigger(element);
 				case NodeType.MaxMana:

@@ -1,9 +1,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Text;
+using Microsoft.Xna.Framework;
 using Runeforge.Content.UI;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
@@ -28,6 +31,22 @@ namespace Runeforge.Content.SkillTree
             {
                 hit.Damage = (int)(hit.Damage * statBlock.CritDamageIncrease);
             }
+        }
+
+        public override bool Shoot(Item item, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
+        {
+            float spread = 1;
+            int spreadCount = 10;
+            for (int i = 0; i < statBlock.ExtraProjectiles; ++i)
+            {
+                // rotate velocity by the angle of spread
+                float angle = spread * ((i + 1) % spreadCount) / 180 * MathF.PI;
+                float newX = velocity.X * MathF.Cos(angle) - velocity.Y * MathF.Sin(angle);
+                float newY = velocity.Y * MathF.Cos(angle) + velocity.X * MathF.Sin(angle);
+                ModContent.GetInstance<Runeforge>().Logger.Info($"X AND Y: ({newX}, {newY}) velocity ({velocity.X}, {velocity.Y}) angle {angle}");
+                Projectile.NewProjectile(source, position, new Vector2(newX, newY), type, damage, knockback);
+            }
+            return base.Shoot(item, source, position, velocity, type, damage, knockback);
         }
 
         public override void UpdateEquips()
