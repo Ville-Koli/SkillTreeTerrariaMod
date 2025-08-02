@@ -11,6 +11,7 @@ namespace Runeforge.Content.UI
 		public Dictionary<ConnectionDirection, (Asset<Texture2D> active, Asset<Texture2D> inactive)> direction_textures = new();
 		public Dictionary<NodeType, (Asset<Texture2D> active, Asset<Texture2D> inactive)> node_textures = new();
 		public Dictionary<UIType, (Asset<Texture2D> active, Asset<Texture2D> inactive)> general_ui = new();
+		public Dictionary<NodeType, Asset<Texture2D>> stat_textures = new();
 
 		public void AddNode(NodeType type, Asset<Texture2D> active, Asset<Texture2D> inactive)
 		{
@@ -27,7 +28,11 @@ namespace Runeforge.Content.UI
 			if (direction_textures.ContainsKey(dir)) return;
 			direction_textures.Add(dir, (active, inactive));
 		}
-
+		public void AddStat(NodeType type, Asset<Texture2D> icon)
+		{
+			if (stat_textures.ContainsKey(type)) return;
+			stat_textures.Add(type, icon);
+		}
 		public (Asset<Texture2D> active, Asset<Texture2D> inactive) GetNode(NodeType type)
 		{
 			if (node_textures.TryGetValue(type, out (Asset<Texture2D> active, Asset<Texture2D> inactive) tuple))
@@ -51,6 +56,14 @@ namespace Runeforge.Content.UI
 				return tuple;
 			}
 			return (null, null);
+		}
+		public Asset<Texture2D> GetStat(NodeType type)
+		{
+			if (stat_textures.TryGetValue(type, out Asset<Texture2D> icon))
+			{
+				return icon;
+			}
+			return null;
 		}
 	}
 }

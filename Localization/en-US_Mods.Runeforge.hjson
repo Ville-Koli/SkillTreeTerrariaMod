@@ -54,4 +54,5 @@ Buffs: {
 Keybinds: {
 	"Toggle My UI.DisplayName": Toggle  My  U I
 	"Toggle Skilltree.DisplayName": Toggle  Skilltree
+	"Toggle Character screen.DisplayName": Toggle  Character screen
 }

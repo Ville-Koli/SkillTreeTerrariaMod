@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 using Runeforge.Content.UI;
 using Terraria;
@@ -138,6 +139,40 @@ namespace Runeforge.Content.SkillTree
                 }
             }
             LevelUI.SetExp(CurrentExperience, RequiredExperienceForLevel);
+        }
+
+        public float GetStat(NodeType type)
+        {
+            switch (type)
+            {
+                case NodeType.Defence:
+                    return DefenceIncrease;
+                case NodeType.RangedDamage:
+                    return RangeDamageIncrease;
+                case NodeType.MeleeDamage:
+                    return MeleeDamageIncrease;
+                case NodeType.SummonDamage:
+                    return SummonDamageIncrease;
+                case NodeType.RangedAttackSpeed:
+                    return RangedAttackSpeedIncrease;
+                case NodeType.MeleeAttackSpeed:
+                    return MeleeAttackSpeedIncrease;
+                case NodeType.BulletDamage:
+                    return BulletDamageIncrease;
+                case NodeType.MovementSpeed:
+                    return MovementSpeedIncrease;
+                case NodeType.MaxHealth:
+                    return MaxHealthIncrease;
+                case NodeType.MaxMana:
+                    return MaxManaIncrease;
+                case NodeType.MagicDamage:
+                    return MagicDamageIncrease;
+                case NodeType.HealthRegen:
+                    return LifeRegenIncrease;
+                case NodeType.ProjectileCount:
+                    return ExtraProjectiles;
+            }
+            return 0;
         }
 
         public void UpdateLevelUI()

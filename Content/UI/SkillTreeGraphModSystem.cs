@@ -14,8 +14,10 @@ namespace Runeforge.Content.UI
 	public class SkillTreeGraphModSystem : ModSystem
 	{
 		internal UserInterface MyInterface;
-		internal SkillTreeUIState MyUI;
-		private bool ShowUI = false;
+		internal SkillTreeUIState SkillTreeUI;
+		internal CharacterScreenState CharacterScreen;
+		private bool ShowSkillTreeUI = false;
+		private bool ShowCharacterScreenUI = false;
 		public static TextureManager textureManager = new();
 
 		public void CreateTextureManager()
@@ -23,6 +25,7 @@ namespace Runeforge.Content.UI
 			textureManager = new TextureManager();
 			string pathToUIElements = @"Runeforge/Content/Assets/UIAssets/";
 			string pathToNodeAssets = @"Runeforge/Content/Assets/NodeAssets/";
+			string pathToStatAssets = @"Runeforge/Content/Assets/StatAssets/";
 
 			List<(List<ConnectionDirection> directions, string name)> connectionElements = new()
 			{
@@ -36,6 +39,11 @@ namespace Runeforge.Content.UI
 			{
 				(NodeType.Empty, "emptynode"),
 				(NodeType.Defence, "defencenode")
+			};
+
+			List<(NodeType type, string name)> statElements = new()
+			{
+				(NodeType.Defence, "stat_icon_defence")
 			};
 
 			foreach (var uiElement in connectionElements)
@@ -62,6 +70,12 @@ namespace Runeforge.Content.UI
 				textureManager.AddNode(uiElement.type, elementAsset.active, elementAsset.inactive);
 			}
 
+			foreach (var uiElement in statElements)
+			{
+				Asset<Texture2D> elementAsset = ModContent.Request<Texture2D>($"{pathToStatAssets}{uiElement.name}");
+				ModContent.GetInstance<Runeforge>().Logger.Info($"Loading element: {pathToStatAssets}{uiElement.name}");
+				textureManager.AddStat(uiElement.type, elementAsset);
+			}
 			Asset<Texture2D> levelBar = ModContent.Request<Texture2D>($"{pathToUIElements}level_bar");
 			Asset<Texture2D> skillPointOrb = ModContent.Request<Texture2D>($"{pathToUIElements}skillpoint_orb");
 
@@ -80,8 +94,10 @@ namespace Runeforge.Content.UI
 			{
 				CreateTextureManager();
 				MyInterface = new UserInterface();
-				MyUI = new SkillTreeUIState();
-				MyUI.Activate(); // Activate calls Initialize() on the UIState if not initialized and calls OnActivate, then calls Activate on every child element.
+				SkillTreeUI = new SkillTreeUIState();
+				CharacterScreen = new();
+				SkillTreeUI.Activate(); // Activate calls Initialize() on the UIState if not initialized and calls OnActivate, then calls Activate on every child element.
+				CharacterScreen.Activate();
 			}
 		}
 		private GameTime _lastUpdateUiGameTime;
@@ -122,14 +138,25 @@ namespace Runeforge.Content.UI
 		public override void Unload()
 		{
 			//MyUI?.SomeKindOfUnload(); // If you hold data that needs to be unloaded, call it in OO-fashion
-			MyUI = null;
+			SkillTreeUI = null;
 		}
-		internal void ShowMyUI()
+		internal void ShowSkillTree()
 		{
-			MyInterface?.SetState(MyUI);
+			MyInterface?.SetState(SkillTreeUI);
+			ShowCharacterScreenUI = false;
 		}
 
-		internal void HideMyUI()
+		internal void HideSkillTree()
+		{
+			MyInterface?.SetState(null);
+		}
+		internal void ShowCharacterScreen()
+		{
+			MyInterface?.SetState(CharacterScreen);
+			ShowSkillTreeUI = false;
+		}
+
+		internal void HideCharacterScreen()
 		{
 			MyInterface?.SetState(null);
 		}
@@ -137,17 +164,29 @@ namespace Runeforge.Content.UI
 		{
 			if (Runeforge.ToggleMyUIKeybind != null && Runeforge.ToggleMyUIKeybind.JustPressed)
 			{
-				ShowUI = !ShowUI;
-				if (ShowUI)
+				ShowSkillTreeUI = !ShowSkillTreeUI;
+				if (ShowSkillTreeUI)
 				{
-					ShowMyUI();
+					ShowSkillTree();
 					Mod.Logger.Info("Show UI.");
 				}
 				else
 				{
-					HideMyUI();
+					HideSkillTree();
 					Mod.Logger.Info("Stop showing UI.");
 				}
+			} else if (Runeforge.ToggleCharacterStatScreen != null && Runeforge.ToggleCharacterStatScreen.JustPressed) {
+				ShowCharacterScreenUI = !ShowCharacterScreenUI;
+				if (ShowCharacterScreenUI)
+				{
+					ShowCharacterScreen();
+					Mod.Logger.Info("Show UI.");
+				}
+				else
+				{
+					HideCharacterScreen();
+					Mod.Logger.Info("Stop showing UI.");
+				}				
 			}
 		}
 	}

@@ -7,13 +7,16 @@ namespace Runeforge
 	public class Runeforge : Mod
 	{
 		public static ModKeybind ToggleMyUIKeybind;
+		public static ModKeybind ToggleCharacterStatScreen;
 		public override void Load()
 		{
 			ToggleMyUIKeybind = KeybindLoader.RegisterKeybind(this, "Toggle Skilltree", Keys.G);
+			ToggleCharacterStatScreen = KeybindLoader.RegisterKeybind(this, "Toggle Character screen", Keys.C);
 		}
-        public override void Unload()
-        {
-            ToggleMyUIKeybind = null;
+		public override void Unload()
+		{
+			ToggleMyUIKeybind = null;
+			ToggleCharacterStatScreen = null;
         }
 	}
 }
