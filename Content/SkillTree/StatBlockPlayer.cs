@@ -24,6 +24,10 @@ namespace Runeforge.Content.SkillTree
         {
             statBlock.AddExperience(damageDone);
             //ModContent.GetInstance<Runeforge>().Logger.Info($"Hit an enemy and gained {damageDone} exp!");
+            if (hit.Crit && !hit.InstantKill)
+            {
+                hit.Damage = (int)(hit.Damage * statBlock.CritDamageIncrease);
+            }
         }
 
         public override void UpdateEquips()

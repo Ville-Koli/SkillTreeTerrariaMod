@@ -27,6 +27,8 @@ namespace Runeforge.Content.SkillTree
         private float _lifeRegenIncrease = 0;
         private float _maxHealthIncrease = 0;
         private float _maxManaIncrease = 0;
+        private float _critChanceIncrease = 0;
+        private float _critDamageIncrease = 1;
         private float _currentExperience = 0;
         private float _requiredExperienceForLevel = 45;
         private float _currentLevel = 0;
@@ -44,6 +46,8 @@ namespace Runeforge.Content.SkillTree
         public float MaxHealthIncrease { get { return _maxHealthIncrease; } set { _maxHealthIncrease = value; } }
         public float MaxManaIncrease { get { return _maxManaIncrease; } set { _maxManaIncrease = value; } }
         public float MagicDamageIncrease { get { return _magicDamageIncrease; } set { _magicDamageIncrease = value; } }
+        public float CritChanceIncrease { get { return _critChanceIncrease; } set { _critChanceIncrease = value; } }
+        public float CritDamageIncrease { get { return _critDamageIncrease; } set { _critDamageIncrease = value; } }
         public float CurrentExperience { get { return _currentExperience; } set { _currentExperience = value; } }
         public float RequiredExperienceForLevel { get { return _requiredExperienceForLevel; } set { _requiredExperienceForLevel = value; } }
         public float CurrentLevel { get { return _currentLevel; } set { _currentLevel = value; } }
@@ -121,6 +125,14 @@ namespace Runeforge.Content.SkillTree
         {
             MagicDamageIncrease += amount;
         }
+        public void AddCritChanceIncrease(float amount)
+        {
+            CritChanceIncrease += amount;
+        }
+        public void AddCritDamageIncrease(float amount)
+        {
+            CritDamageIncrease += amount;
+        }
         public void AddExperience(float amount)
         {
             CurrentExperience += amount;
@@ -134,7 +146,8 @@ namespace Runeforge.Content.SkillTree
                 ChangeSkillPointAmount(+1);
                 LevelUI.SetLevel((int)CurrentLevel);
                 ModContent.GetInstance<Runeforge>().Logger.Info($"LEVELED UP TO {CurrentLevel} {CurrentExperience} {RequiredExperienceForLevel}!");
-                if (CurrentExperience > RequiredExperienceForLevel) {
+                if (CurrentExperience > RequiredExperienceForLevel)
+                {
                     AddExperience(0);
                 }
             }

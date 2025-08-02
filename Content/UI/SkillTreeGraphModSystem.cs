@@ -40,8 +40,11 @@ namespace Runeforge.Content.UI
 				(NodeType.Empty, "emptynode"),
 				(NodeType.Defence, "defencenode"),
 				(NodeType.MeleeDamage, "meleedamagenode"),
+				(NodeType.RangedDamage, "rangeddamagenode"),
+				(NodeType.BulletDamage, "bulletdamagenode"),
 				(NodeType.MeleeAttackSpeed, "meleeattackspeednode"),
-				(NodeType.RangedAttackSpeed, "rangedattackspeednode")
+				(NodeType.RangedAttackSpeed, "rangedattackspeednode"),
+				(NodeType.MaxHealth, "maxhealthnode")
 			};
 
 			List<(NodeType type, string name)> statElements = new()
