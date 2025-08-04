@@ -46,7 +46,7 @@ namespace Runeforge.Content.UI
 			UIText header = new UIText("Character Screen", 1, false);
 			panel.Append(header);
 			int maxAmountOfNodeTypes = Enum.GetValues(typeof(NodeType)).Cast<int>().Max();
-			int approxAssetHeight = SkillTreeGraphModSystem.textureManager.GetStat(NodeType.Defence).Height() + 3;
+			int approxAssetHeight = SkillTreeGraphModSystem.textureManager.GetStat(NodeType.Defence).Height() + 6;
 			for (int i = 0; i < maxAmountOfNodeTypes; ++i)
 			{
 				NodeType type = (NodeType)i;

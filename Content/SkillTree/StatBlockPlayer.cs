@@ -26,24 +26,38 @@ namespace Runeforge.Content.SkillTree
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             statBlock.AddExperience(damageDone);
-            //ModContent.GetInstance<Runeforge>().Logger.Info($"Hit an enemy and gained {damageDone} exp!");
-            if (hit.Crit && !hit.InstantKill)
-            {
-                hit.Damage = (int)(hit.Damage * statBlock.CritDamageIncrease);
-            }
+        }
+
+        public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
+        {
+            base.ModifyHitNPC(target, ref modifiers);
+            modifiers.CritDamage *= statBlock.CritDamageIncrease;
         }
 
         public override bool Shoot(Item item, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            float spread = 1;
+            float spread = 5; // degree of angle for spread
             int spreadCount = 10;
+            int counter = 0;
             for (int i = 0; i < statBlock.ExtraProjectiles; ++i)
             {
                 // rotate velocity by the angle of spread
-                float angle = spread * ((i + 1) % spreadCount) / 180 * MathF.PI;
-                float newX = velocity.X * MathF.Cos(angle) - velocity.Y * MathF.Sin(angle);
-                float newY = velocity.Y * MathF.Cos(angle) + velocity.X * MathF.Sin(angle);
-                ModContent.GetInstance<Runeforge>().Logger.Info($"X AND Y: ({newX}, {newY}) velocity ({velocity.X}, {velocity.Y}) angle {angle}");
+                float angle = spread * ((counter + 1) % spreadCount) / 180 * MathF.PI;
+                float cosVal = MathF.Cos(angle);
+                float sinVal = MathF.Sin(angle);
+                int sign;
+                if (i % 2 == 0)
+                {
+                    if (i != 0)
+                        counter++;
+                    sign = 1;
+                }
+                else
+                {
+                    sign = -1;
+                }
+                float newX = velocity.X * cosVal + velocity.Y * sinVal * sign;
+                float newY = velocity.Y * cosVal - velocity.X * sinVal * sign;
                 Projectile.NewProjectile(source, position, new Vector2(newX, newY), type, damage, knockback);
             }
             return base.Shoot(item, source, position, velocity, type, damage, knockback);
@@ -62,11 +76,14 @@ namespace Runeforge.Content.SkillTree
 
                 Player.GetAttackSpeed(DamageClass.Melee) *= statBlock.MeleeAttackSpeedIncrease;
                 Player.GetAttackSpeed(DamageClass.Ranged) *= statBlock.RangedAttackSpeedIncrease;
+                Player.lifeSteal *= statBlock.LifestealIncrease;
 
                 Player.statDefense += (int)statBlock.DefenceIncrease;
                 Player.lifeRegenCount += (int)statBlock.LifeRegenIncrease;
                 Player.statLifeMax2 += (int)statBlock.MaxHealthIncrease;
                 Player.statManaMax2 += (int)statBlock.MaxManaIncrease;
+
+                Player.GetCritChance(DamageClass.Generic) += statBlock.CritChanceIncrease;
 
                 // apply buffs
                 foreach (var buffid in statBlock.GetBuffIDs())
@@ -95,10 +112,13 @@ namespace Runeforge.Content.SkillTree
                 tag["defenceIncrease"] = statBlock.DefenceIncrease;
 
                 tag["meleeDamageIncrease"] = statBlock.MeleeDamageIncrease;
+                tag["lifestealIncrease"] = statBlock.LifestealIncrease;
                 tag["rangedDamageIncrease"] = statBlock.RangeDamageIncrease;
                 tag["bulletDamageIncrease"] = statBlock.BulletDamageIncrease;
                 tag["summonDamageIncrease"] = statBlock.SummonDamageIncrease;
                 tag["magicDamageIncrease"] = statBlock.MagicDamageIncrease;
+                tag["critChanceIncrease"] = statBlock.CritChanceIncrease;
+                tag["critDamageIncrease"] = statBlock.CritDamageIncrease;
 
                 tag["meleeAttackSpeedIncrease"] = statBlock.MeleeAttackSpeedIncrease;
                 tag["rangedAttackSpeedIncrease"] = statBlock.RangedAttackSpeedIncrease;
@@ -143,9 +163,12 @@ namespace Runeforge.Content.SkillTree
 
             statBlock.DefenceIncrease = tag.GetFloat("defenceIncrease");
             statBlock.MeleeDamageIncrease = tag.GetFloat("meleeDamageIncrease");
+            statBlock.LifestealIncrease = tag.GetFloat("lifestealIncrease");
             statBlock.RangeDamageIncrease = tag.GetFloat("rangedDamageIncrease");
             statBlock.BulletDamageIncrease = tag.GetFloat("bulletDamageIncrease");
             statBlock.SummonDamageIncrease = tag.GetFloat("summonDamageIncrease");
+            statBlock.CritChanceIncrease = tag.GetFloat("critChanceIncrease");
+            statBlock.CritDamageIncrease = tag.GetFloat("critDamageIncrease");
 
             statBlock.MeleeAttackSpeedIncrease = tag.GetFloat("meleeAttackSpeedIncrease");
             statBlock.RangedAttackSpeedIncrease = tag.GetFloat("rangedAttackSpeedIncrease");

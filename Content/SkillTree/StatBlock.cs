@@ -16,6 +16,7 @@ namespace Runeforge.Content.SkillTree
         private List<int> buffIDs = new(); // list of buffs that the statblock provides to SBP
         private float _defenceIncrease = 0;
         private float _meleeDamageIncrease = 1;
+        private float _lifestealIncrease = 1;
         private float _rangeDamageIncrease = 1;
         private float _bulletDamageIncrease = 1;
         private float _summonDamageIncrease = 1;
@@ -35,6 +36,7 @@ namespace Runeforge.Content.SkillTree
         private int _skillPoints = 0;
         public float DefenceIncrease { get { return _defenceIncrease; } set { _defenceIncrease = value; } }
         public float MeleeDamageIncrease { get { return _meleeDamageIncrease; } set { _meleeDamageIncrease = value; } }
+        public float LifestealIncrease { get { return _lifestealIncrease; } set { _lifestealIncrease = value; } }
         public float RangeDamageIncrease { get { return _rangeDamageIncrease; } set { _rangeDamageIncrease = value; } }
         public float BulletDamageIncrease { get { return _bulletDamageIncrease; } set { _bulletDamageIncrease = value; } }
         public float SummonDamageIncrease { get { return _summonDamageIncrease; } set { _summonDamageIncrease = value; } }
@@ -133,6 +135,10 @@ namespace Runeforge.Content.SkillTree
         {
             CritDamageIncrease += amount;
         }
+        public void AddLifeStealIncrease(float amount)
+        {
+            LifestealIncrease += amount;
+        }
         public void AddExperience(float amount)
         {
             CurrentExperience += amount;
@@ -148,48 +154,50 @@ namespace Runeforge.Content.SkillTree
                 ModContent.GetInstance<Runeforge>().Logger.Info($"LEVELED UP TO {CurrentLevel} {CurrentExperience} {RequiredExperienceForLevel}!");
                 if (CurrentExperience > RequiredExperienceForLevel)
                 {
-                    AddExperience(0);
+                    AddExperience(0); // causes it to recursively level up until no more excess experience is left
                 }
             }
             LevelUI.SetExp(CurrentExperience, RequiredExperienceForLevel);
         }
 
-        public float GetStat(NodeType type)
+        public string GetStat(NodeType type)
         {
             switch (type)
             {
                 case NodeType.Defence:
-                    return DefenceIncrease;
+                    return DefenceIncrease.ToString() + " Defence";
                 case NodeType.RangedDamage:
-                    return RangeDamageIncrease;
+                    return RangeDamageIncrease.ToString() + "x Ranged damage";
                 case NodeType.MeleeDamage:
-                    return MeleeDamageIncrease;
+                    return MeleeDamageIncrease.ToString() + "x Melee damage";
                 case NodeType.SummonDamage:
-                    return SummonDamageIncrease;
+                    return SummonDamageIncrease.ToString() + "x Summon damage";
                 case NodeType.RangedAttackSpeed:
-                    return RangedAttackSpeedIncrease;
+                    return RangedAttackSpeedIncrease.ToString() + "x Ranged attack speed";
                 case NodeType.MeleeAttackSpeed:
-                    return MeleeAttackSpeedIncrease;
+                    return MeleeAttackSpeedIncrease.ToString() + "x Melee attack speed";
                 case NodeType.BulletDamage:
-                    return BulletDamageIncrease;
+                    return BulletDamageIncrease.ToString() + "x Bullet damage";
                 case NodeType.MovementSpeed:
-                    return MovementSpeedIncrease;
+                    return MovementSpeedIncrease.ToString() + "x Movement speed";
                 case NodeType.MaxHealth:
-                    return MaxHealthIncrease;
+                    return MaxHealthIncrease.ToString() + " Max health";
                 case NodeType.MaxMana:
-                    return MaxManaIncrease;
+                    return MaxManaIncrease.ToString() + " Max mana";
                 case NodeType.MagicDamage:
-                    return MagicDamageIncrease;
+                    return MagicDamageIncrease.ToString() + " Magic damage";
                 case NodeType.HealthRegen:
-                    return LifeRegenIncrease;
+                    return LifeRegenIncrease.ToString() + " Health regen";
                 case NodeType.ProjectileCount:
-                    return ExtraProjectiles;
+                    return ExtraProjectiles.ToString() + " Projectile count";
                 case NodeType.CriticalHitChance:
-                    return CritChanceIncrease;
+                    return CritChanceIncrease.ToString() + "% Crit chance";
                 case NodeType.CriticalHitDamage:
-                    return CritDamageIncrease;
+                    return CritDamageIncrease.ToString() + "x Crit damage";
+                case NodeType.LifeSteal:
+                    return LifestealIncrease.ToString() + "x Lifesteal";
             }
-            return 0;
+            return "0";
         }
 
         public void UpdateLevelUI()

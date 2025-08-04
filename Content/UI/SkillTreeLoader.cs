@@ -116,6 +116,8 @@ namespace Runeforge.Content.UI
 					return new DefenceNodeTrigger(element);
 				case NodeType.MeleeDamage:
 					return new MeleeDamageNodeTrigger(element);
+				case NodeType.SummonDamage:
+					return new SummonDamageNodeTrigger(element);
 				case NodeType.MeleeAttackSpeed:
 					return new MeleeAttackSpeedNodeTrigger(element);
 				case NodeType.RangedAttackSpeed:
@@ -126,10 +128,16 @@ namespace Runeforge.Content.UI
 					return new ExtraProjectileNodeTrigger(element);
 				case NodeType.MaxHealth:
 					return new MaxHealthNodeTrigger(element);
+				case NodeType.HealthRegen:
+					return new HealthRegenNodeTrigger(element);
 				case NodeType.MaxMana:
 					return new MaxManaNodeTrigger(element);
 				case NodeType.ApplyBuff:
 					return new ApplyBuffNodeTrigger(element);
+				case NodeType.CriticalHitChance:
+					return new CritChanceNodeTrigger(element);
+				case NodeType.CriticalHitDamage:
+					return new CritDamageNodeTrigger(element);
 			}
 			return new EmptyNodeTrigger(); // default node
 		}

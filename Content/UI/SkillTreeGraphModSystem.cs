@@ -42,10 +42,15 @@ namespace Runeforge.Content.UI
 				(NodeType.MeleeDamage, "meleedamagenode"),
 				(NodeType.RangedDamage, "rangeddamagenode"),
 				(NodeType.BulletDamage, "bulletdamagenode"),
+				(NodeType.SummonDamage, "summondamagenode"),
 				(NodeType.MeleeAttackSpeed, "meleeattackspeednode"),
 				(NodeType.RangedAttackSpeed, "rangedattackspeednode"),
 				(NodeType.ProjectileCount, "extraprojectilesnode"),
-				(NodeType.MaxHealth, "maxhealthnode")
+				(NodeType.MaxHealth, "maxhealthnode"),
+				(NodeType.MaxMana, "maxmananode"),
+				(NodeType.HealthRegen, "healthregennode"),
+				(NodeType.CriticalHitChance, "critchancenode"),
+				(NodeType.CriticalHitDamage, "critdamagenode")
 			};
 
 			List<(NodeType type, string name)> statElements = new()
@@ -55,8 +60,14 @@ namespace Runeforge.Content.UI
 				(NodeType.LifeSteal, "stat_icon_lifesteal"),
 				(NodeType.RangedDamage, "stat_icon_range_damage"),
 				(NodeType.SummonDamage, "stat_icon_summoner_damage"),
+				(NodeType.BulletDamage, "stat_icon_bulletdamage"),
 				(NodeType.MeleeAttackSpeed, "stat_icon_melee_attackspeed"),
-				(NodeType.RangedAttackSpeed, "stat_icon_ranged_attackspeed")
+				(NodeType.RangedAttackSpeed, "stat_icon_ranged_attackspeed"),
+				(NodeType.CriticalHitChance, "stat_icon_critchance"),
+				(NodeType.CriticalHitDamage, "stat_icon_critdamage"),
+				(NodeType.MaxHealth, "stat_icon_maxhealth"),
+				(NodeType.HealthRegen, "stat_icon_healthregen"),
+				(NodeType.MaxMana, "stat_icon_maxmana")
 			};
 
 			foreach (var uiElement in connectionElements)
