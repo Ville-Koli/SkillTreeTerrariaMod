@@ -38,6 +38,7 @@ namespace Runeforge.Content.UI
 			List<(NodeType type, string name)> nodeElements = new()
 			{
 				(NodeType.Empty, "emptynode"),
+				(NodeType.MovementSpeed, "movementspeednode"),
 				(NodeType.Defence, "defencenode"),
 				(NodeType.MeleeDamage, "meleedamagenode"),
 				(NodeType.RangedDamage, "rangeddamagenode"),
@@ -55,6 +56,7 @@ namespace Runeforge.Content.UI
 
 			List<(NodeType type, string name)> statElements = new()
 			{
+				(NodeType.MovementSpeed, "stat_icon_movespeed"),
 				(NodeType.Defence, "stat_icon_defence"),
 				(NodeType.MeleeDamage, "stat_icon_melee_damage"),
 				(NodeType.LifeSteal, "stat_icon_lifesteal"),

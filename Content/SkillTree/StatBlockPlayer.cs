@@ -83,6 +83,8 @@ namespace Runeforge.Content.SkillTree
                 Player.statLifeMax2 += (int)statBlock.MaxHealthIncrease;
                 Player.statManaMax2 += (int)statBlock.MaxManaIncrease;
 
+                Player.moveSpeed += statBlock.MovementSpeedIncrease;
+
                 Player.GetCritChance(DamageClass.Generic) += statBlock.CritChanceIncrease;
 
                 // apply buffs
@@ -128,6 +130,7 @@ namespace Runeforge.Content.SkillTree
                 tag["lifeRegenIncrease"] = statBlock.LifeRegenIncrease;
                 tag["maxHealthIncrease"] = statBlock.MaxHealthIncrease;
                 tag["maxManaIncrease"] = statBlock.MaxManaIncrease;
+                tag["movementSpeedIncrease"] = statBlock.MovementSpeedIncrease;
 
                 tag["currentExp"] = statBlock.CurrentExperience;
                 tag["currentLevel"] = statBlock.CurrentLevel;
@@ -178,6 +181,7 @@ namespace Runeforge.Content.SkillTree
             statBlock.LifeRegenIncrease = tag.GetFloat("lifeRegenIncrease");
             statBlock.MaxHealthIncrease = tag.GetFloat("maxHealthIncrease");
             statBlock.MaxManaIncrease = tag.GetFloat("maxManaIncrease");
+            statBlock.MovementSpeedIncrease = tag.GetFloat("movementSpeedIncrease");
 
             statBlock.CurrentExperience = tag.GetFloat("currentExp");
             statBlock.CurrentLevel = tag.GetFloat("currentLevel");

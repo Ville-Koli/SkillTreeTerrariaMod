@@ -138,6 +138,8 @@ namespace Runeforge.Content.UI
 					return new CritChanceNodeTrigger(element);
 				case NodeType.CriticalHitDamage:
 					return new CritDamageNodeTrigger(element);
+				case NodeType.MovementSpeed:
+					return new MovementSpeedNodeTrigger(element);
 			}
 			return new EmptyNodeTrigger(); // default node
 		}

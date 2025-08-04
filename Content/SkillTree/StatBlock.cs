@@ -179,7 +179,7 @@ namespace Runeforge.Content.SkillTree
                 case NodeType.BulletDamage:
                     return BulletDamageIncrease.ToString() + "x Bullet damage";
                 case NodeType.MovementSpeed:
-                    return MovementSpeedIncrease.ToString() + "x Movement speed";
+                    return MovementSpeedIncrease.ToString() + "% Movement speed";
                 case NodeType.MaxHealth:
                     return MaxHealthIncrease.ToString() + " Max health";
                 case NodeType.MaxMana:
