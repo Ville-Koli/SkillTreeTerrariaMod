@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Runeforge.Content.Buffs;
 using Runeforge.Content.UI;
 using Terraria;
 using Terraria.DataStructures;
@@ -26,6 +27,18 @@ namespace Runeforge.Content.SkillTree
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             statBlock.AddExperience(damageDone);
+
+            if (Player.HasBuff(ModContent.BuffType<PoisonImbuement>()))
+            {
+                target.AddBuff(BuffID.Poisoned, 300);
+            }
+        }
+
+        public override void ModifyMaxStats(out StatModifier health, out StatModifier mana)
+        {
+            base.ModifyMaxStats(out health, out mana);
+            health.Base += statBlock.MaxHealthIncrease;
+            mana.Base += statBlock.MaxManaIncrease;
         }
 
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
@@ -63,6 +76,12 @@ namespace Runeforge.Content.SkillTree
             return base.Shoot(item, source, position, velocity, type, damage, knockback);
         }
 
+        public override void GetHealLife(Item item, bool quickHeal, ref int healValue)
+        {
+            base.GetHealLife(item, quickHeal, ref healValue);
+            healValue *= (int)statBlock.HealingIncrease;
+        }
+
         public override void UpdateEquips()
         {
             base.UpdateEquips();
@@ -80,12 +99,12 @@ namespace Runeforge.Content.SkillTree
 
                 Player.statDefense += (int)statBlock.DefenceIncrease;
                 Player.lifeRegenCount += (int)statBlock.LifeRegenIncrease;
-                Player.statLifeMax2 += (int)statBlock.MaxHealthIncrease;
-                Player.statManaMax2 += (int)statBlock.MaxManaIncrease;
 
                 Player.moveSpeed += statBlock.MovementSpeedIncrease;
 
                 Player.GetCritChance(DamageClass.Generic) += statBlock.CritChanceIncrease;
+
+                //Player.wingsLogic = 0; you can use this to disable wings
 
                 // apply buffs
                 foreach (var buffid in statBlock.GetBuffIDs())

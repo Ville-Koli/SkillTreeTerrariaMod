@@ -49,6 +49,11 @@ Buffs: {
 		DisplayName: Custom Inferno
 		Description: Mods.Runeforge.Buffs.CustomInferno.Description
 	}
+
+	PoisonImbuement: {
+		DisplayName: Poison Imbuement
+		Description: Mods.Runeforge.Buffs.PoisonImbuement.Description
+	}
 }
 
 Keybinds: {

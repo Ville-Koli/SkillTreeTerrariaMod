@@ -35,7 +35,6 @@ namespace Runeforge.Content.Items.Accessories
 				player.AddBuff(ModContent.BuffType<CustomInferno>(), 100);
 				player.AddBuff(BuffID.OnFire3, 10);
 
-
 				//player.inferno = true;
 				//player.infernoCounter = 1;
 				if (damageCooldownCounter == 0)

@@ -11,6 +11,7 @@ using Terraria;
 using System.IO;
 using System;
 using Terraria.UI;
+using Runeforge.Content.Buffs;
 
 namespace Runeforge.Content.UI
 {
@@ -140,6 +141,10 @@ namespace Runeforge.Content.UI
 					return new CritDamageNodeTrigger(element);
 				case NodeType.MovementSpeed:
 					return new MovementSpeedNodeTrigger(element);
+				case NodeType.Healing:
+					return new HealingNodeTrigger(element);
+				case NodeType.PoisonImbuement:
+					return new ApplyBuffNodeTrigger(ModContent.BuffType<PoisonImbuement>());
 			}
 			return new EmptyNodeTrigger(); // default node
 		}

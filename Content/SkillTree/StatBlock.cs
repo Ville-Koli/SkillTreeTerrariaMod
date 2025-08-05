@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
+using Runeforge.Content.Buffs;
 using Runeforge.Content.UI;
 using Terraria;
 using Terraria.ID;
@@ -24,9 +25,10 @@ namespace Runeforge.Content.SkillTree
         private float _movementSpeedIncrease = 1;
         private float _meleeAttackSpeedIncrease = 1;
         private float _rangedAttackSpeedIncrease = 1;
-        private float _extraProjectiles = 0; // not yet implemented
+        private float _extraProjectiles = 0;
         private float _lifeRegenIncrease = 0;
         private float _maxHealthIncrease = 0;
+        private float _healingIncrease = 1;
         private float _maxManaIncrease = 0;
         private float _critChanceIncrease = 0;
         private float _critDamageIncrease = 1;
@@ -46,6 +48,7 @@ namespace Runeforge.Content.SkillTree
         public float ExtraProjectiles { get { return _extraProjectiles; } set { _extraProjectiles = value; } }
         public float LifeRegenIncrease { get { return _lifeRegenIncrease; } set { _lifeRegenIncrease = value; } }
         public float MaxHealthIncrease { get { return _maxHealthIncrease; } set { _maxHealthIncrease = value; } }
+        public float HealingIncrease { get { return _healingIncrease; } set { _healingIncrease = value; } }
         public float MaxManaIncrease { get { return _maxManaIncrease; } set { _maxManaIncrease = value; } }
         public float MagicDamageIncrease { get { return _magicDamageIncrease; } set { _magicDamageIncrease = value; } }
         public float CritChanceIncrease { get { return _critChanceIncrease; } set { _critChanceIncrease = value; } }
@@ -119,6 +122,10 @@ namespace Runeforge.Content.SkillTree
         {
             MaxHealthIncrease += amount;
         }
+        public void AddHealingIncrease(float amount)
+        {
+            HealingIncrease += amount;
+        }
         public void AddMaxManaIncrease(float amount)
         {
             MaxManaIncrease += amount;
@@ -133,7 +140,7 @@ namespace Runeforge.Content.SkillTree
         }
         public void AddCritDamageIncrease(float amount)
         {
-            CritDamageIncrease += amount;
+            CritDamageIncrease = MathF.Max(CritDamageIncrease + amount, 1);
         }
         public void AddLifeStealIncrease(float amount)
         {
@@ -196,6 +203,10 @@ namespace Runeforge.Content.SkillTree
                     return CritDamageIncrease.ToString() + "x Crit damage";
                 case NodeType.LifeSteal:
                     return LifestealIncrease.ToString() + "x Lifesteal";
+                case NodeType.Healing:
+                    return HealingIncrease.ToString() + "x Healing increase";
+                case NodeType.PoisonImbuement:
+                    return buffIDs.Contains(ModContent.BuffType<PoisonImbuement>()) ? "Applied" : "Not applied";
             }
             return "0";
         }

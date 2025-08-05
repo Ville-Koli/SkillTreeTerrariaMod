@@ -50,6 +50,8 @@ namespace Runeforge.Content.UI
 				(NodeType.MaxHealth, "maxhealthnode"),
 				(NodeType.MaxMana, "maxmananode"),
 				(NodeType.HealthRegen, "healthregennode"),
+				(NodeType.Healing, "healingnode"),
+				(NodeType.PoisonImbuement, "poisonimbuementnode"),
 				(NodeType.CriticalHitChance, "critchancenode"),
 				(NodeType.CriticalHitDamage, "critdamagenode")
 			};
@@ -65,11 +67,14 @@ namespace Runeforge.Content.UI
 				(NodeType.BulletDamage, "stat_icon_bulletdamage"),
 				(NodeType.MeleeAttackSpeed, "stat_icon_melee_attackspeed"),
 				(NodeType.RangedAttackSpeed, "stat_icon_ranged_attackspeed"),
+				(NodeType.ProjectileCount, "stat_icon_extraprojectiles"),
 				(NodeType.CriticalHitChance, "stat_icon_critchance"),
 				(NodeType.CriticalHitDamage, "stat_icon_critdamage"),
 				(NodeType.MaxHealth, "stat_icon_maxhealth"),
 				(NodeType.HealthRegen, "stat_icon_healthregen"),
-				(NodeType.MaxMana, "stat_icon_maxmana")
+				(NodeType.Healing, "stat_icon_healing"),
+				(NodeType.MaxMana, "stat_icon_maxmana"),
+				(NodeType.PoisonImbuement, "stat_icon_poisonimbuement")
 			};
 
 			foreach (var uiElement in connectionElements)
