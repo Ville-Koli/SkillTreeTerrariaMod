@@ -12,6 +12,7 @@ using System.IO;
 using System;
 using Terraria.UI;
 using Runeforge.Content.Buffs;
+using Runeforge.Content.Items.Accessories;
 
 namespace Runeforge.Content.UI
 {
@@ -143,8 +144,12 @@ namespace Runeforge.Content.UI
 					return new MovementSpeedNodeTrigger(element);
 				case NodeType.Healing:
 					return new HealingNodeTrigger(element);
+				case NodeType.Poison:
+					return new PoisonDamageNodeTrigger(element);
 				case NodeType.PoisonImbuement:
 					return new ApplyBuffNodeTrigger(ModContent.BuffType<PoisonImbuement>());
+				case NodeType.MAJOR_RighteousFire:
+					return new ApplyBuffNodeTrigger(ModContent.BuffType<CustomInferno>());
 			}
 			return new EmptyNodeTrigger(); // default node
 		}

@@ -1,8 +1,8 @@
 0 | 0    | | 0
-20 | 10 | adds 10x ranged attackspeed | 1
-15 | 1000 | adds 1000x ranged damage | 1
-12 | 1000 | adds 1000 defence | 1
-9 | 1000 | adds 1000 defence | 1
+17 | 100 | adds 100x ranged attackspeed | 1
+9 | 1000 | adds 1000x ranged damage | 1
+23 | 1000 | adds 1000 defence | 1
+20 | 1000 | adds 1000 defence | 1
 16 | 1000 | adds 1000 defence | 1
 13 | 1000 | adds 1000 defence | 1
 14 | 1000 | adds 1000 defence | 1

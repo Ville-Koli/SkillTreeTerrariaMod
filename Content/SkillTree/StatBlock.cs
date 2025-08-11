@@ -22,6 +22,7 @@ namespace Runeforge.Content.SkillTree
         private float _bulletDamageIncrease = 1;
         private float _summonDamageIncrease = 1;
         private float _magicDamageIncrease = 1;
+        private float _poisonDamageIncrease = 1;
         private float _movementSpeedIncrease = 1;
         private float _meleeAttackSpeedIncrease = 1;
         private float _rangedAttackSpeedIncrease = 1;
@@ -42,6 +43,7 @@ namespace Runeforge.Content.SkillTree
         public float RangeDamageIncrease { get { return _rangeDamageIncrease; } set { _rangeDamageIncrease = value; } }
         public float BulletDamageIncrease { get { return _bulletDamageIncrease; } set { _bulletDamageIncrease = value; } }
         public float SummonDamageIncrease { get { return _summonDamageIncrease; } set { _summonDamageIncrease = value; } }
+        public float PoisonDamageIncrease { get { return _poisonDamageIncrease; } set { _poisonDamageIncrease = value; } }
         public float MovementSpeedIncrease { get { return _movementSpeedIncrease; } set { _movementSpeedIncrease = value; } }
         public float MeleeAttackSpeedIncrease { get { return _meleeAttackSpeedIncrease; } set { _meleeAttackSpeedIncrease = value; } }
         public float RangedAttackSpeedIncrease { get { return _rangedAttackSpeedIncrease; } set { _rangedAttackSpeedIncrease = value; } }
@@ -146,6 +148,10 @@ namespace Runeforge.Content.SkillTree
         {
             LifestealIncrease += amount;
         }
+        public void AddPoisonDamageIncrease(float amount)
+        {
+            PoisonDamageIncrease += amount;
+        }
         public void AddExperience(float amount)
         {
             CurrentExperience += amount;
@@ -205,6 +211,8 @@ namespace Runeforge.Content.SkillTree
                     return LifestealIncrease.ToString() + "x Lifesteal";
                 case NodeType.Healing:
                     return HealingIncrease.ToString() + "x Healing increase";
+                case NodeType.Poison:
+                    return PoisonDamageIncrease.ToString() + "x Poison Damage";
                 case NodeType.PoisonImbuement:
                     return buffIDs.Contains(ModContent.BuffType<PoisonImbuement>()) ? "Applied" : "Not applied";
             }

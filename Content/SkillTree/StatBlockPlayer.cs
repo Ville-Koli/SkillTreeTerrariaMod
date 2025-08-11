@@ -27,11 +27,6 @@ namespace Runeforge.Content.SkillTree
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             statBlock.AddExperience(damageDone);
-
-            if (Player.HasBuff(ModContent.BuffType<PoisonImbuement>()))
-            {
-                target.AddBuff(BuffID.Poisoned, 300);
-            }
         }
 
         public override void ModifyMaxStats(out StatModifier health, out StatModifier mana)

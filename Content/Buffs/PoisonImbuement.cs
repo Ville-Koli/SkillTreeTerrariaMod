@@ -19,5 +19,11 @@ namespace Runeforge.Content.Buffs
 			buffName = BUFF_NAME;
 			tip = BUFF_TIP;
 		}
+
+		public override void Update(Player player, ref int buffIndex)
+		{
+			base.Update(player, ref buffIndex);
+			player.GetModPlayer<PoisonImbuementApplier>().ApplyPoison = true; // also maybe make my own poison so that I can apply damage increases on it
+        }
 	}		
 }

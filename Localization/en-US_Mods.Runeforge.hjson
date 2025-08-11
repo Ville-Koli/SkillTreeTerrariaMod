@@ -54,6 +54,11 @@ Buffs: {
 		DisplayName: Poison Imbuement
 		Description: Mods.Runeforge.Buffs.PoisonImbuement.Description
 	}
+
+	Poison: {
+		DisplayName: Poison
+		Description: Mods.Runeforge.Buffs.Poison.Description
+	}
 }
 
 Keybinds: {
@@ -61,3 +66,5 @@ Keybinds: {
 	"Toggle Skilltree.DisplayName": Toggle  Skilltree
 	"Toggle Character screen.DisplayName": Toggle  Character screen
 }
+
+DamageClasses.Debuff.DisplayName: Debuff
