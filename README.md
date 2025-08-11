@@ -1,4 +1,6 @@
 <H1>Skill tree mod</H1>
+<p>This mod expands Terraria with a skill tree allowing players to express their characters with more in depth builds.</p>
+
 <li>Contains custom UI for skill tree nodes and stat icons</li>
 <li>Adds a skill tree to the game with leveling system</li>
 <li>You can move around in the skill tree UI by dragging and zooming</li>
