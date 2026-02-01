@@ -16,18 +16,18 @@
 1 | 1 | adds 1 armour | 1
 1 | 1 | adds 1 armour | 1
 1 | 1 | adds 1 armour | 1
-13 | 1 | adds 10 max health | 1
-13 | 1 | adds 10 max health | 1
-13 | 1 | adds 10 max health | 1
-13 | 1 | adds 10 max health | 1
-13 | 1 | adds 10 max health | 1
-13 | 1 | adds 10 max health | 1
-13 | 1 | adds 10 max health | 1
-13 | 1 | adds 10 max health | 1
-13 | 1 | adds 10 max health | 1
-13 | 1 | adds 10 max health | 1
-13 | 1 | adds 10 max health | 1
-13 | 1 | adds 10 max health | 1
+13 | 10 | adds 10 max health | 1
+13 | 10 | adds 10 max health | 1
+13 | 10 | adds 10 max health | 1
+13 | 10 | adds 10 max health | 1
+13 | 10 | adds 10 max health | 1
+13 | 10 | adds 10 max health | 1
+13 | 10 | adds 10 max health | 1
+13 | 10 | adds 10 max health | 1
+13 | 10 | adds 10 max health | 1
+13 | 10 | adds 10 max health | 1
+13 | 10 | adds 10 max health | 1
+13 | 10 | adds 10 max health | 1
 15 | 1 | adds 1 health regen | 1
 15 | 1 | adds 1 health regen | 1
 15 | 1 | adds 1 health regen | 1
@@ -296,23 +296,23 @@
 20 | 1 | adds 1% critical strike chance | 1
 20 | 1 | adds 1% critical strike chance | 1
 20 | 1 | adds 1% critical strike chance | 1
-13 | 1 | adds 10 max health | 1
-13 | 1 | adds 10 max health | 1
-13 | 1 | adds 10 max health | 1
-13 | 1 | adds 10 max health | 1
-13 | 1 | adds 10 max health | 1
-13 | 1 | adds 10 max health | 1
-13 | 1 | adds 10 max health | 1
-13 | 1 | adds 10 max health | 1
-13 | 1 | adds 10 max health | 1
-13 | 1 | adds 10 max health | 1
-13 | 1 | adds 10 max health | 1
-13 | 1 | adds 10 max health | 1
-13 | 1 | adds 10 max health | 1
-13 | 1 | adds 10 max health | 1
-13 | 1 | adds 10 max health | 1
-13 | 1 | adds 10 max health | 1
-13 | 1 | adds 10 max health | 1
+13 | 10 | adds 10 max health | 1
+13 | 10 | adds 10 max health | 1
+13 | 10 | adds 10 max health | 1
+13 | 10 | adds 10 max health | 1
+13 | 10 | adds 10 max health | 1
+13 | 10 | adds 10 max health | 1
+13 | 10 | adds 10 max health | 1
+13 | 10 | adds 10 max health | 1
+13 | 10 | adds 10 max health | 1
+13 | 10 | adds 10 max health | 1
+13 | 10 | adds 10 max health | 1
+13 | 10 | adds 10 max health | 1
+13 | 10 | adds 10 max health | 1
+13 | 10 | adds 10 max health | 1
+13 | 10 | adds 10 max health | 1
+13 | 10 | adds 10 max health | 1
+13 | 10 | adds 10 max health | 1
 7 | 1 | adds 1% minion damage | 1
 7 | 1 | adds 1% minion damage | 1
 7 | 1 | adds 1% minion damage | 1
@@ -555,7 +555,7 @@
 22 | 1 | adds 1 projectile | 1
 22 | 1 | adds 1 projectile | 1
 10 | 50 | adds 50% melee attack speed | 10
-22 | 5 | adds 5 projectile | 10
+22 | 5 | adds 5 projectile | 15
 1 | 50 | adds 50 armour | 15
 2 | 30 | adds 30% melee damage | 10
 13 | 300 | adds 300 max health | 10

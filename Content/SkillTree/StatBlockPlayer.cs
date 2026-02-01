@@ -95,7 +95,7 @@ namespace Runeforge.Content.SkillTree
                 Player.statDefense += (int)statBlock.DefenceIncrease;
                 Player.lifeRegenCount += (int)statBlock.LifeRegenIncrease;
 
-                Player.moveSpeed += statBlock.MovementSpeedIncrease;
+                Player.moveSpeed += statBlock.MovementSpeedIncrease / 100;
 
                 Player.GetCritChance(DamageClass.Generic) += statBlock.CritChanceIncrease;
 

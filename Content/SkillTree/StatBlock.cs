@@ -23,7 +23,7 @@ namespace Runeforge.Content.SkillTree
         private float _summonDamageIncrease = 1;
         private float _magicDamageIncrease = 1;
         private float _poisonDamageIncrease = 1;
-        private float _movementSpeedIncrease = 1;
+        private float _movementSpeedIncrease = 0;
         private float _meleeAttackSpeedIncrease = 1;
         private float _rangedAttackSpeedIncrease = 1;
         private float _extraProjectiles = 0;
