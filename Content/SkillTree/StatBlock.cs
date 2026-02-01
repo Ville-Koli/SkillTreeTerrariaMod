@@ -82,7 +82,7 @@ namespace Runeforge.Content.SkillTree
         }
         public void AddMeleeDamageIncrease(float amount)
         {
-            MeleeDamageIncrease += amount;
+            MeleeDamageIncrease += amount / 100;
         }
         public void AddDefenceIncrease(float amount)
         {
@@ -90,15 +90,15 @@ namespace Runeforge.Content.SkillTree
         }
         public void AddRangeDamageIncrease(float amount)
         {
-            RangeDamageIncrease += amount;
+            RangeDamageIncrease += amount / 100;
         }
         public void AddBulletDamageIncrease(float amount)
         {
-            BulletDamageIncrease += amount;
+            BulletDamageIncrease += amount / 100;
         }
         public void AddSummonDamageIncrease(float amount)
         {
-            SummonDamageIncrease += amount;
+            SummonDamageIncrease += amount / 100;
         }
         public void AddMovementSpeedIncreasee(float amount)
         {
@@ -106,11 +106,11 @@ namespace Runeforge.Content.SkillTree
         }
         public void AddMeleeAttackSpeedIncrease(float amount)
         {
-            MeleeAttackSpeedIncrease += amount;
+            MeleeAttackSpeedIncrease += amount / 100;
         }
         public void AddRangedAttackSpeedIncrease(float amount)
         {
-            RangedAttackSpeedIncrease += amount;
+            RangedAttackSpeedIncrease += amount / 100;
         }
         public void AddExtraProjectiles(float amount)
         {
@@ -126,7 +126,7 @@ namespace Runeforge.Content.SkillTree
         }
         public void AddHealingIncrease(float amount)
         {
-            HealingIncrease += amount;
+            HealingIncrease += amount / 100;
         }
         public void AddMaxManaIncrease(float amount)
         {
@@ -138,19 +138,19 @@ namespace Runeforge.Content.SkillTree
         }
         public void AddCritChanceIncrease(float amount)
         {
-            CritChanceIncrease += amount;
+            CritChanceIncrease += amount / 100;
         }
         public void AddCritDamageIncrease(float amount)
         {
-            CritDamageIncrease = MathF.Max(CritDamageIncrease + amount, 1);
+            CritDamageIncrease = MathF.Max(CritDamageIncrease + amount, 1) / 100;
         }
         public void AddLifeStealIncrease(float amount)
         {
-            LifestealIncrease += amount;
+            LifestealIncrease += amount / 100;
         }
         public void AddPoisonDamageIncrease(float amount)
         {
-            PoisonDamageIncrease += amount;
+            PoisonDamageIncrease += amount / 100;
         }
         public void AddExperience(float amount)
         {
@@ -180,17 +180,17 @@ namespace Runeforge.Content.SkillTree
                 case NodeType.Defence:
                     return DefenceIncrease.ToString() + " Defence";
                 case NodeType.RangedDamage:
-                    return RangeDamageIncrease.ToString() + "x Ranged damage";
+                    return RangeDamageIncrease.ToString() + "% Ranged damage";
                 case NodeType.MeleeDamage:
-                    return MeleeDamageIncrease.ToString() + "x Melee damage";
+                    return MeleeDamageIncrease.ToString() + "% Melee damage";
                 case NodeType.SummonDamage:
-                    return SummonDamageIncrease.ToString() + "x Summon damage";
+                    return SummonDamageIncrease.ToString() + "% Summon damage";
                 case NodeType.RangedAttackSpeed:
-                    return RangedAttackSpeedIncrease.ToString() + "x Ranged attack speed";
+                    return RangedAttackSpeedIncrease.ToString() + "% Ranged attack speed";
                 case NodeType.MeleeAttackSpeed:
-                    return MeleeAttackSpeedIncrease.ToString() + "x Melee attack speed";
+                    return MeleeAttackSpeedIncrease.ToString() + "% Melee attack speed";
                 case NodeType.BulletDamage:
-                    return BulletDamageIncrease.ToString() + "x Bullet damage";
+                    return BulletDamageIncrease.ToString() + "% Bullet damage";
                 case NodeType.MovementSpeed:
                     return MovementSpeedIncrease.ToString() + "% Movement speed";
                 case NodeType.MaxHealth:
@@ -206,13 +206,13 @@ namespace Runeforge.Content.SkillTree
                 case NodeType.CriticalHitChance:
                     return CritChanceIncrease.ToString() + "% Crit chance";
                 case NodeType.CriticalHitDamage:
-                    return CritDamageIncrease.ToString() + "x Crit damage";
+                    return CritDamageIncrease.ToString() + "% Crit damage";
                 case NodeType.LifeSteal:
-                    return LifestealIncrease.ToString() + "x Lifesteal";
+                    return LifestealIncrease.ToString() + "% Lifesteal";
                 case NodeType.Healing:
-                    return HealingIncrease.ToString() + "x Healing increase";
+                    return HealingIncrease.ToString() + "% Healing increase";
                 case NodeType.Poison:
-                    return PoisonDamageIncrease.ToString() + "x Poison Damage";
+                    return PoisonDamageIncrease.ToString() + "% Poison Damage";
                 case NodeType.PoisonImbuement:
                     return buffIDs.Contains(ModContent.BuffType<PoisonImbuement>()) ? "Applied" : "Not applied";
             }

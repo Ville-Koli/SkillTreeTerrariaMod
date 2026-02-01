@@ -1,1 +1,5 @@
-This description will show up on the steam page, check out https://steamcommunity.com/comment/Guide/formattinghelp.
+[h1] Runeforge [/h1]
+
+Adds a skill tree, which allows you to define your build more clearly.
+
+Damaging enemies grants you experience and then you level up and leveling up gives you skill points, which you can use to empower yourself with the skill tree. Notice that you start from the middle and you can only unlock nodes that are connected to unlocked nodes. There is no theoretical maximum level, but practically you wont reach higher level than 70 as the experience requirement is exponential.
