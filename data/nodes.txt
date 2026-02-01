@@ -1,11 +1,567 @@
-0 | 0    | | 0
-17 | 100 | adds 100x ranged attackspeed | 1
-9 | 1000 | adds 1000x ranged damage | 1
-23 | 1000 | adds 1000 defence | 1
-20 | 1000 | adds 1000 defence | 1
-16 | 1000 | adds 1000 defence | 1
-13 | 1000 | adds 1000 defence | 1
-14 | 1000 | adds 1000 defence | 1
-18 | 1000 | adds 1000 defence | 1
-18 | 1000 | adds 1000 defence | 1
-19 | 1000 | adds 1000 defence | 1
+0 | 0 |  | 0
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+15 | 1 | adds 1 health regen | 1
+15 | 1 | adds 1 health regen | 1
+15 | 1 | adds 1 health regen | 1
+15 | 1 | adds 1 health regen | 1
+15 | 1 | adds 1 health regen | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+16 | 1 | Increases healing from healing sources by 1% | 1
+16 | 1 | Increases healing from healing sources by 1% | 1
+16 | 1 | Increases healing from healing sources by 1% | 1
+16 | 1 | Increases healing from healing sources by 1% | 1
+16 | 1 | Increases healing from healing sources by 1% | 1
+16 | 1 | Increases healing from healing sources by 1% | 1
+16 | 1 | Increases healing from healing sources by 1% | 1
+16 | 1 | Increases healing from healing sources by 1% | 1
+16 | 1 | Increases healing from healing sources by 1% | 1
+16 | 1 | Increases healing from healing sources by 1% | 1
+16 | 1 | Increases healing from healing sources by 1% | 1
+16 | 1 | Increases healing from healing sources by 1% | 1
+16 | 1 | Increases healing from healing sources by 1% | 1
+16 | 1 | Increases healing from healing sources by 1% | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+10 | 1 | adds 1% melee attack speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+18 | 1 | adds 1% movement speed | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+4 | 1 | adds 1% ranged damage | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+22 | 1 | adds 1 projectile | 1
+22 | 1 | adds 1 projectile | 1
+22 | 1 | adds 1 projectile | 1
+22 | 1 | adds 1 projectile | 1
+22 | 1 | adds 1 projectile | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+22 | 1 | adds 1 projectile | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+14 | 10 | adds 10 max mana | 1
+7 | 1 | adds 1% minion damage | 1
+7 | 1 | adds 1% minion damage | 1
+7 | 1 | adds 1% minion damage | 1
+7 | 1 | adds 1% minion damage | 1
+7 | 1 | adds 1% minion damage | 1
+7 | 1 | adds 1% minion damage | 1
+7 | 1 | adds 1% minion damage | 1
+7 | 1 | adds 1% minion damage | 1
+7 | 1 | adds 1% minion damage | 1
+7 | 1 | adds 1% minion damage | 1
+7 | 1 | adds 1% minion damage | 1
+7 | 1 | adds 1% minion damage | 1
+7 | 1 | adds 1% minion damage | 1
+7 | 1 | adds 1% minion damage | 1
+7 | 1 | adds 1% minion damage | 1
+7 | 1 | adds 1% minion damage | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+7 | 1 | adds 1% minion damage | 1
+7 | 1 | adds 1% minion damage | 1
+7 | 1 | adds 1% minion damage | 1
+7 | 1 | adds 1% minion damage | 1
+7 | 1 | adds 1% minion damage | 1
+7 | 1 | adds 1% minion damage | 1
+7 | 1 | adds 1% minion damage | 1
+7 | 1 | adds 1% minion damage | 1
+7 | 1 | adds 1% minion damage | 1
+21 | 1 | Increases critical strike damage by 1% | 1
+21 | 1 | Increases critical strike damage by 1% | 1
+21 | 1 | Increases critical strike damage by 1% | 1
+21 | 1 | Increases critical strike damage by 1% | 1
+21 | 1 | Increases critical strike damage by 1% | 1
+21 | 1 | Increases critical strike damage by 1% | 1
+21 | 1 | Increases critical strike damage by 1% | 1
+21 | 1 | Increases critical strike damage by 1% | 1
+21 | 1 | Increases critical strike damage by 1% | 1
+21 | 1 | Increases critical strike damage by 1% | 1
+21 | 1 | Increases critical strike damage by 1% | 1
+21 | 1 | Increases critical strike damage by 1% | 1
+21 | 1 | Increases critical strike damage by 1% | 1
+21 | 1 | Increases critical strike damage by 1% | 1
+21 | 1 | Increases critical strike damage by 1% | 1
+21 | 1 | Increases critical strike damage by 1% | 1
+21 | 1 | Increases critical strike damage by 1% | 1
+21 | 1 | Increases critical strike damage by 1% | 1
+21 | 1 | Increases critical strike damage by 1% | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+20 | 1 | adds 1% critical strike chance | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+11 | 1 | adds 1% ranged attack speed | 1
+22 | 1 | adds 1 projectile | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+1 | 1 | adds 1 armour | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+13 | 1 | adds 10 max health | 1
+15 | 1 | adds 1 health regen | 1
+15 | 1 | adds 1 health regen | 1
+15 | 1 | adds 1 health regen | 1
+15 | 1 | adds 1 health regen | 1
+15 | 1 | adds 1 health regen | 1
+15 | 1 | adds 1 health regen | 1
+15 | 1 | adds 1 health regen | 1
+15 | 1 | adds 1 health regen | 1
+15 | 1 | adds 1 health regen | 1
+15 | 1 | adds 1 health regen | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+2 | 1 | adds 1% melee damage | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+3 | 1 | increase bullet damage by 1% | 1
+22 | 1 | adds 1 projectile | 1
+22 | 1 | adds 1 projectile | 1
+10 | 50 | adds 50% melee attack speed | 10
+22 | 5 | adds 5 projectile | 10
+1 | 50 | adds 50 armour | 15
+2 | 30 | adds 30% melee damage | 10
+13 | 300 | adds 300 max health | 10
+11 | 100 | adds 100% ranged attack speed | 30
+3 | 30 | increase bullet damage by 30% | 15
+7 | 50 | adds 50% minion damage | 25
+18 | 50 | adds 50% movement speed | 25
+15 | 25 | adds 25 health regen | 30
+
