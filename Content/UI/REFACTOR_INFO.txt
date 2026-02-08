@@ -1,0 +1,41 @@
+Mods Requirements:
+
+1. Loads skill tree from external files
+2. Have UI elements
+	2.1. Level UI
+	2.2. Show character UI (all the bonuses you get from the skill tree)
+	2.3. Each node has any amount textures that depend on a state (active, inactive, etc)
+	2.4. Skill tree UI
+	2.5. UI should be able to have animations (future extension possibilities)
+	2.6. Show how many skill points you have
+3. Make a system that allows you to generate node textures in loading rather than storing
+   different textures for each node state.
+4. Externalise zoom and drag to a more generic script
+
+
+Initial Refactored Structure (subject to change and updates):
+
+TextureManager -> Contains all the textures
+	TextureBuilder -> Builds the required textures during runtime
+
+SkillTreePanel -> Contains nodes as child UI elements
+	DragAndZoomExtension -> When inherited to a panel allows drag and/or zoom on the parent element
+		-> Any UI element appended to a DragAndZoomExtension are subscribed to a pipeline that
+		   resizes the elements and applies zoom so node's can only care about their neighbours
+                   and graph functionality rather than worrying about the size of the UI
+	NodeTooltipExtension -> Gives a node tooltip about a node when hovered over
+
+SkillTreeLoader -> loads a skill tree from external files
+	NodeParser -> parses nodes from an external file
+	ConnectionParser -> parses connections from an external file
+
+NodeUI -> Contains information about the node
+	TextureContainer -> contains textures for a UI element
+	NodeInfo -> contains generic info about a node
+	NodeEvents -> contains events that can be subscribed to
+		e.g. MouseIn and MouseOut such that node itself doesn't need to care about DragAndZoomExtension
+
+ConnectionUI -> Contains information about the connection
+	TextureContainer -> contains textures for a UI element
+	ConnectionInfo -> contains generic info about a connection
+	ConnectionEvents -> contains events that can be subscribed to
