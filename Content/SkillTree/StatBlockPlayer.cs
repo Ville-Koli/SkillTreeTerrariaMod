@@ -88,8 +88,10 @@ namespace Runeforge.Content.SkillTree
                 Player.GetDamage(DamageClass.Summon) *= statBlock.SummonDamageIncrease;
                 Player.bulletDamage *= statBlock.BulletDamageIncrease;
 
-                Player.GetAttackSpeed(DamageClass.Melee) *= statBlock.MeleeAttackSpeedIncrease;
-                Player.GetAttackSpeed(DamageClass.Ranged) *= statBlock.RangedAttackSpeedIncrease;
+
+                ModContent.GetInstance<Runeforge>().Logger.Info("Melee attackspeed: " + statBlock.MeleeAttackSpeedIncrease);
+                Player.GetAttackSpeed(DamageClass.Melee) += statBlock.MeleeAttackSpeedIncrease;
+                Player.GetAttackSpeed(DamageClass.Ranged) += statBlock.RangedAttackSpeedIncrease;
                 Player.lifeSteal *= statBlock.LifestealIncrease;
 
                 Player.statDefense += (int)statBlock.DefenceIncrease;

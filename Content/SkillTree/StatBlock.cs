@@ -24,8 +24,8 @@ namespace Runeforge.Content.SkillTree
         private float _magicDamageIncrease = 1;
         private float _poisonDamageIncrease = 1;
         private float _movementSpeedIncrease = 0;
-        private float _meleeAttackSpeedIncrease = 1;
-        private float _rangedAttackSpeedIncrease = 1;
+        private float _meleeAttackSpeedIncrease = 0;
+        private float _rangedAttackSpeedIncrease = 0;
         private float _extraProjectiles = 0;
         private float _lifeRegenIncrease = 0;
         private float _maxHealthIncrease = 0;
@@ -186,9 +186,9 @@ namespace Runeforge.Content.SkillTree
                 case NodeType.SummonDamage:
                     return SummonDamageIncrease.ToString() + "% Summon damage";
                 case NodeType.RangedAttackSpeed:
-                    return RangedAttackSpeedIncrease.ToString() + "% Ranged attack speed";
+                    return (RangedAttackSpeedIncrease * 100).ToString() + "% Ranged attack speed";
                 case NodeType.MeleeAttackSpeed:
-                    return MeleeAttackSpeedIncrease.ToString() + "% Melee attack speed";
+                    return (MeleeAttackSpeedIncrease * 100).ToString() + "% Melee attack speed";
                 case NodeType.BulletDamage:
                     return BulletDamageIncrease.ToString() + "% Bullet damage";
                 case NodeType.MovementSpeed:
