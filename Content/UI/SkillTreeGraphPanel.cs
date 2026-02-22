@@ -148,10 +148,8 @@ namespace Runeforge.Content.UI
 			foreach (var pair in nodeContainer)
 			{
 				NodeUI nodeui = pair.Value;
-				ModContent.GetInstance<Runeforge>().Logger.Info("NODE ID: " + nodeui.GetID() + " locations: " + nodeui.GetLocation().X + " , " + nodeui.GetLocation().Y);
 				nodeui.Left.Set(nodeui.GetLocation().X, 0.0f);
 				nodeui.Top.Set(nodeui.GetLocation().Y, 0.0f);
-				//ModContent.GetInstance<Runeforge>().Logger.Info("NODE STATUS: " + nodeui);
 				_uiPanel.Append(nodeui);
 			}
 			_uiPanel.Append(hoverOverUI);

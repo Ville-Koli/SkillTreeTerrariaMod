@@ -30,7 +30,6 @@ namespace Runeforge.Content.UI
 			MarginRight = 100;
 			Append(skillPointIcon);
 			Append(skillPointAmountDisplay);
-			ModContent.GetInstance<Runeforge>().Logger.Info("DIMENSIONS: " + skillPointIcon.GetDimensions().Width);
 		}
 
 		public static void EditSkillPointAmount(int amount)

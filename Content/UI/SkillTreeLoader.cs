@@ -48,14 +48,12 @@ namespace Runeforge.Content.UI
 				byte[] nodeBytes = ModContent.GetFileBytes(nodesLocation);
 				int i = 0;
 				string line = "";
-				ModContent.GetInstance<Runeforge>().Logger.Info($"[LOADING] [PARSING NODES] Byte found and its size is: {nodeBytes.Length}");
 				while (nodeBytes.Length > i)
 				{
 					char currentCharacter = (char)nodeBytes[i];
 					if (currentCharacter == '\n')
 					{
 						(StatusCodes status, UIElement element, string reason) result = ParseNode(line);
-						ModContent.GetInstance<Runeforge>().Logger.Info($"[LOADING] [PARSING NODES] Parsed a node: {result.reason}");
 						line = ""; // reset line
 					}
 					else
@@ -67,12 +65,10 @@ namespace Runeforge.Content.UI
 				if (line != "")
 				{
 					(StatusCodes status, UIElement element, string reason) result = ParseNode(line);
-					ModContent.GetInstance<Runeforge>().Logger.Info($"[LOADING] [PARSING NODES] Parsed a node: {result.reason}");
 				}
 			}
 			catch (Exception e)
 			{
-				ModContent.GetInstance<Runeforge>().Logger.Info($"[LOADING] [PARSING NODES] error message: {e.Message}");
 			}
 		}
 		public void LoadConnections()
@@ -82,14 +78,12 @@ namespace Runeforge.Content.UI
 				byte[] nodeBytes = ModContent.GetFileBytes(connectionLocation);
 				int i = 0;
 				string line = "";
-				ModContent.GetInstance<Runeforge>().Logger.Info($"[LOADING] [PARSING CONNECTION] Byte found and its size is: {nodeBytes.Length}");
 				while (nodeBytes.Length > i)
 				{
 					char currentCharacter = (char)nodeBytes[i];
 					if (currentCharacter == '\n')
 					{
 						(StatusCodes status, UIElement element, string reason) result = ParseConnection(line);
-						ModContent.GetInstance<Runeforge>().Logger.Info($"[LOADING] [PARSING CONNECTION] Parsed a connection: {result.reason}");
 						line = ""; // reset line
 					}
 					else
@@ -101,12 +95,10 @@ namespace Runeforge.Content.UI
 				if (line != "")
 				{
 					(StatusCodes status, UIElement element, string reason) result = ParseConnection(line);
-					ModContent.GetInstance<Runeforge>().Logger.Info($"[LOADING] [PARSING CONNECTION] Parsed a connection: {result.reason}");
 				}
 			}
 			catch (Exception e)
 			{
-				ModContent.GetInstance<Runeforge>().Logger.Info($"[LOADING] [PARSING CONNECTION] error message: {e.Message}");
 			}
 		}
 

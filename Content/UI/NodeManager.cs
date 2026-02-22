@@ -71,7 +71,7 @@ namespace Runeforge.Content.UI
 
 		</returns>
 		**/
-		public static bool ActivateNodesFromStringBuilder(StringBuilder activeNodes)
+		public static bool ActivateNodesFromStringBuilder(StringBuilder activeNodes, StatBlock statBlock)
 		{
 			string activeNodesString = activeNodes.ToString();
 			string[] splittedString = activeNodesString.Split(":");
@@ -84,6 +84,7 @@ namespace Runeforge.Content.UI
 					{
 						NodeUI node = nodeContainer[intID];
 						node.SetActive();
+						node.trigger.Activate(statBlock);
 					}
 					else
 					{

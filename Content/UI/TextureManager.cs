@@ -75,12 +75,10 @@ namespace Runeforge.Content.UI
 				(Asset<Texture2D> active, Asset<Texture2D> inactive) elementAsset = (
 				ModContent.Request<Texture2D>($"{pathToUIElements}active_{uiElement.name}"),
 				ModContent.Request<Texture2D>($"{pathToUIElements}inactive_{uiElement.name}"));
-				ModContent.GetInstance<Runeforge>().Logger.Info($"Loading element: {pathToUIElements}active_{uiElement.name}");
 
 				foreach (var direction in uiElement.directions)
 				{
 					textureManager.AddDirection(direction, elementAsset.active, elementAsset.inactive);
-					ModContent.GetInstance<Runeforge>().Logger.Info($"\tDirection: {direction}");
 				}
 			}
 
@@ -89,15 +87,13 @@ namespace Runeforge.Content.UI
 				(Asset<Texture2D> active, Asset<Texture2D> inactive) elementAsset = (
 				ModContent.Request<Texture2D>($"{pathToNodeAssets}active_{uiElement.name}"),
 				ModContent.Request<Texture2D>($"{pathToNodeAssets}inactive_{uiElement.name}"));
-				ModContent.GetInstance<Runeforge>().Logger.Info($"Loading element: {pathToNodeAssets}{uiElement.name}");
 
 				textureManager.AddNode(uiElement.type, elementAsset.active, elementAsset.inactive);
 			}
 
 			foreach (var uiElement in statElements)
 			{
-				Asset<Texture2D> elementAsset = ModContent.Request<Texture2D>($"{pathToStatAssets}{uiElement.name}");
-				ModContent.GetInstance<Runeforge>().Logger.Info($"Loading element: {pathToStatAssets}{uiElement.name}");
+				Asset<Texture2D> elementAsset = ModContent.Request<Texture2D>($"{pathToStatAssets}{uiElement.name}");;
 				textureManager.AddStat(uiElement.type, elementAsset);
 			}
 			Asset<Texture2D> levelBar = ModContent.Request<Texture2D>($"{pathToUIElements}level_bar");

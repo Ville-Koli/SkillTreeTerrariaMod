@@ -19,7 +19,7 @@ namespace Runeforge.Content.UI
 		private SkillTreePanel mainPanel;
 		private List<ConnectionUI> connections = new();
 		private NodeType type;
-		private INodeTrigger trigger;
+		public INodeTrigger trigger;
 		public UIImage node_image;
 		public Asset<Texture2D> active_node_image;
 		public Asset<Texture2D> inactive_node_image;
@@ -93,14 +93,10 @@ namespace Runeforge.Content.UI
 			List<ConnectionUI> connections = GetActiveNeigbhourNodeList();
 			bool isLeafNode = connections.Count == 1; // node is a leaf node only and only if the amount of active connections are one
 
-			ModContent.GetInstance<Runeforge>().Logger.Info("START");
-
 			if (HandleEmptyNodeCase()) return;
 
-			ModContent.GetInstance<Runeforge>().Logger.Info("PAST EMPTY NODE: " + connections.Count + " NODE ACTIVITY: " + active);
 			if (!active && connections.Count >= 1 && statBlock.SkillPoints >= skillPointCost)
 			{
-				ModContent.GetInstance<Runeforge>().Logger.Info("\tACTIVATE!");
 				node_image.SetImage(active_node_image);
 
 				foreach (var activeNeigbhourConn in connections)
@@ -114,8 +110,6 @@ namespace Runeforge.Content.UI
 			}
 			else
 			{
-				ModContent.GetInstance<Runeforge>().Logger.Info("\tMAYBE INACTIVATE!");
-				ModContent.GetInstance<Runeforge>().Logger.Info("\t\tIS LEAFNODE: " + isLeafNode + " is deactivatable: " + CanNodeBeDeActivated(connections));
 				if (active && (isLeafNode || CanNodeBeDeActivated(connections)))
 				{
 					active = !active;
@@ -209,12 +203,10 @@ namespace Runeforge.Content.UI
 			if (!active) return false;
 			bool deactivation = true;
 			active = false;
-			ModContent.GetInstance<Runeforge>().Logger.Info("MAPPING PATHING! Current connections: " + connections.Count);
 			foreach (var conn in activeNeighbours)
 			{
 				NodeUI node = GetNeighbourNode(conn);
 				deactivation = deactivation && PathingAlgorithms.DoesPossiblePathExistToEmpty(node, new());
-				ModContent.GetInstance<Runeforge>().Logger.Info("Trying neigbhour: " + deactivation);
 			}
 			active = true;
 			return deactivation;

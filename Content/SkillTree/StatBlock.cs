@@ -142,7 +142,7 @@ namespace Runeforge.Content.SkillTree
         }
         public void AddCritDamageIncrease(float amount)
         {
-            CritDamageIncrease = MathF.Max(CritDamageIncrease + amount, 1) / 100;
+            CritDamageIncrease += amount / 100;
         }
         public void AddLifeStealIncrease(float amount)
         {
@@ -180,17 +180,17 @@ namespace Runeforge.Content.SkillTree
                 case NodeType.Defence:
                     return DefenceIncrease.ToString() + " Defence";
                 case NodeType.RangedDamage:
-                    return RangeDamageIncrease.ToString() + "% Ranged damage";
+                    return RangeDamageIncrease.ToString() + "x Ranged damage";
                 case NodeType.MeleeDamage:
-                    return MeleeDamageIncrease.ToString() + "% Melee damage";
+                    return MeleeDamageIncrease.ToString() + "x Melee damage";
                 case NodeType.SummonDamage:
-                    return SummonDamageIncrease.ToString() + "% Summon damage";
+                    return SummonDamageIncrease.ToString() + "x Summon damage";
                 case NodeType.RangedAttackSpeed:
                     return (RangedAttackSpeedIncrease * 100).ToString() + "% Ranged attack speed";
                 case NodeType.MeleeAttackSpeed:
                     return (MeleeAttackSpeedIncrease * 100).ToString() + "% Melee attack speed";
                 case NodeType.BulletDamage:
-                    return BulletDamageIncrease.ToString() + "% Bullet damage";
+                    return BulletDamageIncrease.ToString() + "x Bullet damage";
                 case NodeType.MovementSpeed:
                     return MovementSpeedIncrease.ToString() + "% Movement speed";
                 case NodeType.MaxHealth:
@@ -204,9 +204,9 @@ namespace Runeforge.Content.SkillTree
                 case NodeType.ProjectileCount:
                     return ExtraProjectiles.ToString() + " Projectile count";
                 case NodeType.CriticalHitChance:
-                    return CritChanceIncrease.ToString() + "% Crit chance";
+                    return (CritChanceIncrease * 100).ToString() + "% Crit chance";
                 case NodeType.CriticalHitDamage:
-                    return CritDamageIncrease.ToString() + "% Crit damage";
+                    return CritDamageIncrease.ToString() + "x Crit damage";
                 case NodeType.LifeSteal:
                     return LifestealIncrease.ToString() + "% Lifesteal";
                 case NodeType.Healing:
