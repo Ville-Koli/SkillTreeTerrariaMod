@@ -39,7 +39,7 @@ namespace Runeforge.Content.SkillTree
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             base.ModifyHitNPC(target, ref modifiers);
-            modifiers.CritDamage *= statBlock.CritDamageIncrease;
+            modifiers.CritDamage += statBlock.CritDamageIncrease;
         }
 
         public override bool Shoot(Item item, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
@@ -106,10 +106,6 @@ namespace Runeforge.Content.SkillTree
                 {
                     Player.AddBuff(buffid, 100);
                 }
-            }
-            else
-            {
-                ModContent.GetInstance<Runeforge>().Logger.Info("STATBLOCK IS NULL!!");
             }
         }
         public override void PreSavePlayer()

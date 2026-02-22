@@ -32,7 +32,7 @@ namespace Runeforge.Content.SkillTree
         private float _healingIncrease = 1;
         private float _maxManaIncrease = 0;
         private float _critChanceIncrease = 0;
-        private float _critDamageIncrease = 1;
+        private float _critDamageIncrease = 0;
         private float _currentExperience = 0;
         private float _requiredExperienceForLevel = 45;
         private float _currentLevel = 0;
@@ -206,7 +206,7 @@ namespace Runeforge.Content.SkillTree
                 case NodeType.CriticalHitChance:
                     return (CritChanceIncrease * 100).ToString() + "% Crit chance";
                 case NodeType.CriticalHitDamage:
-                    return CritDamageIncrease.ToString() + "x Crit damage";
+                    return (CritDamageIncrease * 100).ToString() + "% Crit damage";
                 case NodeType.LifeSteal:
                     return LifestealIncrease.ToString() + "% Lifesteal";
                 case NodeType.Healing:
